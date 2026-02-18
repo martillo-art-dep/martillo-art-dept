@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero_title": "Martillo Art Department",
+    "hero_subtitle": "We create visual experiences that leave a mark",
+    "cta": "View Portfolio",
+    "services_title": "Our Services",
+    "service_branding": "Branding",
+    "service_branding_desc": "Visual identity that communicates your brand's essence.",
+    "service_illustration": "Illustration",
+    "service_illustration_desc": "Original art that brings your ideas and concepts to life.",
+    "service_design": "Graphic Design",
+    "service_design_desc": "Striking visual pieces for digital and print media."
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "A selection of our most outstanding projects.",
+    "filter_all": "All",
+    "filter_branding": "Branding",
+    "filter_illustration": "Illustration",
+    "filter_design": "Design",
+    "view_project": "View project"
+  },
+  "about": {
+    "title": "About Us",
+    "intro": "We are a creative studio specializing in art direction, graphic design, and illustration.",
+    "mission_title": "Our Mission",
+    "mission_text": "Transform ideas into memorable visual experiences that connect brands with their audiences.",
+    "values_title": "Values",
+    "value_creativity": "Creativity",
+    "value_creativity_desc": "Every project is an opportunity to innovate.",
+    "value_quality": "Quality",
+    "value_quality_desc": "Meticulous attention to detail in every delivery.",
+    "value_collaboration": "Collaboration",
+    "value_collaboration_desc": "We work hand in hand with our clients."
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let's talk.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send message",
+    "name_placeholder": "Your full name",
+    "email_placeholder": "you@email.com",
+    "message_placeholder": "Tell us about your project..."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "tagline": "Art & Design"
+  },
+  "language": {
+    "es": "ES",
+    "en": "EN"
+  }
+}

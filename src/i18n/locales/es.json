@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Home",
+    "portfolio": "Proyectos",
+    "about": "Quienes Somos",
+    "contact": "Contacto"
+  },
+  "home": {
+    "hero_title": "Departamento de Arte Martillo",
+    "hero_subtitle": "Creamos experiencias visuales que dejan huella",
+    "cta": "Ver Portafolio",
+    "services_title": "Nuestros Servicios",
+    "service_branding": "Branding",
+    "service_branding_desc": "Identidad visual que comunica la esencia de tu marca.",
+    "service_illustration": "Ilustración",
+    "service_illustration_desc": "Arte original que da vida a tus ideas y conceptos.",
+    "service_design": "Diseño Gráfico",
+    "service_design_desc": "Piezas visuales impactantes para medios digitales e impresos."
+  },
+  "portfolio": {
+    "title": "Portafolio",
+    "subtitle": "Una selección de nuestros proyectos más destacados.",
+    "filter_all": "Todos",
+    "filter_branding": "Branding",
+    "filter_illustration": "Ilustración",
+    "filter_design": "Diseño",
+    "view_project": "Ver proyecto"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "intro": "Somos un estudio creativo especializado en dirección de arte, diseño gráfico e ilustración.",
+    "mission_title": "Nuestra Misión",
+    "mission_text": "Transformar ideas en experiencias visuales memorables que conecten marcas con sus audiencias.",
+    "values_title": "Valores",
+    "value_creativity": "Creatividad",
+    "value_creativity_desc": "Cada proyecto es una oportunidad para innovar.",
+    "value_quality": "Calidad",
+    "value_quality_desc": "Atención meticulosa al detalle en cada entrega.",
+    "value_collaboration": "Colaboración",
+    "value_collaboration_desc": "Trabajamos de la mano con nuestros clientes."
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes un proyecto en mente? Hablemos.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "send": "Enviar mensaje",
+    "name_placeholder": "Tu nombre completo",
+    "email_placeholder": "tu@email.com",
+    "message_placeholder": "Cuéntanos sobre tu proyecto..."
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "tagline": "Arte & Diseño"
+  },
+  "language": {
+    "es": "ES",
+    "en": "EN"
+  }
+}
