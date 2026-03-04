@@ -215,7 +215,6 @@ export default function Header() {
   const navLinks = [
     { to: "/portfolio", labelEs: "Proyectos", labelEn: "Portfolio", dropdown: true },
     { to: "/services", labelEs: "Servicios", labelEn: "Services", dropdown: false },
-    { to: "/others", labelEs: "Otros", labelEn: "Others", dropdown: false },
     { to: "/about", labelEs: "Quienes Somos", labelEn: "About Us", dropdown: false },
     { to: "/contact", labelEs: "Contacto", labelEn: "Contact", dropdown: false },
   ];
@@ -434,7 +433,6 @@ export default function Header() {
                     { to: "/portfolio?category=series", labelEs: "Series", labelEn: "Series" },
                     { to: "/portfolio?category=comerciales", labelEs: "Comerciales", labelEn: "Commercials" },
                     { to: "/portfolio?category=videoclips", labelEs: "Videoclips", labelEn: "Music Videos" },
-                    { to: "/portfolio?category=otros", labelEs: "Otros Proyectos", labelEn: "Other Projects" },
                   ].map((cat) => (
                     <NavLink
                       key={cat.to}
