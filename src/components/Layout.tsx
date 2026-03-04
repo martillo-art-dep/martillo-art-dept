@@ -1,13 +1,22 @@
 import { Suspense } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Header from "./Header";
 import Footer from "./Footer";
 
 export default function Layout() {
+  const location = useLocation();
+
+  const isHome =
+    location.pathname === "/" ||
+    location.pathname === "/es" ||
+    location.pathname === "/en" ||
+    location.pathname === "/es/" ||
+    location.pathname === "/en/";
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1 pt-24">
+      <main className={`flex-1 ${isHome ? "" : ""}`}>
         <Suspense
           fallback={
             <div className="flex min-h-[50vh] items-center justify-center bg-black">
@@ -18,7 +27,8 @@ export default function Layout() {
           <Outlet />
         </Suspense>
       </main>
-      <Footer />
+
+      {!isHome && <Footer />}
     </div>
   );
 }
