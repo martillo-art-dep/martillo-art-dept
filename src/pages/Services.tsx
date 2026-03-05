@@ -90,22 +90,41 @@ const SERVICES: ServiceItem[] = [
 const accordionCSS = `
 .accordion-content {
   overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
 }
 .accordion-content.closed { max-height: 0; opacity: 0; }
-.accordion-content.open { max-height: 800px; opacity: 1; }
+.accordion-content.open { max-height: 900px; opacity: 1; }
 .chevron-icon { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 .chevron-icon.rotated { transform: rotate(180deg); }
+
+/* Checker placeholder pattern — replica del Figma */
+.checker-placeholder {
+  background-color: #e0e0e0;
+  background-image:
+    linear-gradient(45deg, #c8c8c8 25%, transparent 25%),
+    linear-gradient(-45deg, #c8c8c8 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #c8c8c8 75%),
+    linear-gradient(-45deg, transparent 75%, #c8c8c8 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
 `;
 
 function ChevronDown({ open }: { open: boolean }) {
   return (
     <svg
-      className={`chevron-icon${open ? " rotated" : ""} w-[30px] h-[18px] md:w-[40px] md:h-[24px] lg:w-[53px] lg:h-[32px]`}
+      className={`chevron-icon${open ? " rotated" : ""} flex-shrink-0`}
+      style={{ width: "clamp(30px, 3.7vw, 53px)", height: "clamp(18px, 2.2vw, 32px)" }}
       viewBox="0 0 53 32"
       fill="none"
     >
-      <path d="M2 2L26.5 28L51 2" stroke="#000000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M2 2L26.5 28L51 2"
+        stroke="#000000"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -134,17 +153,14 @@ export default function Services() {
           backgroundAttachment: "fixed",
         }}
       >
-        {/* ═══ HERO — responsive height ═══ */}
-        <section
-          className="relative w-full h-[250px] md:h-[350px] lg:h-[500px] overflow-hidden"
-        >
+        {/* ═══ HERO ═══ */}
+        <section className="relative w-full h-[250px] md:h-[350px] lg:h-[500px] overflow-hidden">
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 checker-placeholder"
             style={{
               backgroundImage: "url(/assets/projects/services-hero.jpg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              backgroundColor: "#ccc",
             }}
           />
         </section>
@@ -159,26 +175,34 @@ export default function Services() {
 
             return (
               <div key={service.id}>
-                {/* Accordion header */}
+
+                {/* ── Accordion header ── */}
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex justify-between items-center"
+                  className="w-full flex flex-row justify-between items-center"
                   style={{
                     backgroundColor: "#FBFEF9",
                     borderTop: "1px solid #000000",
                     boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.3)",
                     cursor: "pointer",
                     outline: "none",
-                    padding: "0 50px",
-                    height: "250px",
+                    // Figma: height 250px desktop con padding vertical que lo centra
+                    // En mobile reducimos padding para que no sea tan alto
+                    padding: "clamp(18px, 2.5vw, 26px) clamp(16px, 3.47vw, 50px)",
+                    minHeight: "clamp(70px, 8vw, 115px)",
+                    gap: "clamp(16px, 3.75vw, 54px)",
                   }}
                 >
                   <span
-                    className="text-[24px] leading-[28px] md:text-[42px] md:leading-[46px] lg:text-[66px] lg:leading-[66px] text-left"
+                    className="text-left"
                     style={{
                       fontFamily: "'Martillo Completa', sans-serif",
                       fontWeight: 400,
                       color: "#000000",
+                      textTransform: "uppercase",
+                      // Figma: 48px desktop
+                      fontSize: "clamp(18px, 3.33vw, 48px)",
+                      lineHeight: "1.1",
                     }}
                   >
                     {title}
@@ -186,40 +210,117 @@ export default function Services() {
                   <ChevronDown open={isOpen} />
                 </button>
 
-                {/* Expandable content */}
-                <div className={`accordion-content ${isOpen ? "open" : "closed"}`} style={{ backgroundColor: "#FBFEF9" }}>
+                {/* ── Expandable content ── */}
+                <div
+                  className={`accordion-content ${isOpen ? "open" : "closed"}`}
+                  style={{ backgroundColor: "#FBFEF9" }}
+                >
+                  {/*
+                    Figma layout (Frame 41):
+                    - Imagen izq: 657×438px
+                    - Texto der: 656px — descripción en Helvetica justify +
+                      subtítulo en cursiva debajo (cuando difiere del título)
+                    - gap: 27px, padding contenedor: 50px 0
+                  */}
                   <div
-                    className="mx-auto flex flex-col gap-6 md:grid md:gap-8 lg:gap-10"
                     style={{
-                      maxWidth: "1440px",
-                      padding: "40px 50px 60px",
-                      gridTemplateColumns: "minmax(0, 400px) 1fr",
-                      alignItems: "start",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      padding: "clamp(24px, 3.47vw, 50px) 0",
                     }}
                   >
-                    {/* Text content */}
-                    <div className="flex flex-col gap-4 md:gap-5">
-                      <h3
-                        className="text-[24px] leading-[30px] md:text-[30px] md:leading-[38px] lg:text-[36px] lg:leading-[44px]"
-                        style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, color: "#000" }}
-                      >
-                        {subtitle}
-                      </h3>
-                      <p
-                        className="text-[15px] md:text-[16px] lg:text-[18px]"
+                    <div
+                      style={{
+                        width: "100%",
+                        maxWidth: "1340px",
+                        padding: "0 clamp(16px, 3.47vw, 50px)",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        gap: "clamp(16px, 1.87vw, 27px)",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {/* Imagen / Checker placeholder — 657×438 en Figma */}
+                      <div
+                        className="checker-placeholder flex-shrink-0"
                         style={{
-                          fontFamily: "'Helvetica', 'Arial', sans-serif",
-                          fontWeight: 400,
-                          lineHeight: "1.5",
-                          color: "#000",
-                          textAlign: "justify",
+                          // En desktop: 657px fijo. En mobile: ~48% del viewport
+                          width: "clamp(160px, 45.6vw, 657px)",
+                          height: "clamp(107px, 30.4vw, 438px)",
+                          overflow: "hidden",
                         }}
                       >
-                        {description}
-                      </p>
+                        {service.image && (
+                          <img
+                            src={service.image}
+                            alt={title}
+                            style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
+                            onError={(e) => { e.currentTarget.style.display = "none"; }}
+                          />
+                        )}
+                      </div>
+
+                      {/* Texto — columna derecha */}
+                      <div
+                        style={{
+                          flex: "1 1 200px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "clamp(10px, 1vw, 16px)",
+                          alignItems: "flex-start",
+                        }}
+                      >
+                        {/*
+                          Figma: descripción en Helvetica / 32px / justify / #001011
+                          En "production-service" la descripción es Helvetica normal,
+                          y el subtítulo aparece en Inter italic abajo.
+                          En los demás servicios donde el subtítulo difiere del título,
+                          aparece en Inter italic como segunda línea.
+                        */}
+                        <p
+                          style={{
+                            fontFamily: "'Helvetica', 'Arial', sans-serif",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            fontSize: "clamp(13px, 2.22vw, 32px)",
+                            lineHeight: "clamp(1.45, 2.57vw, 1.16)",
+                            textAlign: "justify",
+                            color: "#001011",
+                            margin: 0,
+                          }}
+                        >
+                          {description}
+                        </p>
+
+                        {/*
+                          Subtítulo: visible en cursiva debajo de la descripción,
+                          igual que en el Figma (imgs 2,3,4).
+                          Solo se muestra si el subtítulo es diferente al título original.
+                        */}
+                        {subtitle !== service.titleEs && subtitle !== service.titleEn && (
+                          <p
+                            style={{
+                              fontFamily: "'Inter', sans-serif",
+                              fontStyle: "italic",
+                              fontWeight: 400,
+                              fontSize: "clamp(13px, 2.22vw, 32px)",
+                              lineHeight: "clamp(1.45, 2.57vw, 1.22)",
+                              textAlign: "justify",
+                              color: "#001011",
+                              margin: 0,
+                            }}
+                          >
+                            {subtitle}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             );
           })}

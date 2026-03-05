@@ -16,26 +16,28 @@ const RECENT_COLORS = [
 ];
 
 const AWARDS = [
-  { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
-  { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
-  { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
-  { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
+  { titleEs: "Concha de Oro — Mejor Película", titleEn: "Golden Shell — Best Film", roleEs: "Festival de San Sebastián 2000", roleEn: "San Sebastian Festival 2000" },
+  { titleEs: "Sundance — Directing Award", titleEn: "Sundance — Directing Award", roleEs: "Sundance Film Festival 2009", roleEn: "Sundance Film Festival 2009" },
+  { titleEs: "Premio Ariel — Mejor Escenografía", titleEn: "Ariel Award — Best Set Design", roleEs: "De noche vienes Esmeralda, 1997", roleEn: "De noche vienes Esmeralda, 1997" },
+  { titleEs: "Premio Nacional de Arte Joven", titleEn: "National Young Art Prize", roleEs: "Feria de San Marcos, Aguascalientes 1991", roleEn: "San Marcos Fair, Aguascalientes 1991" },
+  { titleEs: "55+ Premios Internacionales", titleEn: "55+ International Awards", roleEs: "El Violín — Festivales mundiales", roleEn: "El Violín — World festivals" },
+  { titleEs: "Premio del Público", titleEn: "Audience Award", roleEs: "Festival de Cine de Guadalajara 2005", roleEn: "Guadalajara Film Festival 2005" },
 ];
 
 const TEAM = [
   {
     id: "hector",
     name: "Héctor Iruegas",
-    image: "/assets/team/hector.jpg",
-    bioEs: "Lorem ipsum dolor sit amet consectetur adipiscing elit, varius nulla donec at duis consequat pulvinar ante, dictum cursus ac enim primis luctus. Nascetur a quis ultricies sociis convallis hac lacus nisl sodales ad mus, montes vitae diam nam vulputate placerat curae himenaeos aptent parturient.",
-    bioEn: "Lorem ipsum dolor sit amet consectetur adipiscing elit, varius nulla donec at duis consequat pulvinar ante, dictum cursus ac enim primis luctus. Nascetur a quis ultricies sociis convallis hac lacus nisl sodales ad mus, montes vitae diam nam vulputate placerat curae himenaeos aptent parturient.",
+    image: "/assets/team/carry.webp",
+    bioEs: "Nacido en Monterrey, México, en 1980, su formación como Ingeniero en Electrónica y Comunicaciones le dio una base analítica que hoy aplica al diseño cinematográfico. En 1999, como vocalista de la banda Superavión, dirigió el arte de su primer videoclip — y fue ahí donde descubrió que su verdadera pasión estaba detrás de cámara.",
+    bioEn: "Born in Monterrey, Mexico, in 1980, his training as an Electronics and Communications Engineer gave him an analytical base that he applies today to film design. In 1999, as the lead singer of the band Superavión, he directed the art for their first music video — and it was there that he discovered that his true passion was behind the camera.",
   },
   {
     id: "claudio",
-    name: "Claudio Martinez",
-    image: "/assets/team/claudio.jpg",
-    bioEs: "Lorem ipsum dolor sit amet consectetur adipiscing elit, varius nulla donec at duis consequat pulvinar ante, dictum cursus ac enim primis luctus. Nascetur a quis ultricies sociis convallis hac lacus nisl sodales ad mus, montes vitae diam nam vulputate placerat curae himenaeos aptent parturient.",
-    bioEn: "Lorem ipsum dolor sit amet consectetur adipiscing elit, varius nulla donec at duis consequat pulvinar ante, dictum cursus ac enim primis luctus. Nascetur a quis ultricies sociis convallis hac lacus nisl sodales ad mus, montes vitae diam nam vulputate placerat curae himenaeos aptent parturient.",
+    name: "Claudio Contreras",
+    image: "/assets/team/pache.webp",
+    bioEs: "De formación autodidacta, comienza su carrera artística en el performance art con SDT (Sindicato Del Terror). Con 35 años de experiencia, para \"Pache\" el diseño de producción no es simplemente \"vestir\" un espacio: es construir un personaje más, darle vida al telón de fondo.",
+    bioEn: "Self-taught, he began his artistic career in performance art with SDT (Sindicato Del Terror). With 35 years of experience, for \"Pache\" production design is not simply \"dressing\" a space: it is building one more character, giving life to the backdrop.",
   },
 ];
 
@@ -218,12 +220,10 @@ export default function About() {
             fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400,
             fontSize: "14px", lineHeight: "18px", color: "#FBFEF9", textAlign: "justify", marginBottom: "40px",
           }}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies
-            cum class habitant fringilla, aliquam dignissim facilisi ligula
-            tempus diam nisl parturient per penatibus. Consequat vehicula
-            tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit
-            amet consectetur adipiscing elit ultricies cum class habitant
-            fringilla, aliquam dignissim facilisi ligula.
+            {isEn
+              ? "A company specializing in production design and art direction for the entertainment industry. Hammer, we are the accurate blow that shapes chaos. In an industry where each production is a new challenge against the clock, experience is not improvised. If we add the years of professional career between the founding partners \"Carry\" and \"Pache\", we are at 62 years of combined trajectory. At Martillo, we conceive of our work as a modern forge craft. We believe that creativity without structure is just noise, and that soulless technology is just an obsolete tool. Martillo Art Dept. is the balance between the pulse of art and the weight of technique."
+              : "Una empresa especializada en el diseño de producción y la dirección de arte para la industria del entretenimiento. Martillo, somos el golpe certero que da forma al caos. En una industria donde cada producción es un nuevo reto contra reloj, la experiencia no se improvisa. Si sumamos los años de carrera profesional entre los socios fundadores \"Carry\" y \"Pache\", estamos en los 62 años de trayectoria combinada. En Martillo, concebimos nuestro trabajo como un oficio de forja moderna. Creemos que la creatividad sin estructura es solo ruido, y que la tecnología sin alma es solo herramienta obsoleta. Martillo Art Dept. es el equilibrio entre el pulso del arte y el peso de la técnica."
+            }
           </p>
 
           {/* ═══ TEAM — alternating layout ═══ */}
@@ -359,17 +359,10 @@ export default function About() {
             </div>
             <div className="flex items-center" style={{ flex: 1, padding: "10px" }}>
               <p style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "24px", lineHeight: "28px", color: "#FBFEF9", maxWidth: "542px" }}>
-                Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies
-                cum class habitant fringilla, aliquam dignissim facilisi ligula
-                tempus diam nisl parturient per penatibus. Consequat vehicula
-                tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit
-                amet consectetur adipiscing elit ultricies cum class habitant
-                fringilla, aliquam dignissim facilisi ligula tempus diam nisl
-                parturient per penatibus. Consequat vehicula tempor accumsan
-                purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur
-                adipiscing elit ultricies cum class habitant fringilla, aliquam
-                dignissim facilisi ligula tempus diam nisl parturient per
-                penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam.
+                {isEn
+                  ? "A company specializing in production design and art direction for the entertainment industry. Hammer, we are the accurate blow that shapes chaos. In an industry where each production is a new challenge against the clock, experience is not improvised. If we add the years of professional career between the founding partners \"Carry\" and \"Pache\", we are at 62 years of combined trajectory. At Martillo, we conceive of our work as a modern forge craft. We believe that creativity without structure is just noise, and that soulless technology is just an obsolete tool. Martillo Art Dept. is the balance between the pulse of art and the weight of technique."
+                  : "Una empresa especializada en el diseño de producción y la dirección de arte para la industria del entretenimiento. Martillo, somos el golpe certero que da forma al caos. En una industria donde cada producción es un nuevo reto contra reloj, la experiencia no se improvisa. Si sumamos los años de carrera profesional entre los socios fundadores \"Carry\" y \"Pache\", estamos en los 62 años de trayectoria combinada. En Martillo, concebimos nuestro trabajo como un oficio de forja moderna. Creemos que la creatividad sin estructura es solo ruido, y que la tecnología sin alma es solo herramienta obsoleta. Martillo Art Dept. es el equilibrio entre el pulso del arte y el peso de la técnica."
+                }
               </p>
             </div>
           </div>
@@ -416,11 +409,11 @@ export default function About() {
                 {isEn ? "AWARDS & ACCOLADES" : "PREMIOS & GALARDONES"}
               </h2>
               <div className="flex" style={{ gap: "304px" }}>
-                {[0, 1].map((col) => (
+                {[AWARDS.slice(0, 3), AWARDS.slice(3)].map((colAwards, col) => (
                   <div key={col} className="flex flex-col" style={{ width: "543px", gap: "19px" }}>
-                    {AWARDS.map((award, idx) => (
-                      <div key={`${col}-${idx}`} className="flex items-center justify-between" style={{ height: "90px" }}>
-                        <div className="flex flex-col">
+                    {colAwards.map((award, idx) => (
+                      <div key={`${col}-${idx}`} className="flex items-center justify-between" style={{ minHeight: "143px", gap: "16px" }}>
+                        <div className="flex flex-col" style={{ flex: 1 }}>
                           <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>
                             {isEn ? award.titleEn : award.titleEs}
                           </span>
@@ -428,7 +421,7 @@ export default function About() {
                             {isEn ? award.roleEn : award.roleEs}
                           </span>
                         </div>
-                        <img src="/assets/galardones.svg" alt="Award" style={{ width: "87px", height: "80px", objectFit: "contain" }} />
+                        <img src="/assets/galardones.svg" alt="Award" style={{ width: "87px", height: "80px", objectFit: "contain", flexShrink: 0 }} />
                       </div>
                     ))}
                   </div>

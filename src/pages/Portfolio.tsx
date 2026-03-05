@@ -153,7 +153,7 @@ export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
-  const allProjects = getProjectCards();
+  const allProjects = getProjectCards().sort((a, b) => Number(b.year) - Number(a.year));
 
   const categories = [
     { id: "largometrajes", labelEs: "Largometrajes", labelEn: "Feature Films" },
