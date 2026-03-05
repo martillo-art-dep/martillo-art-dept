@@ -257,7 +257,7 @@ export default function ProjectDetail() {
               fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400,
               fontSize: "14px", lineHeight: "18px", color: "#FBFEF9", textAlign: "justify",
             }}>
-              {project.synopsis}
+              {currentLang.startsWith("en") ? (project.synopsisEn || project.synopsis) : project.synopsis}
             </p>
           </div>
 
@@ -329,7 +329,7 @@ export default function ProjectDetail() {
               fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400,
               fontSize: "14px", lineHeight: "18px", color: "#FBFEF9", textAlign: "justify",
             }}>
-              {project.productionDesignText}
+              {currentLang.startsWith("en") ? (project.productionDesignTextEn || project.productionDesignText) : project.productionDesignText}
             </p>
           </div>
 
@@ -518,10 +518,10 @@ export default function ProjectDetail() {
             <div style={{ padding: "0 50px", display: "flex", flexDirection: "column", gap: "48px" }}>
               <div>
                 <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
-                  SINOPSIS
+                  {currentLang.startsWith("en") ? "SYNOPSIS" : "SINOPSIS"}
                 </h2>
                 <p style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
-                  {project.synopsis}
+                  {currentLang.startsWith("en") ? (project.synopsisEn || project.synopsis) : project.synopsis}
                 </p>
               </div>
               <div>
@@ -529,7 +529,7 @@ export default function ProjectDetail() {
                   {project.subtitle}
                 </h2>
                 <p style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
-                  {project.productionDesignText}
+                  {currentLang.startsWith("en") ? (project.productionDesignTextEn || project.productionDesignText) : project.productionDesignText}
                 </p>
               </div>
             </div>

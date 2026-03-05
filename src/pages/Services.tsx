@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 // ─── Service Data ────────────────────────────────────────────────────
@@ -12,53 +11,78 @@ interface ServiceItem {
   subtitleEn: string;
   descriptionEs: string;
   descriptionEn: string;
-  relatedCategory?: string;
 }
 
 const SERVICES: ServiceItem[] = [
   {
-    id: "principales",
-    titleEs: "SERVICIOS PRINCIPALES",
-    titleEn: "MAIN SERVICES",
-    image: "/assets/projects/service-1.jpg",
-    subtitleEs: "Titulo Servicio",
-    subtitleEn: "Service Title",
-    descriptionEs: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    descriptionEn: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    relatedCategory: "largometrajes",
+    id: "production-design",
+    titleEs: "DISEÑO DE PRODUCCIÓN & DIRECCIÓN DE ARTE",
+    titleEn: "PRODUCTION DESIGN & ART DIRECTION",
+    image: "",
+    subtitleEs: "Diseño de Producción & Dirección de Arte",
+    subtitleEn: "Production Design & Art Direction",
+    descriptionEs: "Conceptualización estética y propuesta visual con Concept Artists y Set Designers integrados desde el inicio, diseño de espacios, supervisión del departamento de arte y gestión administrativa desde preproducción hasta entrega.",
+    descriptionEn: "Aesthetic conceptualization and visual proposal with Concept Artists and Set Designers integrated from the beginning, design of spaces, supervision of the art department and administrative management from pre-production to delivery.",
   },
   {
-    id: "especializados",
-    titleEs: "SERVICIOS ESPECIALIZADOS",
-    titleEn: "SPECIALIZED SERVICES",
-    image: "/assets/projects/service-2.jpg",
-    subtitleEs: "Titulo Servicio",
-    subtitleEn: "Service Title",
-    descriptionEs: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    descriptionEn: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    relatedCategory: "series",
+    id: "construction",
+    titleEs: "CONSTRUCCIÓN Y ESCENOGRAFÍA",
+    titleEn: "CONSTRUCTION AND SCENOGRAPHY",
+    image: "",
+    subtitleEs: "Fabricamos lo que no existe. Trasladamos lo que pesa.",
+    subtitleEn: "We manufacture what does not exist. We transfer what is heavy.",
+    descriptionEs: "Taller propio equipado con herramienta de carpintería, herrería, pintura y acabados escénicos. Corte CNC, impresión 3D y transporte propio.",
+    descriptionEn: "Own workshop equipped with carpentry, blacksmithing, painting and scenic finishes. CNC cutting, 3D printing and own transport.",
   },
   {
-    id: "infraestructura",
-    titleEs: "INFRAESTRUCTURA & EQUIPO",
-    titleEn: "INFRASTRUCTURE & EQUIPMENT",
-    image: "/assets/projects/service-3.jpg",
-    subtitleEs: "Titulo Servicio",
-    subtitleEn: "Service Title",
-    descriptionEs: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    descriptionEn: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    relatedCategory: "comerciales",
+    id: "set-dressing",
+    titleEs: "DECORACIÓN Y SET DRESSING",
+    titleEn: "DECORATION AND SET DRESSING",
+    image: "",
+    subtitleEs: "Decoración y Set Dressing",
+    subtitleEn: "Decoration and Set Dressing",
+    descriptionEs: "Selección, colocación y ajuste fino de cada objeto en cuadro — por profesionales con criterio y trayectoria en cine, series y comerciales.",
+    descriptionEn: "Selection, placement and fine-tuning of each object in the frame — by professionals with criteria and experience in film, series and commercials.",
   },
   {
-    id: "consultoria",
-    titleEs: "CERTIFICACIONES Y LEGALES",
-    titleEn: "CERTIFICATIONS & LEGAL",
-    image: "/assets/projects/service-4.jpg",
-    subtitleEs: "Titulo Servicio",
-    subtitleEn: "Service Title",
-    descriptionEs: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    descriptionEn: "Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus. Consequat vehicula tempor accumsan purus, pellentesque etiam. Lorem ipsum dolor sit amet consectetur adipiscing elit ultricies cum class habitant fringilla, aliquam dignissim facilisi ligula tempus diam nisl parturient per penatibus.",
-    relatedCategory: "largometrajes",
+    id: "sustainable",
+    titleEs: "ESCENOGRAFÍA SUSTENTABLE",
+    titleEn: "SUSTAINABLE SCENOGRAPHY",
+    image: "",
+    subtitleEs: "En proceso — requisito normativo 2026",
+    subtitleEn: "In process — regulatory requirement 2026",
+    descriptionEs: "Procesos alineados con las normativas de producción sostenible en México. Una exigencia que ya estamos construyendo.",
+    descriptionEn: "Processes aligned with sustainable production regulations in Mexico. A demand that we are already building.",
+  },
+  {
+    id: "production-service",
+    titleEs: "PRODUCTION SERVICE MÉXICO",
+    titleEn: "PRODUCTION SERVICE MÉXICO",
+    image: "",
+    subtitleEs: "México sin fricción: permisos, logística y equipo local con estándares internacionales.",
+    subtitleEn: "Frictionless Mexico: permits, logistics and local equipment with international standards.",
+    descriptionEs: "Apoyo logístico y legal para productoras extranjeras que filman en territorio nacional.",
+    descriptionEn: "Logistical and legal support for foreign production companies that film in national territory.",
+  },
+  {
+    id: "infrastructure",
+    titleEs: "INFRAESTRUCTURA",
+    titleEn: "INFRASTRUCTURE",
+    image: "",
+    subtitleEs: "Infraestructura",
+    subtitleEn: "Infrastructure",
+    descriptionEs: "Oficinas equipadas — Taller de construcción — Almacén de props y decoración — Corte CNC — Impresión 3D — Transporte propio.",
+    descriptionEn: "Equipped offices — Construction workshop — Props and decoration warehouse — CNC cutting — 3D printing — Own transport.",
+  },
+  {
+    id: "certifications",
+    titleEs: "CERTIFICACIONES",
+    titleEn: "CERTIFICATIONS",
+    image: "",
+    subtitleEs: "Certificaciones",
+    subtitleEn: "Certifications",
+    descriptionEs: "RFC (En proceso) — REPSE (En proceso)",
+    descriptionEn: "RFC (In Process) — REPSE (In Process)",
   },
 ];
 
@@ -89,7 +113,6 @@ function ChevronDown({ open }: { open: boolean }) {
 // ─── Services Page ───────────────────────────────────────────────────
 export default function Services() {
   const { i18n } = useTranslation();
-  const navigate = useNavigate();
   const currentLang = i18n.language;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -174,16 +197,6 @@ export default function Services() {
                       alignItems: "start",
                     }}
                   >
-                    {/* Image */}
-                    <div className="w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden" style={{ backgroundColor: "#ddd" }}>
-                      <img
-                        src={service.image}
-                        alt={title}
-                        className="block w-full h-full object-cover"
-                        onError={(e) => { e.currentTarget.style.display = "none"; }}
-                      />
-                    </div>
-
                     {/* Text content */}
                     <div className="flex flex-col gap-4 md:gap-5">
                       <h3
@@ -204,29 +217,6 @@ export default function Services() {
                       >
                         {description}
                       </p>
-                      <button
-                        onClick={() => navigate(`/services/${service.id}`)}
-                        className="text-[14px] md:text-[15px] lg:text-[16px]"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                          padding: "10px 20px",
-                          backgroundColor: "#1b1b1b",
-                          color: "#FBFEF9",
-                          fontFamily: "'Inter', sans-serif",
-                          border: "none",
-                          borderRadius: "4px",
-                          cursor: "pointer",
-                          width: "fit-content",
-                          transition: "background-color 0.2s ease",
-                        }}
-                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#fb5000"; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#1b1b1b"; }}
-                      >
-                        <span style={{ fontSize: "20px", lineHeight: "16px" }}>+</span>
-                        {currentLang.startsWith("en") ? "View more" : "Ver más"}
-                      </button>
                     </div>
                   </div>
                 </div>
