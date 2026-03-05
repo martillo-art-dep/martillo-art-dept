@@ -3,42 +3,91 @@
     "home": "Home",
     "portfolio": "Proyectos",
     "services": "Servicios",
-    "about": "Quienes Somos",
+    "about": "Quiénes Somos",
     "contact": "Contacto"
   },
   "home": {
-    "hero_title": "Departamento de Arte Martillo",
-    "hero_subtitle": "Creamos experiencias visuales que dejan huella",
-    "cta": "Ver Portafolio",
-    "services_title": "Nuestros Servicios",
-    "service_branding": "Branding",
-    "service_branding_desc": "Identidad visual que comunica la esencia de tu marca.",
-    "service_illustration": "Ilustración",
-    "service_illustration_desc": "Arte original que da vida a tus ideas y conceptos.",
-    "service_design": "Diseño Gráfico",
-    "service_design_desc": "Piezas visuales impactantes para medios digitales e impresos."
-  },
-  "portfolio": {
-    "title": "Portafolio",
-    "subtitle": "Una selección de nuestros proyectos más destacados.",
-    "filter_all": "Todos",
-    "filter_branding": "Branding",
-    "filter_illustration": "Ilustración",
-    "filter_design": "Diseño",
-    "view_project": "Ver proyecto"
+    "hero_title": "Martillo Art Dept.",
+    "hero_subtitle": "Creatividad con pulso, gestión con peso y la experiencia de un golpe certero.",
+    "cta": "Ver Proyectos"
   },
   "about": {
-    "title": "Sobre Nosotros",
-    "intro": "Somos un estudio creativo especializado en dirección de arte, diseño gráfico e ilustración.",
-    "mission_title": "Nuestra Misión",
-    "mission_text": "Transformar ideas en experiencias visuales memorables que conecten marcas con sus audiencias.",
-    "values_title": "Valores",
-    "value_creativity": "Creatividad",
-    "value_creativity_desc": "Cada proyecto es una oportunidad para innovar.",
-    "value_quality": "Calidad",
-    "value_quality_desc": "Atención meticulosa al detalle en cada entrega.",
-    "value_collaboration": "Colaboración",
-    "value_collaboration_desc": "Trabajamos de la mano con nuestros clientes."
+    "title": "Nuestra Historia",
+    "intro": "Una empresa especializada en el diseño de producción y la dirección de arte para la industria del entretenimiento.",
+    "history_tagline": "La historia comienza aquí.",
+    "history_p1": "Martillo, somos el golpe certero que da forma al caos.",
+    "history_p2": "En una industria donde cada producción es un nuevo reto contra reloj, la experiencia no se improvisa. Si sumamos los años de carrera profesional entre los socios fundadores \"Carry\" y \"Pache\", estamos en los 62 años de trayectoria combinada.",
+    "history_p3": "Somos una empresa que cubre todos los procesos creativos y técnicos necesarios para crear escenarios de toda índole, con la solidez administrativa para que cada producción cuente con el respaldo legal y fiscal que la industria exige.",
+    "history_p4": "En Martillo, concebimos nuestro trabajo como un oficio de forja moderna. Creemos que la creatividad sin estructura es solo ruido, y que la tecnología sin alma es solo herramienta obsoleta. Martillo Art Dept. es el equilibrio entre el pulso del arte y el peso de la técnica.",
+    "history_quote": "Creatividad con pulso, gestión con peso y la experiencia de un golpe certero.",
+    "team_title": "Equipo"
+  },
+  "team": {
+    "carry": {
+      "name": "Héctor \"Carry\" Iruegas",
+      "role": "Diseñador de Producción, Director de Arte y cofundador de Martillo Art Dept.",
+      "bio_p1": "Nacido en Monterrey, México, en 1980, su formación como Ingeniero en Electrónica y Comunicaciones le dio una base analítica que hoy aplica al diseño cinematográfico. En 1999, como vocalista de la banda Superavión, dirigió el arte de su primer videoclip — y fue ahí donde descubrió que su verdadera pasión estaba detrás de cámara. Inmerso en la escena musical de Monterrey durante la Avanzada Regia, diseñó videoclips para bandas emblemáticas del movimiento como Panda, Jumbo, Chetes y Volován, así como para artistas como León Larregui, Belanova y Zoé, forjando una identidad visual que lo llevaría al cine.",
+      "bio_p2": "Su salto a la pantalla grande llegó como Director de Arte del cortometraje Victoria para Chino, dirigido por Cary Joji Fukunaga — pieza que fue seleccionada en Sundance, ganó un Student Academy Award y acumuló numerosos premios internacionales, antes de que Fukunaga dirigiera True Detective, Sin Nombre y James Bond: No Time to Die. Fue también Fukunaga quien lo presentó a Claudio \"Pache\" Contreras. Años después, esa conexión se convertiría en más de una década de colaboración y en la cofundación de Martillo Art Dept.",
+      "bio_p3": "Instalado en la Ciudad de México desde 2006, acumula más de dos décadas de trayectoria colaborando con directores como Peter Greenaway, Carlos Reygadas, Nick Cassavetes, Lucía Puenzo, Nicolás Puenzo, Kevin Spacey, Tim Burton, entre otros, así como con productores y diseñadores de producción de primer nivel. Su trabajo abarca también largometrajes, series, comerciales, cortometrajes e instalaciones artísticas nacionales e internacionales, con proyectos seleccionados en el Festival de Cannes y la Berlinale.",
+      "bio_p4": "Bilingüe y viajero incansable, encuentra inspiración constante en la arquitectura, la cocina, los idiomas, la música y las culturas del mundo."
+    },
+    "pache": {
+      "name": "Claudio \"Pache\" Contreras",
+      "role": "Diseñador de Producción, Director de Arte y cofundador de Martillo Art Dept.",
+      "bio_p1": "De formación autodidacta, comienza su carrera artística en el performance art con SDT (Sindicato Del Terror). Luego forma el grupo interdisciplinario Produkto MS (Mortem Shock), donde con un trabajo de instalación, fotografía y pintura titulado E=MC2, ganan el PREMIO NACIONAL DE ARTE JOVEN 1991 en la Feria de San Marcos, Aguascalientes.",
+      "bio_p2": "Su siguiente paso fue la dirección de arte del programa de terror La Hora Marcada y múltiples videoclips de la era dorada del rock mexicano: Maldita Vecindad, Caifanes, Fobia, Santa Sabina y Titán, así como artistas internacionales como Shakira, Morcheeba, Juanes, Fuji Kaze y Lady Gaga.",
+      "bio_p3": "A lo largo de su carrera profesional, \"Pache\" ha colaborado con directores de visiones tan disímiles como Álex de la Iglesia (Perdita Durango) y Jaime Humberto Hermosillo (De noche vienes Esmeralda, PREMIO ARIEL A MEJOR ESCENOGRAFÍA 1997), como Decorador. Como Director de Arte, trabajó con Francisco Vargas (El Violín, película multipremiada a nivel internacional) y Arturo Ripstein (La Perdición de los Hombres, CONCHA DE ORO en el Festival de San Sebastián 2000). Como Diseñador de Producción, con Cary Joji Fukunaga (Sin Nombre, premiada en el Festival de Sundance 2009), Nick Cassavetes (God Is a Bullet, protagonizada por Maika Monroe y Nikolaj Coster-Waldau), Kevin Spacey (The Portal of Force, próxima a estrenarse) y Tim Burton (videoclip The Dead Dance).",
+      "bio_p4": "Con 35 años de experiencia que le han permitido transitar del celuloide a la vanguardia digital, para \"Pache\" el diseño de producción no es simplemente \"vestir\" un espacio: es construir un personaje más, darle vida al telón de fondo. Creador de atmósferas, su carrera se define por la capacidad de traducir conceptos abstractos en espacios tangibles que narran historias por sí mismos.",
+      "bio_quote": "La calma que da leer, escuchar música, contemplar una exposición, dar largos paseos y saborear la comida, son los nutrientes anímicos que busco para conocerme a mí mismo."
+    }
+  },
+  "services": {
+    "title": "Servicios",
+    "intro_p1": "Somos una firma de diseño de producción con sede en México: un equipo multidisciplinario de artistas y técnicos especializados en la creación de universos visuales para la industria del entretenimiento.",
+    "intro_p2": "Operamos en dos registros simultáneos: como proveedores estratégicos del departamento de arte, y como casa productora independiente. No solo ejecutamos la visión — la respaldamos estructuralmente.",
+    "intro_p3": "Cada peso invertido en el arte es visible en pantalla, auditable en libros y deducible en tu declaración. En Martillo Art Dept., la libertad creativa y el rigor administrativo no se contradicen: se forjan juntos.",
+    "breakdown_title": "Desglose",
+    "production_design": {
+      "title": "Diseño de Producción & Dirección de Arte",
+      "description": "Conceptualización estética y propuesta visual con Concept Artists y Set Designers integrados desde el inicio, diseño de espacios, supervisión del departamento de arte y gestión administrativa desde preproducción hasta entrega."
+    },
+    "construction": {
+      "title": "Construcción y Escenografía",
+      "description": "Taller propio equipado con herramienta de carpintería, herrería, pintura y acabados escénicos. Corte CNC, impresión 3D y transporte propio.",
+      "tagline": "Fabricamos lo que no existe. Trasladamos lo que pesa."
+    },
+    "set_dressing": {
+      "title": "Decoración y Set Dressing",
+      "description": "Selección, colocación y ajuste fino de cada objeto en cuadro — por profesionales con criterio y trayectoria en cine, series y comerciales."
+    },
+    "sustainable": {
+      "title": "Escenografía Sustentable",
+      "badge": "En proceso — requisito normativo 2026",
+      "description": "Procesos alineados con las normativas de producción sostenible en México. Una exigencia que ya estamos construyendo."
+    },
+    "production_service": {
+      "title": "Production Service México",
+      "description": "Apoyo logístico y legal para productoras extranjeras que filman en territorio nacional.",
+      "tagline": "México sin fricción: permisos, logística y equipo local con estándares internacionales."
+    },
+    "infrastructure": {
+      "title": "Infraestructura",
+      "items": "Oficinas equipadas — Taller de construcción — Almacén de props y decoración — Corte CNC — Impresión 3D — Transporte propio."
+    },
+    "certifications": {
+      "title": "Certificaciones",
+      "items": "RFC (En proceso) — REPSE (En proceso)"
+    }
+  },
+  "portfolio": {
+    "title": "Proyectos",
+    "subtitle": "Una selección de nuestros proyectos más destacados.",
+    "filter_all": "Todos",
+    "filter_film": "Cine",
+    "filter_series": "Series",
+    "filter_commercial": "Comerciales",
+    "filter_musicvideo": "Videoclips",
+    "view_project": "Ver proyecto"
   },
   "contact": {
     "title": "Contacto",
@@ -49,11 +98,22 @@
     "send": "Enviar mensaje",
     "name_placeholder": "Tu nombre completo",
     "email_placeholder": "tu@email.com",
-    "message_placeholder": "Cuéntanos sobre tu proyecto..."
+    "message_placeholder": "Cuéntanos sobre tu proyecto...",
+    "address": "[PENDIENTE — CLIENTE: Dirección]",
+    "phone_1": "[PENDIENTE — CLIENTE: Teléfono 1]",
+    "phone_2": "[PENDIENTE — CLIENTE: Teléfono 2]",
+    "email_contact": "[PENDIENTE — CLIENTE: Email de contacto]"
+  },
+  "brands": {
+    "title": "Han confiado en nosotros",
+    "list": ["Focus Features", "Amazon MGM", "Netflix", "IMCINE", "Warner Bros.", "21st Century Fox", "Europa Corp."]
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
-    "tagline": "Arte & Diseño"
+    "credit": "Web by caja.",
+    "legal": "Información Legal",
+    "accreditations": "Acreditaciones",
+    "certifications": "Certificaciones"
   },
   "language": {
     "es": "ES",

@@ -3,42 +3,91 @@
     "home": "Home",
     "portfolio": "Portfolio",
     "services": "Services",
-    "about": "About",
+    "about": "About Us",
     "contact": "Contact"
   },
   "home": {
-    "hero_title": "Martillo Art Department",
-    "hero_subtitle": "We create visual experiences that leave a mark",
-    "cta": "View Portfolio",
-    "services_title": "Our Services",
-    "service_branding": "Branding",
-    "service_branding_desc": "Visual identity that communicates your brand's essence.",
-    "service_illustration": "Illustration",
-    "service_illustration_desc": "Original art that brings your ideas and concepts to life.",
-    "service_design": "Graphic Design",
-    "service_design_desc": "Striking visual pieces for digital and print media."
+    "hero_title": "Martillo Art Dept.",
+    "hero_subtitle": "Creativity with a pulse, management with weight and the experience of an accurate blow.",
+    "cta": "View Projects"
+  },
+  "about": {
+    "title": "Our History",
+    "intro": "A company specializing in production design and art direction for the entertainment industry.",
+    "history_tagline": "The story begins here.",
+    "history_p1": "Hammer, we are the accurate blow that shapes chaos.",
+    "history_p2": "In an industry where each production is a new challenge against the clock, experience is not improvised. If we add the years of professional career between the founding partners \"Carry\" and \"Pache\", we are at 62 years of combined trajectory.",
+    "history_p3": "We are a company that covers all the creative and technical processes necessary to create scenarios of all kinds, with the administrative solidity so that each production has the legal and fiscal support that the industry demands.",
+    "history_p4": "At Martillo, we conceive of our work as a modern forge craft. We believe that creativity without structure is just noise, and that soulless technology is just an obsolete tool. Martillo Art Dept. is the balance between the pulse of art and the weight of technique.",
+    "history_quote": "Creativity with a pulse, management with weight and the experience of an accurate blow.",
+    "team_title": "Team"
+  },
+  "team": {
+    "carry": {
+      "name": "Héctor \"Carry\" Iruegas",
+      "role": "Production Designer, Art Director and co-founder of Martillo Art Dept.",
+      "bio_p1": "Born in Monterrey, Mexico, in 1980, his training as an Electronics and Communications Engineer gave him an analytical base that he applies today to film design. In 1999, as the lead singer of the band Superavión, he directed the art for their first music video — and it was there that he discovered that his true passion was behind the camera. Immersed in the Monterrey music scene during the Avanzada Regia, he designed video clips for emblematic bands of the movement such as Panda, Jumbo, Chetes and Volován, as well as for artists such as León Larregui, Belanova and Zoé, forging a visual identity that would take him to the cinema.",
+      "bio_p2": "His leap to the big screen came as Art Director of the short film Victoria para Chino, directed by Cary Joji Fukunaga — a piece that was selected at Sundance, won a Student Academy Award and accumulated numerous international awards, before Fukunaga directed True Detective, Sin Nombre and James Bond: No Time to Die. It was also Fukunaga who introduced him to Claudio \"Pache\" Contreras. Years later, that connection would become more than a decade of collaboration and co-founding of Martillo Art Dept.",
+      "bio_p3": "Settled in Mexico City since 2006, he has more than two decades of experience collaborating with directors such as Peter Greenaway, Carlos Reygadas, Nick Cassavetes, Lucía Puenzo, Nicolás Puenzo, Kevin Spacey, Tim Burton, among others, as well as with top-level producers and production designers. His work also includes feature films, series, commercials, short films and national and international art installations, with projects selected at the Cannes Film Festival and the Berlinale.",
+      "bio_p4": "Bilingual and a tireless traveler, he finds constant inspiration in the architecture, cuisine, languages, music, and cultures of the world."
+    },
+    "pache": {
+      "name": "Claudio \"Pache\" Contreras",
+      "role": "Production Designer, Art Director and co-founder of Martillo Art Dept.",
+      "bio_p1": "Self-taught, he began his artistic career in performance art with SDT (Sindicato Del Terror). Later he formed the interdisciplinary group Produkto MS (Mortem Shock), where with an installation, photography and painting work entitled E=MC2, they won the NATIONAL PRIZE FOR YOUNG ART 1991 at the San Marcos Fair, Aguascalientes.",
+      "bio_p2": "His next step was the art direction of the horror show La Hora Marcada and multiple video clips from the golden era of Mexican rock: Maldita Vecindad, Caifanes, Fobia, Santa Sabina and Titán, as well as international artists such as Shakira, Morcheeba, Juanes, Fuji Kaze and Lady Gaga.",
+      "bio_p3": "Throughout his professional career, \"Pache\" has collaborated with directors of such dissimilar visions as Álex de la Iglesia (Perdita Durango) and Jaime Humberto Hermosillo (De noche vienes Esmeralda, ARIEL AWARD FOR BEST SET DESIGN 1997), as Decorator. As Art Director, he worked with Francisco Vargas (El Violín, a multi-award-winning film at an international level) and Arturo Ripstein (La Perdición de los Hombres, GOLDEN SHELL at the 2000 San Sebastian Festival). As Production Designer, with Cary Joji Fukunaga (Sin Nombre, awarded at the 2009 Sundance Film Festival), Nick Cassavetes (God Is a Bullet, starring Maika Monroe and Nikolaj Coster-Waldau), Kevin Spacey (The Portal of Force, soon to be released) and Tim Burton (music video The Dead Dance).",
+      "bio_p4": "With 35 years of experience that have allowed him to move from celluloid to the digital avant-garde, for \"Pache\" production design is not simply \"dressing\" a space: it is building one more character, giving life to the backdrop. A creator of atmospheres, his career is defined by the ability to translate abstract concepts into tangible spaces that tell stories on their own.",
+      "bio_quote": "The calm that comes from reading, listening to music, contemplating an exhibition, taking long walks and savoring food, are the emotional nutrients that I seek to know myself."
+    }
+  },
+  "services": {
+    "title": "Services",
+    "intro_p1": "We are a production design firm based in Mexico: a multidisciplinary team of artists and technicians specialized in the creation of visual universes for the entertainment industry.",
+    "intro_p2": "We operate in two simultaneous registers: as strategic suppliers of the art department, and as an independent production house. We don't just execute the vision — we support it structurally.",
+    "intro_p3": "Every peso invested in the art is visible on the screen, auditable in books and deductible in your return. At Martillo Art Dept., creative freedom and administrative rigor do not contradict each other: they are forged together.",
+    "breakdown_title": "Breakdown",
+    "production_design": {
+      "title": "Production Design & Art Direction",
+      "description": "Aesthetic conceptualization and visual proposal with Concept Artists and Set Designers integrated from the beginning, design of spaces, supervision of the art department and administrative management from pre-production to delivery."
+    },
+    "construction": {
+      "title": "Construction and Scenography",
+      "description": "Own workshop equipped with carpentry, blacksmithing, painting and scenic finishes. CNC cutting, 3D printing and own transport.",
+      "tagline": "We manufacture what does not exist. We transfer what is heavy."
+    },
+    "set_dressing": {
+      "title": "Decoration and Set Dressing",
+      "description": "Selection, placement and fine-tuning of each object in the frame — by professionals with criteria and experience in film, series and commercials."
+    },
+    "sustainable": {
+      "title": "Sustainable Scenography",
+      "badge": "In process — regulatory requirement 2026",
+      "description": "Processes aligned with sustainable production regulations in Mexico. A demand that we are already building."
+    },
+    "production_service": {
+      "title": "Production Service México",
+      "description": "Logistical and legal support for foreign production companies that film in national territory.",
+      "tagline": "Frictionless Mexico: permits, logistics and local equipment with international standards."
+    },
+    "infrastructure": {
+      "title": "Infrastructure",
+      "items": "Equipped offices — Construction workshop — Props and decoration warehouse — CNC cutting — 3D printing — Own transport."
+    },
+    "certifications": {
+      "title": "Certifications",
+      "items": "RFC (In Process) — REPSE (In Process)"
+    }
   },
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "A selection of our most outstanding projects.",
     "filter_all": "All",
-    "filter_branding": "Branding",
-    "filter_illustration": "Illustration",
-    "filter_design": "Design",
+    "filter_film": "Film",
+    "filter_series": "Series",
+    "filter_commercial": "Commercials",
+    "filter_musicvideo": "Music Videos",
     "view_project": "View project"
-  },
-  "about": {
-    "title": "About Us",
-    "intro": "We are a creative studio specializing in art direction, graphic design, and illustration.",
-    "mission_title": "Our Mission",
-    "mission_text": "Transform ideas into memorable visual experiences that connect brands with their audiences.",
-    "values_title": "Values",
-    "value_creativity": "Creativity",
-    "value_creativity_desc": "Every project is an opportunity to innovate.",
-    "value_quality": "Quality",
-    "value_quality_desc": "Meticulous attention to detail in every delivery.",
-    "value_collaboration": "Collaboration",
-    "value_collaboration_desc": "We work hand in hand with our clients."
   },
   "contact": {
     "title": "Contact",
@@ -49,11 +98,22 @@
     "send": "Send message",
     "name_placeholder": "Your full name",
     "email_placeholder": "you@email.com",
-    "message_placeholder": "Tell us about your project..."
+    "message_placeholder": "Tell us about your project...",
+    "address": "[PENDING — CLIENT: Address]",
+    "phone_1": "[PENDING — CLIENT: Phone 1]",
+    "phone_2": "[PENDING — CLIENT: Phone 2]",
+    "email_contact": "[PENDING — CLIENT: Contact email]"
+  },
+  "brands": {
+    "title": "They've trusted us",
+    "list": ["Focus Features", "Amazon MGM", "Netflix", "IMCINE", "Warner Bros.", "21st Century Fox", "Europa Corp."]
   },
   "footer": {
     "rights": "All rights reserved.",
-    "tagline": "Art & Design"
+    "credit": "Web by caja.",
+    "legal": "Legal Information",
+    "accreditations": "Accreditations",
+    "certifications": "Certifications"
   },
   "language": {
     "es": "ES",
