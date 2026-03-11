@@ -1,11 +1,18 @@
 import { useState } from "react";
 
+// ─── ASSETS ─────────────────────────────────────────────────────────────────
+// Todos los logos viven en /public/assets/logos/
+// IIMCINE: [PENDIENTE — CLIENTE] agregar iimcine.png cuando lo entreguen
+// ────────────────────────────────────────────────────────────────────────────
+
 const LOGOS = [
-  { src: "/assets/logos/netflix.svg", alt: "Netflix", width: 194 },
-  { src: "/assets/logos/prime-video.svg", alt: "Prime Video", width: 194 },
-  { src: "/assets/logos/focus-features.svg", alt: "Focus Features", width: 194, rounded: true },
-  { src: "/assets/logos/habitant.svg", alt: "Habitant Productions", width: 194 },
-  { src: "/assets/logos/disney-plus.svg", alt: "Disney+", width: 164, rounded: true },
+  { src: "/assets/logos/netflix.svg",                        alt: "Netflix",             width: 194 },
+  { src: "/assets/logos/prime-video-amazon-mgm-studios.svg", alt: "Amazon MGM Studios",  width: 220 },
+  { src: "/assets/logos/focus-features.svg",                 alt: "Focus Features",      width: 194, rounded: true },
+  { src: "/assets/logos/warner-bros.svg",                    alt: "Warner Bros.",        width: 194 },
+  { src: "/assets/logos/21st-century-fox.svg",               alt: "21st Century Fox",    width: 200 },
+  { src: "/assets/logos/europacorp.svg",                     alt: "Europa Corp",         width: 180 },
+  { src: "/assets/logos/iimcine.png",                     alt: "IMCINE",              width: 160 },
 ] as const;
 
 interface LogoItemProps {
@@ -59,11 +66,9 @@ export default function LogoMarquee() {
     >
       <div className="flex h-full items-center overflow-hidden">
         <div className="logo-marquee-track flex shrink-0 items-center gap-[40px] px-[20px] md:gap-[70px] md:px-[30px] lg:gap-[100px] lg:px-[50px]">
-          {/* Primera copia */}
           {LOGOS.map((logo) => (
             <LogoItem key={`a-${logo.alt}`} {...logo} />
           ))}
-          {/* Segunda copia para efecto seamless */}
           {LOGOS.map((logo) => (
             <LogoItem key={`b-${logo.alt}`} {...logo} />
           ))}
