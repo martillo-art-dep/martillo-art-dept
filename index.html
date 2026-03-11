@@ -3,15 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Martillo Art Dept — Estudio creativo de dirección de arte, diseño gráfico e ilustración." />
-    <meta name="theme-color" content="#9333ea" />
+    <meta name="description" content="Martillo Art Dept — Diseño de producción y dirección de arte para cine, series, comerciales y videoclips en México." />
+    <meta name="theme-color" content="#1b1b1b" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Martillo Art Dept</title>
   </head>
   <body>
+    <form name="contacto-martillo" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nombre" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefono" />
+      <textarea name="mensaje"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

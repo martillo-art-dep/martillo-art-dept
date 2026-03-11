@@ -1,19 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { getProjectCards } from "../data/projects";
+import SEO from "../components/SEO";
 
 // ─── Data ────────────────────────────────────────────────────────────
-const RECENT_COLORS = [
-  { color: "#FB5000", label: "Proyecto 1" },
-  { color: "#0052B4", label: "Proyecto 2" },
-  { color: "#702525", label: "Proyecto 3" },
-  { color: "#496E2D", label: "Proyecto 4" },
-  { color: "#338AF3", label: "Proyecto 5" },
-  { color: "#F8F1CD", label: "Proyecto 6" },
-  { color: "#D80027", label: "Proyecto 7" },
-  { color: "#F80078", label: "Proyecto 8" },
-  { color: "#00FF8C", label: "Proyecto 9" },
-];
 
 const AWARDS = [
   { titleEs: "Concha de Oro — Mejor Película", titleEn: "Golden Shell — Best Film", roleEs: "Festival de San Sebastián 2000", roleEn: "San Sebastian Festival 2000" },
@@ -28,14 +19,14 @@ const TEAM = [
   {
     id: "hector",
     name: "Héctor Iruegas",
-    image: "/assets/team/carry.webp",
+    image: "/assets/team/hector-featured.jpg",
     bioEs: "Nacido en Monterrey, México, en 1980, su formación como Ingeniero en Electrónica y Comunicaciones le dio una base analítica que hoy aplica al diseño cinematográfico. En 1999, como vocalista de la banda Superavión, dirigió el arte de su primer videoclip — y fue ahí donde descubrió que su verdadera pasión estaba detrás de cámara.",
     bioEn: "Born in Monterrey, Mexico, in 1980, his training as an Electronics and Communications Engineer gave him an analytical base that he applies today to film design. In 1999, as the lead singer of the band Superavión, he directed the art for their first music video — and it was there that he discovered that his true passion was behind the camera.",
   },
   {
     id: "claudio",
     name: "Claudio Contreras",
-    image: "/assets/team/pache.webp",
+    image: "/assets/team/claudio-featured.jpg",
     bioEs: "De formación autodidacta, comienza su carrera artística en el performance art con SDT (Sindicato Del Terror). Con 35 años de experiencia, para \"Pache\" el diseño de producción no es simplemente \"vestir\" un espacio: es construir un personaje más, darle vida al telón de fondo.",
     bioEn: "Self-taught, he began his artistic career in performance art with SDT (Sindicato Del Terror). With 35 years of experience, for \"Pache\" production design is not simply \"dressing\" a space: it is building one more character, giving life to the backdrop.",
   },
@@ -96,6 +87,80 @@ const aboutCSS = `
 .about-color-swatch:has(+ .about-color-swatch:hover) { transform: scaleY(1.2) scaleX(1.08); z-index: 9999; }
 .about-color-swatch:has(+ .about-color-swatch + .about-color-swatch:hover) { transform: scaleY(1.1) scaleX(1.04); z-index: 999; }
 
+/* ── Tablet overrides (768–1199px) ── */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .about-hero-title {
+    font-size: 72px !important;
+    line-height: 72px !important;
+  }
+  .about-history-row {
+    flex-direction: column !important;
+    padding: 40px 40px !important;
+    gap: 32px !important;
+  }
+  .about-history-left {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .about-history-title-abs {
+    position: static !important;
+    filter: none !important;
+  }
+  .about-history-title-abs h2 {
+    font-size: 64px !important;
+    line-height: 64px !important;
+  }
+  .about-history-text {
+    max-width: 100% !important;
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  .about-team-row {
+    flex-wrap: wrap !important;
+    gap: 48px !important;
+    justify-content: center !important;
+  }
+  .about-team-card {
+    width: calc(50% - 24px) !important;
+  }
+  .about-team-photo {
+    width: 100% !important;
+    height: 420px !important;
+  }
+  .about-team-name {
+    font-size: 56px !important;
+    line-height: 56px !important;
+  }
+  .about-team-bio {
+    font-size: 18px !important;
+    line-height: 24px !important;
+  }
+  .about-section-title {
+    font-size: 48px !important;
+    line-height: 48px !important;
+    margin-bottom: 40px !important;
+  }
+  .about-awards-row {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+  .about-awards-col {
+    width: 100% !important;
+    max-width: 640px !important;
+  }
+  .about-award-title-text {
+    font-size: 28px !important;
+    line-height: 34px !important;
+  }
+  .about-award-role-text {
+    font-size: 18px !important;
+    line-height: 22px !important;
+  }
+  .about-color-swatch {
+    height: 180px !important;
+  }
+}
+
 /* ── Mobile dock ── */
 .about-strip-mobile {
   display: flex;
@@ -146,6 +211,7 @@ export default function About() {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const isEn = i18n.language.startsWith("en");
+  const recentProjects = getProjectCards().slice(0, 9);
   const [heroIndex, setHeroIndex] = useState(0);
 
   const heroPrev = () => setHeroIndex((i) => (i === 0 ? HERO_IMAGES.length - 1 : i - 1));
@@ -153,6 +219,11 @@ export default function About() {
 
   return (
     <>
+      <SEO
+        title="Nosotros"
+        description="Conoce a Martillo Art Dept, equipo de diseño de producción y dirección de arte con más de 62 años de experiencia combinada en cine y entretenimiento."
+        url="/about"
+      />
       <style>{aboutCSS}</style>
 
       {/* ════════════════════════════════════════════════════════════════
@@ -306,10 +377,19 @@ export default function About() {
               {isEn ? "RECENT PROJECTS" : "PROYECTOS RECIENTES"}
             </h2>
             <div className="about-strip-mobile">
-              {RECENT_COLORS.map((item, idx) => (
-                <button key={idx} className="about-swatch-mobile"
-                  style={{ "--color": item.color } as React.CSSProperties}
-                  aria-label={item.label} />
+              {recentProjects.map((project, idx) => (
+                <button
+                  key={idx}
+                  className="about-swatch-mobile"
+                  style={{
+                    backgroundImage: `url(${project.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundColor: "#333",
+                  }}
+                  onClick={() => navigate(`/portfolio/${project.id}`)}
+                  aria-label={project.title}
+                />
               ))}
             </div>
           </div>
@@ -338,17 +418,17 @@ export default function About() {
               </div>
             </div>
             <div className="relative z-10 flex flex-col items-center" style={{ width: "484px" }}>
-              <span style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#001011", display: "block", width: "100%", textAlign: "center" }}>MARTILLO</span>
-              <span style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#001011", display: "block", width: "100%", textAlign: "center" }}>ART DEPT</span>
+              <span className="about-hero-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#001011", display: "block", width: "100%", textAlign: "center" }}>MARTILLO</span>
+              <span className="about-hero-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#001011", display: "block", width: "100%", textAlign: "center" }}>ART DEPT</span>
             </div>
           </section>
 
           {/* OUR HISTORY */}
-          <div className="mx-auto flex items-center" style={{ maxWidth: "1440px", padding: "63px 116px", gap: "51px" }}>
-            <div className="relative flex-shrink-0" style={{ width: "595px", height: "527px" }}>
+          <div className="about-history-row mx-auto flex items-center" style={{ maxWidth: "1440px", padding: "63px 116px", gap: "51px" }}>
+            <div className="about-history-left relative flex-shrink-0" style={{ width: "595px", height: "527px" }}>
               <img src="/assets/martillo-about.svg" alt="" className="absolute"
                 style={{ top: "0", left: "0", width: "575px", height: "507px", objectFit: "contain", opacity: 0.2 }} />
-              <div className="absolute" style={{ left: "83px", top: "163px", filter: "drop-shadow(0px 0px 8.9px rgba(0, 0, 0, 0.5))" }}>
+              <div className="about-history-title-abs absolute" style={{ left: "83px", top: "163px", filter: "drop-shadow(0px 0px 8.9px rgba(0, 0, 0, 0.5))" }}>
                 <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "100px", lineHeight: "100px", color: "#FFFFFF" }}>
                   {isEn ? "OUR" : "NUESTRA"}
                 </h2>
@@ -358,7 +438,7 @@ export default function About() {
               </div>
             </div>
             <div className="flex items-center" style={{ flex: 1, padding: "10px" }}>
-              <p style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "24px", lineHeight: "28px", color: "#FBFEF9", maxWidth: "542px" }}>
+              <p className="about-history-text" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "24px", lineHeight: "28px", color: "#FBFEF9", maxWidth: "542px" }}>
                 {isEn
                   ? "A company specializing in production design and art direction for the entertainment industry. Hammer, we are the accurate blow that shapes chaos. In an industry where each production is a new challenge against the clock, experience is not improvised. If we add the years of professional career between the founding partners \"Carry\" and \"Pache\", we are at 62 years of combined trajectory. At Martillo, we conceive of our work as a modern forge craft. We believe that creativity without structure is just noise, and that soulless technology is just an obsolete tool. Martillo Art Dept. is the balance between the pulse of art and the weight of technique."
                   : "Una empresa especializada en el diseño de producción y la dirección de arte para la industria del entretenimiento. Martillo, somos el golpe certero que da forma al caos. En una industria donde cada producción es un nuevo reto contra reloj, la experiencia no se improvisa. Si sumamos los años de carrera profesional entre los socios fundadores \"Carry\" y \"Pache\", estamos en los 62 años de trayectoria combinada. En Martillo, concebimos nuestro trabajo como un oficio de forja moderna. Creemos que la creatividad sin estructura es solo ruido, y que la tecnología sin alma es solo herramienta obsoleta. Martillo Art Dept. es el equilibrio entre el pulso del arte y el peso de la técnica."
@@ -373,10 +453,10 @@ export default function About() {
           }}>
             {/* TEAM */}
             <div className="mx-auto" style={{ maxWidth: "1440px", padding: "60px 50px 0" }}>
-              <div className="flex justify-between" style={{ gap: "96px" }}>
+              <div className="about-team-row flex justify-between" style={{ gap: "96px" }}>
                 {TEAM.map((member, idx) => (
-                  <div key={idx} className="flex flex-col items-center" style={{ width: "620px", gap: "43px" }}>
-                    <div onClick={() => navigate(`/about/${member.id}`)} style={{
+                  <div key={idx} className="about-team-card flex flex-col items-center" style={{ width: "620px", gap: "43px" }}>
+                    <div className="about-team-photo" onClick={() => navigate(`/about/${member.id}`)} style={{
                       width: "620px", height: "775px", backgroundColor: "#D9D9D9", borderRadius: "20px",
                       overflow: "hidden", cursor: "pointer", transition: "transform 0.3s ease",
                     }}
@@ -386,13 +466,13 @@ export default function About() {
                       <img src={member.image} alt={member.name} className="w-full h-full object-cover"
                         onError={(e) => { e.currentTarget.style.display = "none"; }} />
                     </div>
-                    <h3 onClick={() => navigate(`/about/${member.id}`)} style={{
+                    <h3 className="about-team-name" onClick={() => navigate(`/about/${member.id}`)} style={{
                       fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "90px",
                       lineHeight: "90px", textAlign: "center", color: "#FFFFFF", width: "100%", cursor: "pointer",
                     }}>
                       {member.name}
                     </h3>
-                    <p style={{
+                    <p className="about-team-bio" style={{
                       fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "25px",
                       lineHeight: "29px", textAlign: "justify", color: "#FFFFFF", width: "100%",
                     }}>
@@ -405,19 +485,19 @@ export default function About() {
 
             {/* AWARDS */}
             <div className="mx-auto" style={{ maxWidth: "1440px", padding: "120px 50px 100px" }}>
-              <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "68px" }}>
+              <h2 className="about-section-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "68px" }}>
                 {isEn ? "AWARDS & ACCOLADES" : "PREMIOS & GALARDONES"}
               </h2>
-              <div className="flex" style={{ gap: "304px" }}>
+              <div className="about-awards-row flex" style={{ gap: "304px" }}>
                 {[AWARDS.slice(0, 3), AWARDS.slice(3)].map((colAwards, col) => (
-                  <div key={col} className="flex flex-col" style={{ width: "543px", gap: "19px" }}>
+                  <div key={col} className="about-awards-col flex flex-col" style={{ width: "543px", gap: "19px" }}>
                     {colAwards.map((award, idx) => (
                       <div key={`${col}-${idx}`} className="flex items-center justify-between" style={{ minHeight: "143px", gap: "16px" }}>
                         <div className="flex flex-col" style={{ flex: 1 }}>
-                          <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>
+                          <span className="about-award-title-text" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>
                             {isEn ? award.titleEn : award.titleEs}
                           </span>
-                          <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "24px", lineHeight: "29px", color: "#FFFFFF" }}>
+                          <span className="about-award-role-text" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "24px", lineHeight: "29px", color: "#FFFFFF" }}>
                             {isEn ? award.roleEn : award.roleEs}
                           </span>
                         </div>
@@ -431,14 +511,24 @@ export default function About() {
 
             {/* RECENT PROJECTS dock */}
             <div className="mx-auto" style={{ maxWidth: "1440px", padding: "0 50px 80px" }}>
-              <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "74px" }}>
+              <h2 className="about-section-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "74px" }}>
                 {isEn ? "RECENT PROJECTS" : "PROYECTOS RECIENTES"}
               </h2>
               <div className="about-gallery-strip" style={{ width: "100%", maxWidth: "1341px" }}>
-                {RECENT_COLORS.map((item, idx) => (
-                  <button key={idx} className="about-color-swatch"
-                    style={{ "--color": item.color } as React.CSSProperties}
-                    data-label={item.label} aria-label={item.label} />
+                {recentProjects.map((project, idx) => (
+                  <button
+                    key={idx}
+                    className="about-color-swatch"
+                    style={{
+                      backgroundImage: `url(${project.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundColor: "#333",
+                    }}
+                    data-label={project.title}
+                    onClick={() => navigate(`/portfolio/${project.id}`)}
+                    aria-label={project.title}
+                  />
                 ))}
               </div>
             </div>

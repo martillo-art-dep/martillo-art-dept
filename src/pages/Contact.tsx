@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import SEO from "../components/SEO";
 
 // ─── Social icon SVGs (inline for reliability) ──────────────────────
 function WhatsAppIcon() {
@@ -44,45 +45,99 @@ function EmailIcon() {
   );
 }
 
-// ─── Input fields config ─────────────────────────────────────────────
-const FIELDS_ES = [
-  { name: "nombre", label: "Nombre", type: "text" },
-  { name: "email", label: "Email", type: "email" },
-  { name: "telefono", label: "Teléfono", type: "tel" },
-  { name: "mensaje", label: "Mensaje", type: "text" },
-];
-
-const FIELDS_EN = [
-  { name: "nombre", label: "Name", type: "text" },
-  { name: "email", label: "Email", type: "email" },
-  { name: "telefono", label: "Phone", type: "tel" },
-  { name: "mensaje", label: "Message", type: "text" },
-];
-
 // ─── Component ───────────────────────────────────────────────────────
 export default function Contact() {
   const { i18n } = useTranslation();
   const isEn = i18n.language.startsWith("en");
-  const fields = isEn ? FIELDS_EN : FIELDS_ES;
 
-  const [formData, setFormData] = useState<Record<string, string>>({
+  const [formData, setFormData] = useState({
     nombre: "",
     email: "",
     telefono: "",
     mensaje: "",
   });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    // Placeholder — hook up to API or email service
-    console.log("Contact form submitted:", formData);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contacto-martillo",
+          ...formData,
+        }).toString(),
+      });
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ nombre: "", email: "", telefono: "", mensaje: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const buttonLabel =
+    status === "sending"
+      ? (isEn ? "Sending..." : "Enviando...")
+      : status === "success"
+      ? (isEn ? "Message sent ✓" : "Mensaje enviado ✓")
+      : status === "error"
+      ? (isEn ? "Error. Try again" : "Error. Intenta de nuevo")
+      : (isEn ? "SEND" : "ENVIAR");
 
   return (
     <>
+      <SEO
+        title="Contacto"
+        description="Contáctanos para tu próximo proyecto de cine, series, comerciales o videoclips. Martillo Art Dept, diseño de producción y dirección de arte en México."
+        url="/contact"
+      />
+      <style>{`
+        @media (min-width: 768px) and (max-width: 1199px) {
+          .ct-main-row {
+            padding: 120px 40px 80px !important;
+            gap: 0 !important;
+          }
+          .ct-photo-col {
+            display: none !important;
+          }
+          .ct-form-col {
+            width: 100% !important;
+            max-width: 600px !important;
+            margin: 0 auto !important;
+          }
+          .ct-title {
+            font-size: clamp(52px, 8vw, 96px) !important;
+            line-height: 1 !important;
+            width: 100% !important;
+          }
+          .ct-fields-wrap {
+            width: 100% !important;
+          }
+          .ct-field-row {
+            width: 100% !important;
+          }
+          .ct-input {
+            width: 100% !important;
+          }
+          .ct-submit-wrap {
+            width: 100% !important;
+          }
+          .ct-social-row {
+            width: 100% !important;
+          }
+        }
+      `}</style>
+
       {/* ═══ MOBILE LAYOUT ═══ */}
       <div
         className="block md:hidden"
@@ -131,72 +186,123 @@ export default function Contact() {
 
         {/* Form */}
         <div style={{ padding: "32px 22px 0" }}>
-          <div className="flex flex-col" style={{ gap: "16px" }}>
-            {fields.map((field) => (
-              <div key={field.name} className="flex flex-col" style={{ gap: "6px" }}>
-                <label
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontWeight: 400,
-                    fontSize: "16px",
-                    lineHeight: "20px",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {field.label}
+          <form
+            name="contacto-martillo"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+          >
+            <input type="hidden" name="form-name" value="contacto-martillo" />
+            <input type="hidden" name="bot-field" />
+
+            <div className="flex flex-col" style={{ gap: "16px" }}>
+              {/* Nombre */}
+              <div className="flex flex-col" style={{ gap: "6px" }}>
+                <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: "20px", color: "#FFFFFF" }}>
+                  {isEn ? "Name" : "Nombre"}
                 </label>
                 <input
-                  type={field.type}
-                  value={formData[field.name]}
-                  onChange={(e) => handleChange(field.name, e.target.value)}
-                  style={{
-                    width: "100%",
-                    height: "36px",
-                    backgroundColor: "#D9D9D9",
-                    borderRadius: "5px",
-                    border: "none",
-                    outline: "none",
-                    padding: "0 10px",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "14px",
-                    color: "#1b1b1b",
-                    boxSizing: "border-box",
-                  }}
+                  type="text"
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  required
+                  placeholder={isEn ? "Name" : "Nombre"}
+                  style={{ width: "100%", height: "36px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "0 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box" }}
                 />
               </div>
-            ))}
-          </div>
 
-          {/* Submit button */}
-          <div style={{ marginTop: "28px", display: "flex", justifyContent: "center" }}>
-            <button
-              onClick={handleSubmit}
-              style={{
-                width: "100%",
-                height: "52px",
-                backgroundColor: "#D9D9D9",
-                boxShadow: "0px 4px 13.7px #000000",
-                borderRadius: "14px",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 600,
-                fontSize: "16px",
-                color: "#1b1b1b",
-                transition: "background-color 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#FB5000";
-                e.currentTarget.style.color = "#FFFFFF";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#D9D9D9";
-                e.currentTarget.style.color = "#1b1b1b";
-              }}
-            >
-              {isEn ? "SEND" : "ENVIAR"}
-            </button>
-          </div>
+              {/* Email */}
+              <div className="flex flex-col" style={{ gap: "6px" }}>
+                <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: "20px", color: "#FFFFFF" }}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="Email"
+                  style={{ width: "100%", height: "36px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "0 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box" }}
+                />
+              </div>
+
+              {/* Teléfono */}
+              <div className="flex flex-col" style={{ gap: "6px" }}>
+                <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: "20px", color: "#FFFFFF" }}>
+                  {isEn ? "Phone" : "Teléfono"}
+                </label>
+                <input
+                  type="tel"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleChange}
+                  placeholder={isEn ? "Phone" : "Teléfono"}
+                  style={{ width: "100%", height: "36px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "0 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box" }}
+                />
+              </div>
+
+              {/* Mensaje */}
+              <div className="flex flex-col" style={{ gap: "6px" }}>
+                <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "16px", lineHeight: "20px", color: "#FFFFFF" }}>
+                  {isEn ? "Message" : "Mensaje"}
+                </label>
+                <textarea
+                  name="mensaje"
+                  value={formData.mensaje}
+                  onChange={handleChange}
+                  required
+                  placeholder={isEn ? "Message" : "Mensaje"}
+                  style={{ width: "100%", minHeight: "80px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "8px 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box", resize: "vertical" }}
+                />
+              </div>
+            </div>
+
+            {/* Submit button */}
+            <div style={{ marginTop: "28px", display: "flex", justifyContent: "center" }}>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                style={{
+                  width: "100%",
+                  height: "52px",
+                  backgroundColor: status === "success" ? "#FB5000" : "#D9D9D9",
+                  boxShadow: "0px 4px 13.7px #000000",
+                  borderRadius: "14px",
+                  border: "none",
+                  cursor: status === "sending" ? "not-allowed" : "pointer",
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  color: status === "success" ? "#FFFFFF" : "#1b1b1b",
+                  transition: "background-color 0.3s ease",
+                  opacity: status === "sending" ? 0.7 : 1,
+                }}
+                onMouseEnter={(e) => {
+                  if (status !== "sending" && status !== "success") {
+                    e.currentTarget.style.backgroundColor = "#FB5000";
+                    e.currentTarget.style.color = "#FFFFFF";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (status !== "sending" && status !== "success") {
+                    e.currentTarget.style.backgroundColor = "#D9D9D9";
+                    e.currentTarget.style.color = "#1b1b1b";
+                  }
+                }}
+              >
+                {buttonLabel}
+              </button>
+            </div>
+
+            {status === "success" && (
+              <p style={{ color: "#FB5000", marginTop: "12px", textAlign: "center", fontFamily: "'Inter', sans-serif", fontSize: "14px" }}>
+                {isEn ? "Thank you! We'll get back to you soon." : "¡Gracias! Nos pondremos en contacto pronto."}
+              </p>
+            )}
+          </form>
 
           {/* Social icons */}
           <div
@@ -224,177 +330,234 @@ export default function Contact() {
 
       {/* ═══ DESKTOP LAYOUT ═══ */}
       <div className="hidden md:block">
-    <div
-      className="w-full"
-      style={{
-        backgroundColor: "#1b1b1b",
-        backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-        minHeight: "100vh",
-      }}
-    >
-      {/* ═══ MAIN CONTENT — Figma Frame 62: 1346×682, positioned at x:44 y:179 ═══ */}
-      <div
-        className="mx-auto flex"
-        style={{
-          maxWidth: "1440px",
-          padding: "179px 47px 120px",
-          gap: "33px",
-          alignItems: "flex-start",
-        }}
-      >
-        {/* ── LEFT COLUMN — Form (690px, flex-grow) ── */}
         <div
-          className="flex flex-col"
-          style={{ width: "690px", flexGrow: 1, gap: "46px" }}
-        >
-          {/* Title — Martillo Completa 96px */}
-          <div className="flex justify-center" style={{ width: "537px" }}>
-            <h1
-              style={{
-                fontFamily: "'Martillo Completa', sans-serif",
-                fontWeight: 400,
-                fontSize: "96px",
-                lineHeight: "96px",
-                color: "#FBFEF9",
-                textAlign: "center",
-              }}
-            >
-              {isEn ? "CONTACT US" : "CONTÁCTANOS"}
-            </h1>
-          </div>
-
-          {/* Input fields — 4 fields, 540px wide, gap 20px */}
-          <div
-            className="flex flex-col justify-center"
-            style={{ width: "540px", gap: "20px" }}
-          >
-            {fields.map((field) => (
-              <div
-                key={field.name}
-                className="flex flex-col"
-                style={{ width: "540px", gap: "10px" }}
-              >
-                <label
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontWeight: 400,
-                    fontSize: "20px",
-                    lineHeight: "24px",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {field.label}
-                </label>
-                <input
-                  type={field.type}
-                  value={formData[field.name]}
-                  onChange={(e) => handleChange(field.name, e.target.value)}
-                  style={{
-                    width: "540px",
-                    height: "25px",
-                    backgroundColor: "#D9D9D9",
-                    borderRadius: "5px",
-                    border: "none",
-                    outline: "none",
-                    padding: "0 10px",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "14px",
-                    color: "#1b1b1b",
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Submit button — 358×65, radius 18px */}
-          <div
-            className="flex justify-end"
-            style={{ width: "536px" }}
-          >
-            <button
-              onClick={handleSubmit}
-              style={{
-                width: "358px",
-                height: "65px",
-                backgroundColor: "#D9D9D9",
-                boxShadow: "0px 4px 13.7px #000000",
-                borderRadius: "18px",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 600,
-                fontSize: "18px",
-                color: "#1b1b1b",
-                transition: "background-color 0.3s ease, transform 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#FB5000";
-                e.currentTarget.style.color = "#FFFFFF";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#D9D9D9";
-                e.currentTarget.style.color = "#1b1b1b";
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = "scale(0.97)";
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-              }}
-            >
-              {isEn ? "SEND" : "ENVIAR"}
-            </button>
-          </div>
-
-          {/* Social icons row — 5 icons, 46px each, gap 50px */}
-          <div
-            className="flex justify-between items-center"
-            style={{ width: "540px", gap: "50px" }}
-          >
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-              <WhatsAppIcon />
-            </a>
-            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <InstagramIcon />
-            </a>
-            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <LinkedinIcon />
-            </a>
-            <a href="tel:+5500000000" aria-label={isEn ? "Phone" : "Teléfono"}>
-              <PhoneIcon />
-            </a>
-            <a href="mailto:martillo@correo.com" aria-label="Email">
-              <EmailIcon />
-            </a>
-          </div>
-        </div>
-
-        {/* ── RIGHT COLUMN — Photo placeholder (656×682, radius 43px) ── */}
-        <div
+          className="w-full"
           style={{
-            width: "656px",
-            minWidth: "656px",
-            height: "682px",
-            flexShrink: 0,
-            backgroundColor: "#D9D9D9",
-            borderRadius: "43px",
-            overflow: "hidden",
-            boxShadow: "inset 0px 0px 11.6px rgba(0, 0, 0, 0.25)",
-            alignSelf: "flex-start",
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            minHeight: "100vh",
           }}
         >
-          <img
-            src="/assets/contact/contact-photo.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-            onError={(e) => { e.currentTarget.style.display = "none"; }}
-          />
+          {/* ═══ MAIN CONTENT — Figma Frame 62: 1346×682, positioned at x:44 y:179 ═══ */}
+          <div
+            className="ct-main-row mx-auto flex"
+            style={{
+              maxWidth: "1440px",
+              padding: "179px 47px 120px",
+              gap: "33px",
+              alignItems: "flex-start",
+            }}
+          >
+            {/* ── LEFT COLUMN — Form (690px, flex-grow) ── */}
+            <div
+              className="ct-form-col flex flex-col"
+              style={{ width: "690px", flexGrow: 1, gap: "46px" }}
+            >
+              {/* Title — Martillo Completa 96px */}
+              <div className="flex justify-center" style={{ width: "537px" }}>
+                <h1
+                  className="ct-title"
+                  style={{
+                    fontFamily: "'Martillo Completa', sans-serif",
+                    fontWeight: 400,
+                    fontSize: "96px",
+                    lineHeight: "96px",
+                    color: "#FBFEF9",
+                    textAlign: "center",
+                  }}
+                >
+                  {isEn ? "CONTACT US" : "CONTÁCTANOS"}
+                </h1>
+              </div>
+
+              <form
+                name="contacto-martillo"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                style={{ display: "contents" }}
+              >
+                <input type="hidden" name="form-name" value="contacto-martillo" />
+                <input type="hidden" name="bot-field" />
+
+                {/* Input fields — 540px wide, gap 20px */}
+                <div
+                  className="ct-fields-wrap flex flex-col justify-center"
+                  style={{ width: "540px", gap: "20px" }}
+                >
+                  {/* Nombre */}
+                  <div className="ct-field-row flex flex-col" style={{ width: "540px", gap: "10px" }}>
+                    <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
+                      {isEn ? "Name" : "Nombre"}
+                    </label>
+                    <input
+                      type="text"
+                      name="nombre"
+                      value={formData.nombre}
+                      onChange={handleChange}
+                      required
+                      placeholder={isEn ? "Name" : "Nombre"}
+                      className="ct-input"
+                      style={{ width: "540px", height: "25px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "0 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box" }}
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="ct-field-row flex flex-col" style={{ width: "540px", gap: "10px" }}>
+                    <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Email"
+                      className="ct-input"
+                      style={{ width: "540px", height: "25px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "0 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box" }}
+                    />
+                  </div>
+
+                  {/* Teléfono */}
+                  <div className="ct-field-row flex flex-col" style={{ width: "540px", gap: "10px" }}>
+                    <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
+                      {isEn ? "Phone" : "Teléfono"}
+                    </label>
+                    <input
+                      type="tel"
+                      name="telefono"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                      placeholder={isEn ? "Phone" : "Teléfono"}
+                      className="ct-input"
+                      style={{ width: "540px", height: "25px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "0 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box" }}
+                    />
+                  </div>
+
+                  {/* Mensaje */}
+                  <div className="ct-field-row flex flex-col" style={{ width: "540px", gap: "10px" }}>
+                    <label style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
+                      {isEn ? "Message" : "Mensaje"}
+                    </label>
+                    <textarea
+                      name="mensaje"
+                      value={formData.mensaje}
+                      onChange={handleChange}
+                      required
+                      placeholder={isEn ? "Message" : "Mensaje"}
+                      className="ct-input"
+                      style={{ width: "540px", minHeight: "80px", backgroundColor: "#D9D9D9", borderRadius: "5px", border: "none", outline: "none", padding: "6px 10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#1b1b1b", boxSizing: "border-box", resize: "vertical" }}
+                    />
+                  </div>
+                </div>
+
+                {/* Submit button — 358×65, radius 18px */}
+                <div
+                  className="ct-submit-wrap flex flex-col"
+                  style={{ width: "536px", gap: "12px" }}
+                >
+                  <div className="flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={status === "sending"}
+                      style={{
+                        width: "358px",
+                        height: "65px",
+                        backgroundColor: status === "success" ? "#FB5000" : "#D9D9D9",
+                        boxShadow: "0px 4px 13.7px #000000",
+                        borderRadius: "18px",
+                        border: "none",
+                        cursor: status === "sending" ? "not-allowed" : "pointer",
+                        fontFamily: "'Inter', sans-serif",
+                        fontWeight: 600,
+                        fontSize: "18px",
+                        color: status === "success" ? "#FFFFFF" : "#1b1b1b",
+                        transition: "background-color 0.3s ease, transform 0.15s ease",
+                        opacity: status === "sending" ? 0.7 : 1,
+                      }}
+                      onMouseEnter={(e) => {
+                        if (status !== "sending" && status !== "success") {
+                          e.currentTarget.style.backgroundColor = "#FB5000";
+                          e.currentTarget.style.color = "#FFFFFF";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (status !== "sending" && status !== "success") {
+                          e.currentTarget.style.backgroundColor = "#D9D9D9";
+                          e.currentTarget.style.color = "#1b1b1b";
+                        }
+                      }}
+                      onMouseDown={(e) => {
+                        e.currentTarget.style.transform = "scale(0.97)";
+                      }}
+                      onMouseUp={(e) => {
+                        e.currentTarget.style.transform = "scale(1)";
+                      }}
+                    >
+                      {buttonLabel}
+                    </button>
+                  </div>
+
+                  {status === "success" && (
+                    <p style={{ color: "#FB5000", textAlign: "right", fontFamily: "'Inter', sans-serif", fontSize: "16px" }}>
+                      {isEn ? "Thank you! We'll get back to you soon." : "¡Gracias! Nos pondremos en contacto pronto."}
+                    </p>
+                  )}
+                </div>
+              </form>
+
+              {/* Social icons row — 5 icons, 46px each, gap 50px */}
+              <div
+                className="ct-social-row flex justify-between items-center"
+                style={{ width: "540px", gap: "50px" }}
+              >
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                  <WhatsAppIcon />
+                </a>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <InstagramIcon />
+                </a>
+                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <LinkedinIcon />
+                </a>
+                <a href="tel:+5500000000" aria-label={isEn ? "Phone" : "Teléfono"}>
+                  <PhoneIcon />
+                </a>
+                <a href="mailto:martillo@correo.com" aria-label="Email">
+                  <EmailIcon />
+                </a>
+              </div>
+            </div>
+
+            {/* ── RIGHT COLUMN — Photo placeholder (656×682, radius 43px) ── */}
+            <div
+              className="ct-photo-col"
+              style={{
+                width: "656px",
+                minWidth: "656px",
+                height: "682px",
+                flexShrink: 0,
+                backgroundColor: "#D9D9D9",
+                borderRadius: "43px",
+                overflow: "hidden",
+                boxShadow: "inset 0px 0px 11.6px rgba(0, 0, 0, 0.25)",
+                alignSelf: "flex-start",
+              }}
+            >
+              <img
+                src="/assets/contact/contact-photo.jpg"
+                alt=""
+                className="w-full h-full object-cover"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
       </div>
     </>
   );

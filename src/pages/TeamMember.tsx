@@ -92,6 +92,84 @@ const COLOR_STRIP_MOBILE = [
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const memberCSS = `
+/* ── Tablet overrides (768–1199px) ── */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .member-hero-name-block {
+    left: 30px !important;
+    top: 160px !important;
+    width: 70% !important;
+  }
+  .member-hero-first,
+  .member-hero-last {
+    font-size: clamp(80px, 13vw, 180px) !important;
+    line-height: clamp(80px, 13vw, 181px) !important;
+  }
+  .member-hero-role-block {
+    right: 20px !important;
+    top: 200px !important;
+    width: 30% !important;
+  }
+  .member-hero-role-text {
+    font-size: clamp(20px, 2.8vw, 48px) !important;
+    line-height: 1.2 !important;
+  }
+  .member-bio-container {
+    flex-direction: column !important;
+    padding: 40px 40px 0 !important;
+  }
+  .member-bio-text {
+    width: 100% !important;
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  .member-bio-photo {
+    width: 100% !important;
+    height: 420px !important;
+  }
+  .member-filmography-section {
+    padding: 60px 40px 0 !important;
+  }
+  .member-filmography-title {
+    font-size: 48px !important;
+    line-height: 48px !important;
+    margin-bottom: 48px !important;
+  }
+  .member-filmography-grid {
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
+  .member-film-card {
+    width: calc(33.33% - 12px) !important;
+    height: 180px !important;
+    flex-shrink: 1 !important;
+  }
+  .member-awards-container {
+    padding: 60px 40px 60px !important;
+    flex-direction: column !important;
+  }
+  .member-featured-col {
+    width: 100% !important;
+  }
+  .member-featured-img {
+    width: 100% !important;
+    height: 340px !important;
+  }
+  .member-strip-desktop {
+    width: 100% !important;
+  }
+  .member-awards-list {
+    width: 100% !important;
+  }
+  .member-award-title {
+    font-size: 28px !important;
+    line-height: 34px !important;
+  }
+  .member-award-role {
+    font-size: 18px !important;
+    line-height: 22px !important;
+  }
+}
+
 /* Cobp dock for color strip */
 .member-strip {
   display: flex;
@@ -401,7 +479,7 @@ export default function TeamMember() {
         >
           {/* Name — left aligned, large */}
           <div
-            className="absolute flex flex-col items-start"
+            className="member-hero-name-block absolute flex flex-col items-start"
             style={{
               left: "50px",
               top: "200px",
@@ -409,7 +487,7 @@ export default function TeamMember() {
               filter: "drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.5))",
             }}
           >
-            <span style={{
+            <span className="member-hero-first" style={{
               fontFamily: "'Martillo Completa', sans-serif",
               fontWeight: 400,
               fontSize: "180px",
@@ -419,7 +497,7 @@ export default function TeamMember() {
             }}>
               {firstName}
             </span>
-            <span style={{
+            <span className="member-hero-last" style={{
               fontFamily: "'Martillo Completa', sans-serif",
               fontWeight: 400,
               fontSize: "180px",
@@ -434,7 +512,7 @@ export default function TeamMember() {
 
           {/* Role — anclado a la derecha para no encimarse con el nombre */}
           <div
-            className="absolute"
+            className="member-hero-role-block absolute"
             style={{
               right: "50px",
               top: "260px",
@@ -442,7 +520,7 @@ export default function TeamMember() {
               textShadow: "0px 0px 30px rgba(0, 0, 0, 0.5)",
             }}
           >
-            <span style={{
+            <span className="member-hero-role-text" style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 900,
               fontSize: "48px",
@@ -477,11 +555,11 @@ export default function TeamMember() {
               Figma: Text 770px left + Photo 543×814 right
           */}
           <div
-            className="mx-auto flex"
+            className="member-bio-container mx-auto flex"
             style={{ maxWidth: "1440px", padding: "0 50px", gap: "27px" }}
           >
             {/* Left: Bio text */}
-            <div style={{ width: "770px", flexShrink: 0 }}>
+            <div className="member-bio-text" style={{ width: "770px", flexShrink: 0 }}>
               {bio.split("\n\n").map((paragraph, idx) => (
                 <p
                   key={idx}
@@ -501,6 +579,7 @@ export default function TeamMember() {
 
             {/* Right: Photo */}
             <div
+              className="member-bio-photo"
               style={{
                 width: "543px",
                 height: "814px",
@@ -521,8 +600,8 @@ export default function TeamMember() {
           {/* ═══ FILMOGRAPHY ═══
               Figma: Title 72px + 6 thumbnails (201×302, gap 27px)
           */}
-          <div className="mx-auto" style={{ maxWidth: "1440px", padding: "80px 50px 0" }}>
-            <h2 style={{
+          <div className="member-filmography-section mx-auto" style={{ maxWidth: "1440px", padding: "80px 50px 0" }}>
+            <h2 className="member-filmography-title" style={{
               fontFamily: "'Martillo Completa', sans-serif",
               fontWeight: 400,
               fontSize: "72px",
@@ -533,10 +612,11 @@ export default function TeamMember() {
               {isEn ? "FEATURED FILMOGRAPHY" : "FILMOGRAFIA DESTACADA"}
             </h2>
 
-            <div className="flex" style={{ gap: "27px" }}>
+            <div className="member-filmography-grid flex" style={{ gap: "27px" }}>
               {member.filmography.map((film, idx) => (
                 <div
                   key={idx}
+                  className="member-film-card"
                   style={{
                     width: "201px",
                     height: "302px",
@@ -561,13 +641,14 @@ export default function TeamMember() {
                      Right side = 6 award rows (543px wide)
           */}
           <div
-            className="mx-auto flex"
+            className="member-awards-container mx-auto flex"
             style={{ maxWidth: "1440px", padding: "80px 50px 80px", gap: "27px" }}
           >
             {/* Left: Featured image + color strip */}
-            <div style={{ width: "770px", flexShrink: 0 }}>
+            <div className="member-featured-col" style={{ width: "770px", flexShrink: 0 }}>
               {/* Featured image */}
               <div
+                className="member-featured-img"
                 style={{
                   width: "770px",
                   height: "513px",
@@ -586,7 +667,7 @@ export default function TeamMember() {
 
               {/* Color strip — Cobp dock effect */}
               <div
-                className="member-strip"
+                className="member-strip member-strip-desktop"
                 style={{ width: "770px" }}
               >
                 {COLOR_STRIP.map((color, idx) => (
@@ -602,7 +683,7 @@ export default function TeamMember() {
             </div>
 
             {/* Right: Awards list */}
-            <div className="flex flex-col" style={{ width: "543px", gap: "19px" }}>
+            <div className="member-awards-list flex flex-col" style={{ width: "543px", gap: "19px" }}>
               {member.awards.map((award, idx) => (
                 <div
                   key={idx}
@@ -610,7 +691,7 @@ export default function TeamMember() {
                   style={{ height: "90px" }}
                 >
                   <div className="flex flex-col">
-                    <span style={{
+                    <span className="member-award-title" style={{
                       fontFamily: "'Inter', sans-serif",
                       fontWeight: 400,
                       fontSize: "40px",
@@ -619,7 +700,7 @@ export default function TeamMember() {
                     }}>
                       {isEn ? award.titleEn : award.titleEs}
                     </span>
-                    <span style={{
+                    <span className="member-award-role" style={{
                       fontFamily: "'Inter', sans-serif",
                       fontWeight: 300,
                       fontSize: "24px",

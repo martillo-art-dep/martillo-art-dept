@@ -17,6 +17,7 @@ export interface Nomination { title: string; area: string; }
 export interface GallerySection { title: string; images: string[]; }
 
 export interface ProjectFull extends ProjectCard {
+  hidden?: boolean;
   heroImage: string;
   subtitle: string;
   originalTitle: string;
@@ -39,6 +40,7 @@ export const projects: ProjectFull[] = [
   // ═══ LARGOMETRAJES ═══
   {
     id: "sin-nombre",
+    hidden: true,
     title: "SIN NOMBRE",
     year: 2007,
     category: "largometrajes",
@@ -73,10 +75,10 @@ export const projects: ProjectFull[] = [
   {
     id: "giab",
     title: "GOD IS A BULLET",
-    year: 2023,
+    year: 2021,
     category: "largometrajes",
     image: "/assets/projects/giab/thumb.webp",
-    description: "[PENDIENTE — CLIENTE: Descripción breve]",
+    description: "Detective Bob Hightower se infiltra en una secta satánica para rescatar a su hija secuestrada, con la ayuda de Case Hardin, la única sobreviviente del culto.",
     heroImage: "/assets/projects/giab/hero.webp",
     subtitle: "DISEÑO DE PRODUCCIÓN",
     originalTitle: "God Is a Bullet",
@@ -84,21 +86,114 @@ export const projects: ProjectFull[] = [
     genre: "Thriller / Drama",
     credits: [
       { role: "Dirección", name: "Nick Cassavetes" },
-      { role: "Diseño de producción", name: "Claudio Contreras" },
-      { role: "Elenco", name: "Maika Monroe, Nikolaj Coster-Waldau" },
+      { role: "Diseño de producción", name: "Claudio \"Pache\" Contreras" },
+      { role: "Dirección de arte", name: "Héctor \"Carry\" Iruegas" },
+      { role: "Elenco", name: "Nikolaj Coster-Waldau, Maika Monroe" },
     ],
     posterImage: "/assets/projects/giab/poster.webp",
     trailerUrl: "[PENDIENTE — CLIENTE]",
     logos: [],
     nominations: [],
-    synopsis: "[PENDIENTE — CLIENTE]",
-    synopsisEn: "[PENDING — CLIENT]",
-    productionDesignText: "[PENDIENTE — CLIENTE]",
-    productionDesignTextEn: "[PENDING — CLIENT]",
+    synopsis: "La historia sigue a Bob Hightower (Nikolaj Coster-Waldau), un detective cuya exesposa es asesinada y su hija secuestrada por una secta satánica. Frustrado por la burocracia policial, Bob deja su placa y se infiltra en el culto con la ayuda de Case Hardin (Maika Monroe), la única mujer que ha logrado escapar de ellos.",
+    synopsisEn: "The story follows Bob Hightower (Nikolaj Coster-Waldau), a detective whose ex-wife is murdered and his daughter kidnapped by a satanic cult. Frustrated by police bureaucracy, Bob leaves his badge and infiltrates the cult with the help of Case Hardin (Maika Monroe), the only woman who has managed to escape them.",
+    productionDesignText: "GIAB entraña el reto de recrear en una road movie filmada en su mayor parte en México el paisaje y la atmósfera opresiva y calurosa del corredor desértico entre California y la frontera mexicana, cruzando por Nuevo México.",
+    productionDesignTextEn: "GIAB entails the challenge of recreating in a road movie filmed mostly in Mexico the landscape and the oppressive and hot atmosphere of the desert corridor between California and the Mexican border crossing through New Mexico.",
     galleries: [
-      { title: "SET MURDER MYSTERY", images: ["/assets/projects/giab/murder-01.webp", "/assets/projects/giab/murder-02.webp"] },
-      { title: "SET CHALK FLOOR", images: ["/assets/projects/giab/chalk-01.webp", "/assets/projects/giab/chalk-02.webp"] },
-      { title: "SET ERROL'S BATHROOM", images: ["/assets/projects/giab/errol-01.webp", "/assets/projects/giab/errol-02.webp"] },
+      {
+        title: "SET ERROL'S BATHROOM",
+        images: [
+          "/assets/projects/giab/errol-01.webp",
+          "/assets/projects/giab/errol-02.webp",
+          "/assets/projects/giab/errol-03.webp",
+          "/assets/projects/giab/errol-04.webp",
+          "/assets/projects/giab/errol-05.webp",
+          "/assets/projects/giab/errol-06.webp",
+          "/assets/projects/giab/errol-07.webp",
+          "/assets/projects/giab/errol-08.webp",
+          "/assets/projects/giab/errol-09.webp",
+          "/assets/projects/giab/errol-10.webp",
+          "/assets/projects/giab/errol-11.webp",
+          "/assets/projects/giab/errol-12.webp",
+          "/assets/projects/giab/errol-13.webp",
+          "/assets/projects/giab/errol-14.webp",
+          "/assets/projects/giab/errol-15.webp",
+          "/assets/projects/giab/errol-16.webp",
+          "/assets/projects/giab/errol-17.webp",
+          "/assets/projects/giab/errol-18.webp",
+          "/assets/projects/giab/errol-19.webp",
+          "/assets/projects/giab/errol-20.webp",
+          "/assets/projects/giab/errol-21.webp",
+          "/assets/projects/giab/errol-22.webp",
+          "/assets/projects/giab/errol-23.webp",
+          "/assets/projects/giab/errol-24.webp",
+        ]
+      },
+      {
+        title: "SET CHALK FLATS",
+        images: [
+          "/assets/projects/giab/chalk-01.webp",
+          "/assets/projects/giab/chalk-02.webp",
+          "/assets/projects/giab/chalk-03.webp",
+          "/assets/projects/giab/chalk-04.webp",
+          "/assets/projects/giab/chalk-05.webp",
+          "/assets/projects/giab/chalk-06.webp",
+          "/assets/projects/giab/chalk-07.webp",
+          "/assets/projects/giab/chalk-08.webp",
+          "/assets/projects/giab/chalk-09.webp",
+          "/assets/projects/giab/chalk-10.webp",
+          "/assets/projects/giab/chalk-11.webp",
+          "/assets/projects/giab/chalk-12.webp",
+          "/assets/projects/giab/chalk-13.webp",
+          "/assets/projects/giab/chalk-14.webp",
+          "/assets/projects/giab/chalk-15.webp",
+          "/assets/projects/giab/chalk-16.webp",
+          "/assets/projects/giab/chalk-17.webp",
+          "/assets/projects/giab/chalk-18.webp",
+          "/assets/projects/giab/chalk-19.webp",
+          "/assets/projects/giab/chalk-20.webp",
+          "/assets/projects/giab/chalk-21.webp",
+          "/assets/projects/giab/chalk-22.webp",
+          "/assets/projects/giab/chalk-23.webp",
+          "/assets/projects/giab/chalk-24.webp",
+          "/assets/projects/giab/chalk-25.webp",
+          "/assets/projects/giab/chalk-26.webp",
+          "/assets/projects/giab/chalk-27.webp",
+          "/assets/projects/giab/chalk-28.webp",
+          "/assets/projects/giab/chalk-29.webp",
+        ]
+      },
+      {
+        title: "SET MURDER AT FURNACE CREEK",
+        images: [
+          "/assets/projects/giab/murder-01.webp",
+          "/assets/projects/giab/murder-02.webp",
+          "/assets/projects/giab/murder-03.webp",
+          "/assets/projects/giab/murder-04.webp",
+          "/assets/projects/giab/murder-05.webp",
+          "/assets/projects/giab/murder-06.webp",
+          "/assets/projects/giab/murder-07.webp",
+          "/assets/projects/giab/murder-08.webp",
+          "/assets/projects/giab/murder-09.webp",
+          "/assets/projects/giab/murder-10.webp",
+          "/assets/projects/giab/murder-11.webp",
+          "/assets/projects/giab/murder-12.webp",
+          "/assets/projects/giab/murder-13.webp",
+          "/assets/projects/giab/murder-14.webp",
+          "/assets/projects/giab/murder-15.webp",
+          "/assets/projects/giab/murder-16.webp",
+          "/assets/projects/giab/murder-17.webp",
+          "/assets/projects/giab/murder-18.webp",
+          "/assets/projects/giab/murder-19.webp",
+          "/assets/projects/giab/murder-20.webp",
+          "/assets/projects/giab/murder-21.webp",
+          "/assets/projects/giab/murder-22.webp",
+          "/assets/projects/giab/murder-23.webp",
+          "/assets/projects/giab/murder-24.webp",
+          "/assets/projects/giab/murder-25.webp",
+          "/assets/projects/giab/murder-26.webp",
+          "/assets/projects/giab/murder-27.webp",
+        ]
+      },
     ],
   },
   {
@@ -126,7 +221,23 @@ export const projects: ProjectFull[] = [
     synopsisEn: "EL VIOLÍN tells the story of Don Plutarco, an elderly violinist, his son Genaro and grandson Lucio, who live a double life: they are rural musicians and peasants, but they are also involved in the guerrilla fighting against an oppressive government. When the army invades their village, they are forced to flee and leave their weapons behind. Don Plutarco, using his music as a weapon, tries to recover the ammunition.",
     productionDesignText: "El concepto de la dirección artística de EL VIOLÍN, se basa en una mirada documentada al interior del campo y las carencias cotidianas, que motivan a un grupo disidente al gobierno en turno a luchar por la vía armada. El estilo artístico encontró en el documental una fuente de inspiración para crear una estética donde, la ficción se confunde con la realidad.",
     productionDesignTextEn: "The concept of the artistic direction of EL VIOLÍN is based on a documented look at the interior of the field and the daily shortages, which motivate a group dissident to the government in turn to fight by armed means. The artistic style found in the documentary a source of inspiration to create an aesthetic where fiction is confused with reality.",
-    galleries: [{ title: "EL VIOLÍN", images: ["/assets/projects/el-violin/gallery-01.webp", "/assets/projects/el-violin/gallery-02.webp"] }],
+    galleries: [{ title: "EL VIOLÍN", images: [
+      "/assets/projects/el-violin/gallery-01.webp",
+      "/assets/projects/el-violin/gallery-02.webp",
+      "/assets/projects/el-violin/gallery-03.webp",
+      "/assets/projects/el-violin/gallery-04.webp",
+      "/assets/projects/el-violin/gallery-05.webp",
+      "/assets/projects/el-violin/gallery-06.webp",
+      "/assets/projects/el-violin/gallery-07.webp",
+      "/assets/projects/el-violin/gallery-08.webp",
+      "/assets/projects/el-violin/gallery-09.webp",
+      "/assets/projects/el-violin/gallery-10.webp",
+      "/assets/projects/el-violin/gallery-11.webp",
+      "/assets/projects/el-violin/gallery-12.webp",
+      "/assets/projects/el-violin/gallery-13.webp",
+      "/assets/projects/el-violin/gallery-14.webp",
+      "/assets/projects/el-violin/gallery-15.webp",
+    ] }],
   },
   {
     id: "la-perdicion-de-los-hombres",
@@ -153,10 +264,11 @@ export const projects: ProjectFull[] = [
     synopsisEn: "Two men murder a third man after a trivial dispute over a baseball game in a remote town. From this brutal act, the film is transformed into a surreal satire where the corpse becomes the center of a dispute between two women: the legitimate wife and the lover, the story explores misery, machismo and the absurdity of death.",
     productionDesignText: "Para esta película abordé el realismo trágico como punto de partida para generar lugares que translucieran sátira desde la realidad del entorno donde sucede la historia, el concepto me llevó a abordar un ejercicio buñueliano con recursos limitados que permitieran un aire de fábula atemporal en ese entorno rural, vasto, hostil y desprovisto en una tierra de nadie donde la moral ha desaparecido.",
     productionDesignTextEn: "For this film I approached tragic realism as a starting point to generate places that would translude satire from the reality of the environment where the story takes place, the concept led me to address a Buñuelian exercise with limited resources that would allow an air of a timeless fable in that rural environment, vast, hostile and devoid in a no man's land where morality has disappeared.",
-    galleries: [{ title: "LA PERDICIÓN DE LOS HOMBRES", images: ["/assets/projects/la-perdicion/gallery-01.webp", "/assets/projects/la-perdicion/gallery-02.webp"] }],
+    galleries: [{ title: "LA PERDICIÓN DE LOS HOMBRES", images: ["/assets/projects/la-perdicion/gallery-01.webp", "/assets/projects/la-perdicion/gallery-02.webp", "/assets/projects/la-perdicion/gallery-03.webp", "/assets/projects/la-perdicion/gallery-04.webp", "/assets/projects/la-perdicion/gallery-05.webp", "/assets/projects/la-perdicion/gallery-06.webp", "/assets/projects/la-perdicion/gallery-07.webp", "/assets/projects/la-perdicion/gallery-08.webp", "/assets/projects/la-perdicion/gallery-09.webp"] }],
   },
   {
     id: "feral",
+    hidden: true,
     title: "FERAL",
     year: 2017,
     category: "largometrajes",
@@ -210,12 +322,35 @@ export const projects: ProjectFull[] = [
     synopsisEn: "After the death of the benefactor of the asylum \"El Refugio\", the lives of the residents become precarious due to the lack of resources and medical care. Desperate to improve their conditions, a group of elderly people decide to take extreme measures: they begin to eliminate other companions to reduce the population of the nursing home, making the crimes seem like natural or accidental deaths. This acid satire explores abandonment in old age through a survival pact that is as cynical as it is lethal.",
     productionDesignText: "El asilo es un lugar que se siente \"atrapado en el tiempo\", utilizar una paleta de colores deslavados y texturas que evocan una gloria pasada, que refuerzan la sensación de abandono y precariedad en la que viven los personajes. Los crímenes cometidos por el club deben parecer muertes naturales. El diseño de producción y la utilería se enfocan en objetos cotidianos del asilo que se vuelven letales, manteniendo una apariencia de normalidad doméstica que en todo momento se inscribe en el humor negro.",
     productionDesignTextEn: "The asylum is a place that feels \"trapped in time\", using a palette of washed colors and textures that evoke a past glory, which reinforce the feeling of abandonment and precariousness in which the characters live. The crimes committed by the club must appear to be natural deaths. The production design and props focus on everyday objects of the asylum that become lethal, maintaining an appearance of domestic normality that at all times is inscribed in black humor.",
-    galleries: [{ title: "CLUB EUTANASIA", images: ["/assets/projects/club-eutanasia/gallery-01.webp", "/assets/projects/club-eutanasia/gallery-02.webp"] }],
+    galleries: [{ title: "CLUB EUTANASIA", images: [
+      "/assets/projects/club-eutanasia/gallery-01.webp",
+      "/assets/projects/club-eutanasia/gallery-02.webp",
+      "/assets/projects/club-eutanasia/gallery-03.webp",
+      "/assets/projects/club-eutanasia/gallery-04.webp",
+      "/assets/projects/club-eutanasia/gallery-05.webp",
+      "/assets/projects/club-eutanasia/gallery-06.webp",
+      "/assets/projects/club-eutanasia/gallery-07.webp",
+      "/assets/projects/club-eutanasia/gallery-08.webp",
+      "/assets/projects/club-eutanasia/gallery-09.webp",
+      "/assets/projects/club-eutanasia/gallery-10.webp",
+      "/assets/projects/club-eutanasia/gallery-11.webp",
+      "/assets/projects/club-eutanasia/gallery-12.webp",
+      "/assets/projects/club-eutanasia/gallery-13.webp",
+      "/assets/projects/club-eutanasia/gallery-14.webp",
+      "/assets/projects/club-eutanasia/gallery-15.webp",
+      "/assets/projects/club-eutanasia/gallery-16.webp",
+      "/assets/projects/club-eutanasia/gallery-17.webp",
+      "/assets/projects/club-eutanasia/gallery-18.webp",
+      "/assets/projects/club-eutanasia/gallery-19.webp",
+      "/assets/projects/club-eutanasia/gallery-20.webp",
+      "/assets/projects/club-eutanasia/gallery-21.webp",
+    ] }],
   },
 
   // ═══ SERIES ═══
   {
     id: "mala-fortuna",
+    hidden: true,
     title: "MALA FORTUNA",
     year: 2024,
     category: "series",
@@ -244,6 +379,7 @@ export const projects: ProjectFull[] = [
   // ═══ COMERCIALES ═══
   {
     id: "frosten-flake",
+    hidden: true,
     title: "ZUCARITAS / FROSTED FLAKES",
     year: 2008,
     category: "comerciales",
@@ -272,6 +408,7 @@ export const projects: ProjectFull[] = [
   },
   {
     id: "gatorade-shangai",
+    hidden: true,
     title: "GATORADE SHANGÁI",
     year: 2008,
     category: "comerciales",
@@ -300,6 +437,7 @@ export const projects: ProjectFull[] = [
   },
   {
     id: "nissan-elefante",
+    hidden: true,
     title: "NISSAN ESTAQUITAS",
     year: 2008,
     category: "comerciales",
@@ -330,6 +468,7 @@ export const projects: ProjectFull[] = [
   // ═══ VIDEOCLIPS ═══
   {
     id: "dead-dance",
+    hidden: true,
     title: "THE DEAD DANCE",
     year: 2025,
     category: "videoclips",
@@ -358,6 +497,7 @@ export const projects: ProjectFull[] = [
   },
   {
     id: "mis-planes-son-a-marte",
+    hidden: true,
     title: "MIS PLANES SON A MARTE",
     year: 2016,
     category: "videoclips",
@@ -389,9 +529,11 @@ export const projects: ProjectFull[] = [
 // ─── Helpers ─────────────────────────────────────────────────────────
 
 export function getProjectCards(): ProjectCard[] {
-  return projects.map(({ id, title, year, category, image, description }) => ({
-    id, title, year, category, image, description,
-  }));
+  return projects
+    .filter(p => !p.hidden)
+    .map(({ id, title, year, category, image, description }) => ({
+      id, title, year, category, image, description,
+    }));
 }
 
 export function getProjectById(id: string): ProjectFull | undefined {

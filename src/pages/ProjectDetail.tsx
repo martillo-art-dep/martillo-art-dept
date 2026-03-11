@@ -1,13 +1,8 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { getProjectById } from "../data/projects";
 
-// ─── Gallery Color Strip Colors (Figma spec) ────────────────────────
-const COLOR_STRIP = [
-  "#F8F1CD", "#FB5000", "#FFDA44", "#338AF3", "#00FF8C",
-  "#C32F27", "#F80078", "#751A46", "#338AF3", "#F80078",
-  "#F8F1CD", "#FB5000", "#FFDA44",
-];
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const dockCSS = `
@@ -126,6 +121,78 @@ const dockCSS = `
   transform: scaleY(1.15) scaleX(1.04);
   z-index: 999;
 }
+
+/* ── Active swatch indicator ── */
+.color-swatch.swatch-active {
+  outline: 3px solid #FB5000;
+  outline-offset: -3px;
+}
+.color-swatch-mobile.swatch-active {
+  outline: 3px solid #FB5000;
+  outline-offset: -3px;
+}
+
+/* ── Tablet overrides (768–1199px) ── */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .pd-hero-title {
+    font-size: clamp(52px, 8vw, 128px) !important;
+    line-height: clamp(52px, 8vw, 128px) !important;
+  }
+  .pd-hero-subtitle {
+    font-size: clamp(22px, 3.5vw, 48px) !important;
+    line-height: 1.2 !important;
+  }
+  .pd-tech-grid {
+    grid-template-columns: 1fr !important;
+    padding: 36px 30px 0 !important;
+  }
+  .pd-trailer {
+    width: 100% !important;
+    height: 360px !important;
+    min-width: 0 !important;
+  }
+  .pd-credits-role {
+    width: 200px !important;
+    font-size: 17px !important;
+    line-height: 22px !important;
+  }
+  .pd-credits-value {
+    font-size: 15px !important;
+    line-height: 20px !important;
+  }
+  .pd-nom-grid {
+    grid-template-columns: 1fr !important;
+    padding: 40px 30px 0 !important;
+  }
+  .pd-nom-title {
+    font-size: 28px !important;
+    line-height: 34px !important;
+  }
+  .pd-nom-area {
+    font-size: 18px !important;
+    line-height: 22px !important;
+  }
+  .pd-text-blocks {
+    padding: 0 20px !important;
+    gap: 32px !important;
+  }
+  .pd-text-h2 {
+    font-size: 36px !important;
+    line-height: 36px !important;
+    margin-bottom: 16px !important;
+  }
+  .pd-text-p {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+  .pd-gallery-section {
+    padding: 60px 30px 0 !important;
+  }
+  .pd-gallery-title {
+    font-size: clamp(48px, 7vw, 96px) !important;
+    line-height: clamp(48px, 7vw, 96px) !important;
+  }
+}
 `;
 
 // ─── Laurel SVG (87x80px per Figma) ─────────────────────────────────
@@ -146,6 +213,11 @@ export default function ProjectDetail() {
   const { i18n } = useTranslation();
   const currentLang = i18n.language;
   const project = id ? getProjectById(id) : undefined;
+
+  const [activeImgIdx, setActiveImgIdx] = useState<Record<number, number>>({});
+  const getActiveIdx = (gi: number) => activeImgIdx[gi] ?? 0;
+  const setActiveIdx = (gi: number, i: number) =>
+    setActiveImgIdx((prev) => ({ ...prev, [gi]: i }));
 
   // 404
   if (!project) {
@@ -346,9 +418,9 @@ export default function ProjectDetail() {
 
               {/* Main image */}
               <div style={{ width: "100%", aspectRatio: "383 / 255", backgroundColor: "#555", overflow: "hidden", marginBottom: "8px" }}>
-                {gallery.images[0] && (
+                {gallery.images[getActiveIdx(gi)] && (
                   <img
-                    src={gallery.images[0]}
+                    src={gallery.images[getActiveIdx(gi)]}
                     alt={`${gallery.title} main`}
                     className="block w-full h-full object-cover"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
@@ -356,14 +428,22 @@ export default function ProjectDetail() {
                 )}
               </div>
 
-              {/* Color dock strip */}
+              {/* Thumbnail filmstrip */}
               <div className="gallery-strip-mobile" style={{ paddingBottom: "20px" }}>
-                {COLOR_STRIP.map((color, i) => (
+                {gallery.images.map((imgSrc, i) => (
                   <button
                     key={`mstrip-${gi}-${i}`}
-                    className="color-swatch-mobile"
-                    style={{ "--color": color } as React.CSSProperties}
-                  />
+                    className={`color-swatch-mobile${getActiveIdx(gi) === i ? " swatch-active" : ""}`}
+                    style={{ "--color": "#333", position: "relative", overflow: "hidden" } as React.CSSProperties}
+                    onClick={() => setActiveIdx(gi, i)}
+                  >
+                    <img
+                      src={imgSrc}
+                      alt={`${i + 1} / ${gallery.images.length}`}
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                  </button>
                 ))}
               </div>
             </div>
@@ -419,21 +499,39 @@ export default function ProjectDetail() {
                 background: "linear-gradient(to top, rgba(27,27,27,0.8) 0%, rgba(27,27,27,0.2) 50%, transparent 100%)",
               }}
             />
-            <div className="absolute" style={{ maxWidth: "1440px", width: "100%", left: "50%", transform: "translateX(-50%)" }}>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "40px",
+                left: "50px",
+                right: "50px",
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "40px",
+              }}
+            >
               <h1
+                className="pd-hero-title"
                 style={{
-                  position: "absolute", left: "50px", top: "334px",
                   fontFamily: "'Martillo Completa', sans-serif",
-                  fontSize: "128px", lineHeight: "128px", fontWeight: 400, color: "#1B2021",
+                  fontSize: "72px", lineHeight: "72px", fontWeight: 400,
+                  color: "#FFFFFF", textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+                  maxWidth: "600px",
                 }}
               >
                 {project.title}
               </h1>
               <p
+                className="pd-hero-subtitle"
                 style={{
-                  position: "absolute", left: "737px", top: "404px",
                   fontFamily: "'Inter', sans-serif",
-                  fontSize: "48px", lineHeight: "58px", fontWeight: 700, color: "#1B2021",
+                  fontSize: "36px", lineHeight: "44px", fontWeight: 700,
+                  color: "#FFFFFF", textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+                  textAlign: "right",
+                  flexShrink: 0,
+                  maxWidth: "480px",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {project.subtitle}
@@ -443,7 +541,7 @@ export default function ProjectDetail() {
 
           {/* ═══ TECH SHEET + TRAILER ═══ */}
           <section
-            className="mx-auto"
+            className="pd-tech-grid mx-auto"
             style={{
               maxWidth: "1440px", padding: "45px 50px 0",
               display: "grid", gridTemplateColumns: "543px 1fr", gap: "27px",
@@ -453,10 +551,10 @@ export default function ProjectDetail() {
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {allCredits.map((c, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: "27px" }}>
-                  <span style={{ width: "315px", flexShrink: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "24px", lineHeight: "29px", textAlign: "right", color: "#FFFFFF" }}>
+                  <span className="pd-credits-role" style={{ width: "315px", flexShrink: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "24px", lineHeight: "29px", textAlign: "right", color: "#FFFFFF" }}>
                     {c.role}:
                   </span>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
+                  <span className="pd-credits-value" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
                     {c.value}
                   </span>
                 </div>
@@ -476,7 +574,7 @@ export default function ProjectDetail() {
             </div>
 
             {/* Trailer */}
-            <div className="relative overflow-hidden" style={{ width: "770px", height: "513px", backgroundColor: "#333" }}>
+            <div className="pd-trailer relative overflow-hidden" style={{ width: "770px", height: "513px", backgroundColor: "#333" }}>
               <img
                 src={project.trailerImage || project.posterImage}
                 alt={project.title}
@@ -495,7 +593,7 @@ export default function ProjectDetail() {
 
           {/* ═══ NOMINATIONS + SINOPSIS + DESIGN TEXT ═══ */}
           <section
-            className="mx-auto"
+            className="pd-nom-grid mx-auto"
             style={{
               maxWidth: "1440px", padding: "60px 50px 0",
               display: "grid", gridTemplateColumns: "545px 1fr", gap: "25px", alignItems: "start",
@@ -507,28 +605,28 @@ export default function ProjectDetail() {
                 <div key={i} style={{ display: "flex", flexDirection: "row-reverse", justifyContent: "space-between", alignItems: "center", height: "80px" }}>
                   <LaurelIcon />
                   <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>{nom.title}</span>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "24px", lineHeight: "29px", color: "#FFFFFF" }}>{nom.area}</span>
+                    <span className="pd-nom-title" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>{nom.title}</span>
+                    <span className="pd-nom-area" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "24px", lineHeight: "29px", color: "#FFFFFF" }}>{nom.area}</span>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Text blocks */}
-            <div style={{ padding: "0 50px", display: "flex", flexDirection: "column", gap: "48px" }}>
+            <div className="pd-text-blocks" style={{ padding: "0 50px", display: "flex", flexDirection: "column", gap: "48px" }}>
               <div>
-                <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
+                <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
                   {currentLang.startsWith("en") ? "SYNOPSIS" : "SINOPSIS"}
                 </h2>
-                <p style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
+                <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
                   {currentLang.startsWith("en") ? (project.synopsisEn || project.synopsis) : project.synopsis}
                 </p>
               </div>
               <div>
-                <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
+                <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
                   {project.subtitle}
                 </h2>
-                <p style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
+                <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
                   {currentLang.startsWith("en") ? (project.productionDesignTextEn || project.productionDesignText) : project.productionDesignText}
                 </p>
               </div>
@@ -539,21 +637,21 @@ export default function ProjectDetail() {
           {project.galleries.map((gallery, gi) => (
             <section
               key={gi}
-              className="mx-auto"
+              className="pd-gallery-section mx-auto"
               style={{
                 maxWidth: "1440px", padding: "80px 50px 0",
                 display: "flex", flexDirection: "column", gap: "20px",
               }}
             >
-              <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "96px", lineHeight: "96px", color: "#FFFFFF" }}>
+              <h2 className="pd-gallery-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "96px", lineHeight: "96px", color: "#FFFFFF" }}>
                 {gallery.title}
               </h2>
 
               {/* Main image */}
               <div style={{ width: "100%", aspectRatio: "1340 / 894", backgroundColor: "#555", overflow: "hidden" }}>
-                {gallery.images[0] && (
+                {gallery.images[getActiveIdx(gi)] && (
                   <img
-                    src={gallery.images[0]}
+                    src={gallery.images[getActiveIdx(gi)]}
                     alt={`${gallery.title} main`}
                     className="block w-full h-full object-cover"
                     onError={(e) => { e.currentTarget.style.display = "none"; }}
@@ -561,15 +659,28 @@ export default function ProjectDetail() {
                 )}
               </div>
 
-              {/* ── Cobp Dock Color Strip ── */}
+              {/* ── Thumbnail filmstrip ── */}
               <div className="gallery-strip" style={{ paddingBottom: "40px" }}>
-                {COLOR_STRIP.map((color, i) => (
+                {gallery.images.map((imgSrc, i) => (
                   <button
                     key={`strip-${gi}-${i}`}
-                    className="color-swatch"
-                    style={{ "--color": color } as React.CSSProperties}
-                    data-label={color}
-                  />
+                    className={`color-swatch${getActiveIdx(gi) === i ? " swatch-active" : ""}`}
+                    style={{
+                      "--color": "#333",
+                      width: `calc(100% / ${gallery.images.length})`,
+                      position: "relative",
+                      overflow: "hidden",
+                    } as React.CSSProperties}
+                    data-label={`${i + 1} / ${gallery.images.length}`}
+                    onClick={() => setActiveIdx(gi, i)}
+                  >
+                    <img
+                      src={imgSrc}
+                      alt={`${i + 1} / ${gallery.images.length}`}
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                  </button>
                 ))}
               </div>
             </section>

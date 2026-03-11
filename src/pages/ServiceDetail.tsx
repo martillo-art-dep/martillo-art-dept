@@ -138,6 +138,43 @@ const serviceCSS = `
 .svc-m:hover + .svc-m + .svc-m { transform: scaleY(1.15) scaleX(1.04); z-index: 999; }
 .svc-m:has(+ .svc-m:hover) { transform: scaleY(1.3) scaleX(1.08); z-index: 9999; }
 .svc-m:has(+ .svc-m + .svc-m:hover) { transform: scaleY(1.15) scaleX(1.04); z-index: 999; }
+
+/* ── Tablet overrides (768–1199px) ── */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .svcd-hero-title {
+    font-size: clamp(52px, 8vw, 128px) !important;
+    line-height: clamp(52px, 8vw, 128px) !important;
+    top: auto !important;
+    bottom: 40px !important;
+  }
+  .svcd-content-row {
+    flex-direction: column !important;
+    padding: 40px 30px 0 !important;
+    gap: 32px !important;
+  }
+  .svcd-text-col {
+    width: 100% !important;
+  }
+  .svcd-subtitle {
+    font-size: clamp(22px, 3vw, 40px) !important;
+    line-height: 1.3 !important;
+  }
+  .svcd-description {
+    font-size: clamp(16px, 2vw, 32px) !important;
+    line-height: 1.5 !important;
+  }
+  .svcd-related-title {
+    font-size: clamp(36px, 5.5vw, 70px) !important;
+    line-height: clamp(36px, 5.5vw, 70px) !important;
+    margin-bottom: 40px !important;
+  }
+  .svcd-related-section {
+    padding: 60px 30px 60px !important;
+  }
+  .svc-rel {
+    height: 180px !important;
+  }
+}
 `;
 
 // ─── Component ───────────────────────────────────────────────────────
@@ -222,7 +259,7 @@ export default function ServiceDetailPage() {
           <section className="relative w-full" style={{ height: "636px", overflow: "hidden" }}>
             <div className="absolute inset-0" style={{ backgroundImage: `url(${service.heroImage})`, backgroundSize: "cover", backgroundPosition: "center", backgroundColor: "#333" }} />
             {/* Title — Figma: 128px centered at top:274 */}
-            <div className="absolute w-full" style={{ top: "274px", textAlign: "center", zIndex: 2 }}>
+            <div className="svcd-hero-title absolute w-full" style={{ top: "274px", textAlign: "center", zIndex: 2 }}>
               <h1 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "128px", lineHeight: "128px", color: "#000000", maxWidth: "1290px", margin: "0 auto" }}>
                 {title.toUpperCase()}
               </h1>
@@ -237,16 +274,16 @@ export default function ServiceDetailPage() {
           }}>
 
             {/* 2-column: text left (657px) + photo+dock right */}
-            <div className="mx-auto" style={{ maxWidth: "1440px", padding: "60px 50px 0", display: "flex", gap: "27px", alignItems: "flex-start" }}>
+            <div className="svcd-content-row mx-auto" style={{ maxWidth: "1440px", padding: "60px 50px 0", display: "flex", gap: "27px", alignItems: "flex-start" }}>
               {/* Left: subtitle + description — Figma: Frame 110, 657px */}
-              <div style={{ width: "657px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "25px" }}>
+              <div className="svcd-text-col" style={{ width: "657px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "25px" }}>
                 <div style={{ padding: "0 10px" }}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: "40px", lineHeight: "48px", textAlign: "center", color: "#FFFFFF", maxWidth: "602px" }}>
+                  <p className="svcd-subtitle" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: "40px", lineHeight: "48px", textAlign: "center", color: "#FFFFFF", maxWidth: "602px" }}>
                     {subtitle}
                   </p>
                 </div>
                 <div style={{ padding: "0 10px" }}>
-                  <p style={{ fontFamily: "'Helvetica','Arial',sans-serif", fontWeight: 400, fontSize: "32px", lineHeight: "37px", textAlign: "justify", color: "#FBFEF9", maxWidth: "570px" }}>
+                  <p className="svcd-description" style={{ fontFamily: "'Helvetica','Arial',sans-serif", fontWeight: 400, fontSize: "32px", lineHeight: "37px", textAlign: "justify", color: "#FBFEF9", maxWidth: "570px" }}>
                     {description}
                   </p>
                 </div>
@@ -264,8 +301,8 @@ export default function ServiceDetailPage() {
             </div>
 
             {/* Related Projects — Figma: at y:1450, 1341px wide, 302px tall blocks */}
-            <div className="mx-auto" style={{ maxWidth: "1440px", padding: "100px 50px 80px" }}>
-              <h2 style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "74px" }}>
+            <div className="svcd-related-section mx-auto" style={{ maxWidth: "1440px", padding: "100px 50px 80px" }}>
+              <h2 className="svcd-related-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "74px" }}>
                 {isEn ? "RELATED PROJECTS" : "PROYECTOS RELACIONADOS"}
               </h2>
               <div className="svc-rel-strip" style={{ width: "100%", maxWidth: "1341px" }}>

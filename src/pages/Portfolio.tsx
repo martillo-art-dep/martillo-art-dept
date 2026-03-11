@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { getProjectCards, type ProjectCard } from "../data/projects";
+import SEO from "../components/SEO";
 
 // ─── View Toggle Icons ───────────────────────────────────────────────
 function GridIcon({ active }: { active: boolean }) {
@@ -189,7 +190,7 @@ export default function Portfolio() {
               <span style={{
                 fontFamily: "'Inter', 'Helvetica', sans-serif",
                 fontWeight: 300,
-                fontSize: "36px",
+                fontSize: "clamp(20px, 3vw, 36px)",
                 lineHeight: "normal",
                 color: showUnderline ? "#fb5000" : "#f8f1cd",
                 transition: "color 0.2s ease",
@@ -207,7 +208,7 @@ export default function Portfolio() {
             {index < categories.length - 1 && (
               <div role="presentation" style={{
                 width: "1.5px", height: "29px", backgroundColor: "#f8f1cd",
-                flexShrink: 0, margin: "0 20px",
+                flexShrink: 0, margin: "0 clamp(8px, 1.5vw, 20px)",
               }} />
             )}
           </div>
@@ -260,6 +261,12 @@ export default function Portfolio() {
   );
 
   return (
+    <>
+    <SEO
+      title="Proyectos"
+      description="Explora los proyectos de diseño de producción y dirección de arte de Martillo Art Dept para cine, series, comerciales y videoclips."
+      url="/portfolio"
+    />
     <div
       className="w-full min-h-screen"
       style={{
@@ -339,12 +346,12 @@ export default function Portfolio() {
         {/* ════════════════════════════════════════════════════════════
             DESKTOP LAYOUT (≥ 768px) — EXACT FIGMA SPECS
             ════════════════════════════════════════════════════════════ */}
-        <div className="hidden md:block" style={{ paddingLeft: "100px", paddingRight: "100px", paddingTop: "84px" }}>
+        <div className="hidden md:block" style={{ paddingLeft: "clamp(24px, 7vw, 100px)", paddingRight: "clamp(24px, 7vw, 100px)", paddingTop: "84px" }}>
           {/* Title */}
           <h1 style={{
             fontFamily: "'Martillo Completa', sans-serif",
-            fontSize: "118px",
-            lineHeight: "118px",
+            fontSize: "clamp(64px, 9.5vw, 118px)",
+            lineHeight: "clamp(64px, 9.5vw, 118px)",
             fontWeight: 400,
             color: "#f8f1cd",
             marginBottom: "28px",
@@ -388,5 +395,6 @@ export default function Portfolio() {
         </div>
       </div>
     </div>
+    </>
   );
 }
