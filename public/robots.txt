@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://martillo-art-dept-provisional.netlify.app/sitemap.xml
