@@ -6,7 +6,6 @@ interface ServiceItem {
   id: string;
   titleEs: string;
   titleEn: string;
-  image: string;
   subtitleEs: string;
   subtitleEn: string;
   descriptionEs: string;
@@ -18,7 +17,6 @@ const SERVICES: ServiceItem[] = [
     id: "production-design",
     titleEs: "DISEÑO DE PRODUCCIÓN & DIRECCIÓN DE ARTE",
     titleEn: "PRODUCTION DESIGN & ART DIRECTION",
-    image: "",
     subtitleEs: "Diseño de Producción & Dirección de Arte",
     subtitleEn: "Production Design & Art Direction",
     descriptionEs: "Conceptualización estética y propuesta visual con Concept Artists y Set Designers integrados desde el inicio, diseño de espacios, supervisión del departamento de arte y gestión administrativa desde preproducción hasta entrega.",
@@ -28,7 +26,6 @@ const SERVICES: ServiceItem[] = [
     id: "construction",
     titleEs: "CONSTRUCCIÓN Y ESCENOGRAFÍA",
     titleEn: "CONSTRUCTION AND SCENOGRAPHY",
-    image: "",
     subtitleEs: "Fabricamos lo que no existe. Trasladamos lo que pesa.",
     subtitleEn: "We manufacture what does not exist. We transfer what is heavy.",
     descriptionEs: "Taller propio equipado con herramienta de carpintería, herrería, pintura y acabados escénicos. Corte CNC, impresión 3D y transporte propio.",
@@ -38,7 +35,6 @@ const SERVICES: ServiceItem[] = [
     id: "set-dressing",
     titleEs: "DECORACIÓN Y SET DRESSING",
     titleEn: "DECORATION AND SET DRESSING",
-    image: "",
     subtitleEs: "Decoración y Set Dressing",
     subtitleEn: "Decoration and Set Dressing",
     descriptionEs: "Selección, colocación y ajuste fino de cada objeto en cuadro — por profesionales con criterio y trayectoria en cine, series y comerciales.",
@@ -48,7 +44,6 @@ const SERVICES: ServiceItem[] = [
     id: "sustainable",
     titleEs: "ESCENOGRAFÍA SUSTENTABLE",
     titleEn: "SUSTAINABLE SCENOGRAPHY",
-    image: "",
     subtitleEs: "En proceso — requisito normativo 2026",
     subtitleEn: "In process — regulatory requirement 2026",
     descriptionEs: "Procesos alineados con las normativas de producción sostenible en México. Una exigencia que ya estamos construyendo.",
@@ -58,7 +53,6 @@ const SERVICES: ServiceItem[] = [
     id: "production-service",
     titleEs: "PRODUCTION SERVICE MÉXICO",
     titleEn: "PRODUCTION SERVICE MÉXICO",
-    image: "",
     subtitleEs: "México sin fricción: permisos, logística y equipo local con estándares internacionales.",
     subtitleEn: "Frictionless Mexico: permits, logistics and local equipment with international standards.",
     descriptionEs: "Apoyo logístico y legal para productoras extranjeras que filman en territorio nacional.",
@@ -68,7 +62,6 @@ const SERVICES: ServiceItem[] = [
     id: "infrastructure",
     titleEs: "INFRAESTRUCTURA",
     titleEn: "INFRASTRUCTURE",
-    image: "",
     subtitleEs: "Infraestructura",
     subtitleEn: "Infrastructure",
     descriptionEs: "Oficinas equipadas — Taller de construcción — Almacén de props y decoración — Corte CNC — Impresión 3D — Transporte propio.",
@@ -78,7 +71,6 @@ const SERVICES: ServiceItem[] = [
     id: "certifications",
     titleEs: "CERTIFICACIONES",
     titleEn: "CERTIFICATIONS",
-    image: "",
     subtitleEs: "Certificaciones",
     subtitleEn: "Certifications",
     descriptionEs: "RFC (En proceso) — REPSE (En proceso)",
@@ -186,8 +178,6 @@ export default function Services() {
                     boxShadow: "0px -10px 20px rgba(0, 0, 0, 0.3)",
                     cursor: "pointer",
                     outline: "none",
-                    // Figma: height 250px desktop con padding vertical que lo centra
-                    // En mobile reducimos padding para que no sea tan alto
                     padding: "clamp(18px, 2.5vw, 26px) clamp(16px, 3.47vw, 50px)",
                     minHeight: "clamp(70px, 8vw, 115px)",
                     gap: "clamp(16px, 3.75vw, 54px)",
@@ -200,7 +190,6 @@ export default function Services() {
                       fontWeight: 400,
                       color: "#000000",
                       textTransform: "uppercase",
-                      // Figma: 48px desktop
                       fontSize: "clamp(18px, 3.33vw, 48px)",
                       lineHeight: "1.1",
                     }}
@@ -210,18 +199,11 @@ export default function Services() {
                   <ChevronDown open={isOpen} />
                 </button>
 
-                {/* ── Expandable content ── */}
+                {/* ── Expandable content (SOLO TEXTO, sin imagen) ── */}
                 <div
                   className={`accordion-content ${isOpen ? "open" : "closed"}`}
                   style={{ backgroundColor: "#FBFEF9" }}
                 >
-                  {/*
-                    Figma layout (Frame 41):
-                    - Imagen izq: 657×438px
-                    - Texto der: 656px — descripción en Helvetica justify +
-                      subtítulo en cursiva debajo (cuando difiere del título)
-                    - gap: 27px, padding contenedor: 50px 0
-                  */}
                   <div
                     style={{
                       width: "100%",
@@ -236,87 +218,44 @@ export default function Services() {
                         maxWidth: "1340px",
                         padding: "0 clamp(16px, 3.47vw, 50px)",
                         display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
+                        flexDirection: "column",
+                        gap: "clamp(10px, 1vw, 16px)",
                         alignItems: "flex-start",
-                        gap: "clamp(16px, 1.87vw, 27px)",
-                        flexWrap: "wrap",
                       }}
                     >
-                      {/* Imagen / Checker placeholder — 657×438 en Figma */}
-                      <div
-                        className="checker-placeholder flex-shrink-0"
+                      {/* Descripción */}
+                      <p
                         style={{
-                          // En desktop: 657px fijo. En mobile: ~48% del viewport
-                          width: "clamp(160px, 45.6vw, 657px)",
-                          height: "clamp(107px, 30.4vw, 438px)",
-                          overflow: "hidden",
+                          fontFamily: "'Helvetica', 'Arial', sans-serif",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "clamp(14px, 2.22vw, 32px)",
+                          lineHeight: "1.4",
+                          textAlign: "justify",
+                          color: "#001011",
+                          margin: 0,
                         }}
                       >
-                        {service.image && (
-                          <img
-                            src={service.image}
-                            alt={title}
-                            style={{ display: "block", width: "100%", height: "100%", objectFit: "cover" }}
-                            onError={(e) => { e.currentTarget.style.display = "none"; }}
-                          />
-                        )}
-                      </div>
+                        {description}
+                      </p>
 
-                      {/* Texto — columna derecha */}
-                      <div
-                        style={{
-                          flex: "1 1 200px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "clamp(10px, 1vw, 16px)",
-                          alignItems: "flex-start",
-                        }}
-                      >
-                        {/*
-                          Figma: descripción en Helvetica / 32px / justify / #001011
-                          En "production-service" la descripción es Helvetica normal,
-                          y el subtítulo aparece en Inter italic abajo.
-                          En los demás servicios donde el subtítulo difiere del título,
-                          aparece en Inter italic como segunda línea.
-                        */}
+                      {/* Subtítulo en cursiva (solo si es diferente al título) */}
+                      {subtitle !== service.titleEs && subtitle !== service.titleEn && (
                         <p
                           style={{
-                            fontFamily: "'Helvetica', 'Arial', sans-serif",
-                            fontStyle: "normal",
+                            fontFamily: "'Inter', sans-serif",
+                            fontStyle: "italic",
                             fontWeight: 400,
-                            fontSize: "clamp(13px, 2.22vw, 32px)",
-                            lineHeight: "clamp(1.45, 2.57vw, 1.16)",
+                            fontSize: "clamp(14px, 2.22vw, 32px)",
+                            lineHeight: "1.4",
                             textAlign: "justify",
                             color: "#001011",
                             margin: 0,
                           }}
                         >
-                          {description}
+                          {subtitle}
                         </p>
-
-                        {/*
-                          Subtítulo: visible en cursiva debajo de la descripción,
-                          igual que en el Figma (imgs 2,3,4).
-                          Solo se muestra si el subtítulo es diferente al título original.
-                        */}
-                        {subtitle !== service.titleEs && subtitle !== service.titleEn && (
-                          <p
-                            style={{
-                              fontFamily: "'Inter', sans-serif",
-                              fontStyle: "italic",
-                              fontWeight: 400,
-                              fontSize: "clamp(13px, 2.22vw, 32px)",
-                              lineHeight: "clamp(1.45, 2.57vw, 1.22)",
-                              textAlign: "justify",
-                              color: "#001011",
-                              margin: 0,
-                            }}
-                          >
-                            {subtitle}
-                          </p>
-                        )}
-                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
