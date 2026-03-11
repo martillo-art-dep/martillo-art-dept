@@ -13,7 +13,7 @@ const LOGOS = [
   { src: "/assets/logos/warner-bros.svg",                    alt: "Warner Bros.",       rounded: false, scale: 1   },
   { src: "/assets/logos/21st-century-fox.svg",               alt: "21st Century Fox",   rounded: false, scale: 1.8 },
   { src: "/assets/logos/europacorp.svg",                     alt: "Europa Corp",        rounded: false, scale: 1   },
-  // { src: "/assets/logos/iimcine.png",                     alt: "IMCINE",             rounded: false, scale: 1   },
+  { src: "/assets/logos/iimcine.png",                     alt: "IMCINE",             rounded: false, scale: 1   },
 ] as const;
 
 function LogoImg({ src, alt, rounded }: { src: string; alt: string; rounded?: boolean }) {
