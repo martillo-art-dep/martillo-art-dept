@@ -100,6 +100,12 @@ const accordionCSS = `
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
+
+/* iOS/Safari fix: background-attachment fixed not supported on mobile */
+.svc-bg { background-attachment: scroll; }
+@media (min-width: 768px) {
+  .svc-bg { background-attachment: fixed; }
+}
 `;
 
 function ChevronDown({ open }: { open: boolean }) {
@@ -136,13 +142,12 @@ export default function Services() {
       <style>{accordionCSS}</style>
 
       <div
-        className="w-full min-h-screen"
+        className="w-full min-h-screen svc-bg"
         style={{
           backgroundColor: "#1b1b1b",
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: "fixed",
         }}
       >
         {/* ═══ HERO ═══ */}

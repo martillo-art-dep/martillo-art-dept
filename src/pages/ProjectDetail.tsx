@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { getProjectById } from "../data/projects";
@@ -206,6 +206,19 @@ function LaurelIcon({ size = 87 }: { size?: number }) {
   );
 }
 
+// ─── Trailer URL parser ───────────────────────────────────────────────
+function parseTrailerUrl(url?: string): { type: "youtube" | "vimeo"; id: string; hash: string | null } | null {
+  if (!url || url.startsWith("[PENDIENTE")) return null;
+  const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if (ytMatch) return { type: "youtube", id: ytMatch[1], hash: null };
+  const vmMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vmMatch) {
+    const hashMatch = url.match(/[?&]h=([a-zA-Z0-9]+)/);
+    return { type: "vimeo", id: vmMatch[1], hash: hashMatch ? hashMatch[1] : null };
+  }
+  return null;
+}
+
 // ─── Page Component ──────────────────────────────────────────────────
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -218,6 +231,19 @@ export default function ProjectDetail() {
   const getActiveIdx = (gi: number) => activeImgIdx[gi] ?? 0;
   const setActiveIdx = (gi: number, i: number) =>
     setActiveImgIdx((prev) => ({ ...prev, [gi]: i }));
+
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
+  const markImgError = (key: string) =>
+    setImgErrors((prev) => ({ ...prev, [key]: true }));
+
+  const [trailerActive, setTrailerActive] = useState(false);
+  const [facadeSrc, setFacadeSrc] = useState(project?.posterImage ?? "");
+  useEffect(() => {
+    setTrailerActive(false);
+    setFacadeSrc(project?.posterImage ?? "");
+  }, [id]);
+
+  const trailer = parseTrailerUrl(project?.trailerUrl);
 
   // 404
   if (!project) {
@@ -258,7 +284,7 @@ export default function ProjectDetail() {
         backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "scroll",
         minHeight: "100vh",
         paddingBottom: "40px",
       }}>
@@ -300,26 +326,43 @@ export default function ProjectDetail() {
         {/* ═══ CONTENT AREA — padding 24px ═══ */}
         <div style={{ padding: "0 24px" }}>
 
-          {/* ── Trailer — Figma: 383×163px with "TRAILER" overlay ── */}
+          {/* ── Trailer — Figma: 383×163px ── */}
           <div style={{
             position: "relative", width: "100%", aspectRatio: "383 / 163",
             backgroundColor: "#333", overflow: "hidden", marginBottom: "16px",
           }}>
-            <img
-              src={project.trailerImage || project.posterImage}
-              alt={project.title}
-              className="block w-full h-full object-cover"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
-            />
-            {project.trailerImage && (
-              <div className="absolute inset-0 flex items-center justify-center" style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
-                <span style={{
-                  fontFamily: "'Inter', sans-serif", fontSize: "16px", lineHeight: "19px",
-                  fontWeight: 400, color: "#000000", textAlign: "center",
-                }}>
-                  TRAILER
-                </span>
-              </div>
+            {trailer && trailerActive ? (
+              <iframe
+                src={trailer.type === "youtube"
+                  ? `https://www.youtube.com/embed/${trailer.id}?autoplay=1&rel=0`
+                  : `https://player.vimeo.com/video/${trailer.id}?${trailer.hash ? `h=${trailer.hash}&` : ""}autoplay=1`}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <>
+                <img
+                  src={trailer?.type === "youtube"
+                    ? `https://img.youtube.com/vi/${trailer.id}/maxresdefault.jpg`
+                    : facadeSrc}
+                  alt={project.title}
+                  className="block w-full h-full object-cover"
+                  onError={() => setFacadeSrc(project.heroImage)}
+                />
+                {trailer && (
+                  <button
+                    onClick={() => setTrailerActive(true)}
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ backgroundColor: "rgba(0,0,0,0.45)", border: "none", cursor: "pointer", width: "100%", height: "100%" }}
+                    aria-label="Reproducir trailer"
+                  >
+                    <div style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.15)", border: "2px solid #FFFFFF", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <div style={{ width: 0, height: 0, borderTop: "8px solid transparent", borderBottom: "8px solid transparent", borderLeft: "14px solid #FB5000", marginLeft: "3px" }} />
+                    </div>
+                  </button>
+                )}
+              </>
             )}
           </div>
 
@@ -419,12 +462,14 @@ export default function ProjectDetail() {
               {/* Main image */}
               <div style={{ width: "100%", aspectRatio: "383 / 255", backgroundColor: "#555", overflow: "hidden", marginBottom: "8px" }}>
                 {gallery.images[getActiveIdx(gi)] && (
-                  <img
-                    src={gallery.images[getActiveIdx(gi)]}
-                    alt={`${gallery.title} main`}
-                    className="block w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.style.display = "none"; }}
-                  />
+                  imgErrors[`${gi}-${getActiveIdx(gi)}`]
+                    ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
+                    : <img
+                        src={gallery.images[getActiveIdx(gi)]}
+                        alt={`${gallery.title} main`}
+                        className="block w-full h-full object-cover"
+                        onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
+                      />
                 )}
               </div>
 
@@ -437,12 +482,15 @@ export default function ProjectDetail() {
                     style={{ "--color": "#333", position: "relative", overflow: "hidden" } as React.CSSProperties}
                     onClick={() => setActiveIdx(gi, i)}
                   >
-                    <img
-                      src={imgSrc}
-                      alt={`${i + 1} / ${gallery.images.length}`}
-                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                      onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
+                    {imgErrors[`${gi}-${i}`]
+                      ? <div style={{ position: "absolute", inset: 0, backgroundColor: "#333" }} />
+                      : <img
+                          src={imgSrc}
+                          alt={`${i + 1} / ${gallery.images.length}`}
+                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                          onError={() => markImgError(`${gi}-${i}`)}
+                        />
+                    }
                   </button>
                 ))}
               </div>
@@ -575,18 +623,38 @@ export default function ProjectDetail() {
 
             {/* Trailer */}
             <div className="pd-trailer relative overflow-hidden" style={{ width: "770px", height: "513px", backgroundColor: "#333" }}>
-              <img
-                src={project.trailerImage || project.posterImage}
-                alt={project.title}
-                className="block w-full h-full object-cover"
-                onError={(e) => { e.currentTarget.style.display = "none"; }}
-              />
-              {project.trailerImage && (
-                <div className="absolute inset-0 flex items-center justify-center" style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
-                  <span style={{ fontFamily: "'Helvetica', sans-serif", fontSize: "64px", lineHeight: "74px", fontWeight: 400, color: "#FFFFFF" }}>
-                    TRAILER
-                  </span>
-                </div>
+              {trailer && trailerActive ? (
+                <iframe
+                  src={trailer.type === "youtube"
+                    ? `https://www.youtube.com/embed/${trailer.id}?autoplay=1&rel=0`
+                    : `https://player.vimeo.com/video/${trailer.id}?${trailer.hash ? `h=${trailer.hash}&` : ""}autoplay=1`}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <>
+                  <img
+                    src={trailer?.type === "youtube"
+                      ? `https://img.youtube.com/vi/${trailer.id}/maxresdefault.jpg`
+                      : facadeSrc}
+                    alt={project.title}
+                    className="block w-full h-full object-cover"
+                    onError={() => setFacadeSrc(project.heroImage)}
+                  />
+                  {trailer && (
+                    <button
+                      onClick={() => setTrailerActive(true)}
+                      className="absolute inset-0 flex items-center justify-center"
+                      style={{ backgroundColor: "rgba(0,0,0,0.45)", border: "none", cursor: "pointer", width: "100%", height: "100%" }}
+                      aria-label="Reproducir trailer"
+                    >
+                      <div style={{ width: "72px", height: "72px", borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.15)", border: "2px solid #FFFFFF", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderLeft: "28px solid #FB5000", marginLeft: "6px" }} />
+                      </div>
+                    </button>
+                  )}
+                </>
               )}
             </div>
           </section>
@@ -650,12 +718,14 @@ export default function ProjectDetail() {
               {/* Main image */}
               <div style={{ width: "100%", aspectRatio: "1340 / 894", backgroundColor: "#555", overflow: "hidden" }}>
                 {gallery.images[getActiveIdx(gi)] && (
-                  <img
-                    src={gallery.images[getActiveIdx(gi)]}
-                    alt={`${gallery.title} main`}
-                    className="block w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.style.display = "none"; }}
-                  />
+                  imgErrors[`${gi}-${getActiveIdx(gi)}`]
+                    ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
+                    : <img
+                        src={gallery.images[getActiveIdx(gi)]}
+                        alt={`${gallery.title} main`}
+                        className="block w-full h-full object-cover"
+                        onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
+                      />
                 )}
               </div>
 
@@ -674,12 +744,15 @@ export default function ProjectDetail() {
                     data-label={`${i + 1} / ${gallery.images.length}`}
                     onClick={() => setActiveIdx(gi, i)}
                   >
-                    <img
-                      src={imgSrc}
-                      alt={`${i + 1} / ${gallery.images.length}`}
-                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                      onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
+                    {imgErrors[`${gi}-${i}`]
+                      ? <div style={{ position: "absolute", inset: 0, backgroundColor: "#333" }} />
+                      : <img
+                          src={imgSrc}
+                          alt={`${i + 1} / ${gallery.images.length}`}
+                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                          onError={() => markImgError(`${gi}-${i}`)}
+                        />
+                    }
                   </button>
                 ))}
               </div>

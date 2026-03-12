@@ -210,7 +210,7 @@ export default function ServiceDetailPage() {
       <div className="block md:hidden" style={{
         backgroundColor: "#1b1b1b",
         backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-        backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed",
+        backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "scroll",
         minHeight: "100vh", paddingBottom: "40px",
       }}>
         <section className="relative w-full overflow-hidden" style={{ height: "300px" }}>

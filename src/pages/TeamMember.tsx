@@ -320,7 +320,7 @@ export default function TeamMember() {
         backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "scroll",
         minHeight: "100vh",
         paddingBottom: "40px",
       }}>

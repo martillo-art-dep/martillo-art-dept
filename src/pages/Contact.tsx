@@ -146,7 +146,7 @@ export default function Contact() {
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          backgroundAttachment: "scroll",
           minHeight: "100vh",
           paddingBottom: "60px",
         }}
