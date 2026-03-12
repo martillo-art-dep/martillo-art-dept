@@ -460,7 +460,7 @@ export default function ProjectDetail() {
               </h3>
 
               {/* Main image */}
-              <div style={{ width: "100%", aspectRatio: "383 / 255", backgroundColor: "#555", overflow: "hidden", marginBottom: "8px" }}>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "383 / 255", backgroundColor: "#555", overflow: "hidden", marginBottom: "8px" }}>
                 {gallery.images[getActiveIdx(gi)] && (
                   imgErrors[`${gi}-${getActiveIdx(gi)}`]
                     ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
@@ -470,6 +470,32 @@ export default function ProjectDetail() {
                         className="block w-full h-full object-cover"
                         onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
                       />
+                )}
+                {getActiveIdx(gi) > 0 && (
+                  <button
+                    onClick={() => setActiveIdx(gi, getActiveIdx(gi) - 1)}
+                    style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.45)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background-color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.75)")}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.45)")}
+                    aria-label="Imagen anterior"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="13 4 7 10 13 16" />
+                    </svg>
+                  </button>
+                )}
+                {getActiveIdx(gi) < gallery.images.length - 1 && (
+                  <button
+                    onClick={() => setActiveIdx(gi, getActiveIdx(gi) + 1)}
+                    style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.45)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background-color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.75)")}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.45)")}
+                    aria-label="Imagen siguiente"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="7 4 13 10 7 16" />
+                    </svg>
+                  </button>
                 )}
               </div>
 
@@ -716,7 +742,7 @@ export default function ProjectDetail() {
               </h2>
 
               {/* Main image */}
-              <div style={{ width: "100%", aspectRatio: "1340 / 894", backgroundColor: "#555", overflow: "hidden" }}>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "1340 / 894", backgroundColor: "#555", overflow: "hidden" }}>
                 {gallery.images[getActiveIdx(gi)] && (
                   imgErrors[`${gi}-${getActiveIdx(gi)}`]
                     ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
@@ -726,6 +752,32 @@ export default function ProjectDetail() {
                         className="block w-full h-full object-cover"
                         onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
                       />
+                )}
+                {getActiveIdx(gi) > 0 && (
+                  <button
+                    onClick={() => setActiveIdx(gi, getActiveIdx(gi) - 1)}
+                    style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.45)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background-color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.75)")}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.45)")}
+                    aria-label="Imagen anterior"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="13 4 7 10 13 16" />
+                    </svg>
+                  </button>
+                )}
+                {getActiveIdx(gi) < gallery.images.length - 1 && (
+                  <button
+                    onClick={() => setActiveIdx(gi, getActiveIdx(gi) + 1)}
+                    style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.45)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background-color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.75)")}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.45)")}
+                    aria-label="Imagen siguiente"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="7 4 13 10 7 16" />
+                    </svg>
+                  </button>
                 )}
               </div>
 
