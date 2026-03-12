@@ -220,6 +220,7 @@ export default function Header() {
   ];
 
   const dropdownCategories = [
+    { to: "/portfolio", labelEs: "Todos", labelEn: "All" },
     { to: "/portfolio?category=largometrajes", labelEs: "Largometrajes", labelEn: "Feature Films" },
     { to: "/portfolio?category=series", labelEs: "Series", labelEn: "Series" },
     { to: "/portfolio?category=comerciales", labelEs: "Comerciales", labelEn: "Commercials" },
@@ -429,6 +430,7 @@ export default function Header() {
               {projectsExpanded && (
                 <div style={{ display: "flex", flexDirection: "column", paddingLeft: "39px", paddingTop: "8px", paddingBottom: "8px", gap: "8px" }}>
                   {[
+                    { to: "/portfolio", labelEs: "Todos", labelEn: "All" },
                     { to: "/portfolio?category=largometrajes", labelEs: "Largometrajes", labelEn: "Feature Films" },
                     { to: "/portfolio?category=series", labelEs: "Series", labelEn: "Series" },
                     { to: "/portfolio?category=comerciales", labelEs: "Comerciales", labelEn: "Commercials" },

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { getProjectCards, type ProjectCard } from "../data/projects";
 import SEO from "../components/SEO";
 
@@ -151,7 +151,12 @@ export default function Portfolio() {
   const navigate = useNavigate();
 
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategory = searchParams.get("category");
+  const setActiveCategory = (cat: string | null) => {
+    if (cat) setSearchParams({ category: cat });
+    else setSearchParams({});
+  };
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   const allProjects = getProjectCards().sort((a, b) => Number(b.year) - Number(a.year));
