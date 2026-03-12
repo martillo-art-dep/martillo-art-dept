@@ -150,7 +150,7 @@ export default function Services() {
           <div
             className="absolute inset-0 checker-placeholder"
             style={{
-              backgroundImage: "url(/assets/projects/services-hero.jpg)",
+              backgroundImage: "url(/assets/projects/services-hero.webp)",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
