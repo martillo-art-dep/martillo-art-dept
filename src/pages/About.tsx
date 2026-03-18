@@ -1,19 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { getProjectCards } from "../data/projects";
+
 import SEO from "../components/SEO";
 
 // ─── Data ────────────────────────────────────────────────────────────
 
-const AWARDS = [
-  { titleEs: "Concha de Oro — Mejor Película", titleEn: "Golden Shell — Best Film", roleEs: "Festival de San Sebastián 2000", roleEn: "San Sebastian Festival 2000" },
-  { titleEs: "Sundance — Directing Award", titleEn: "Sundance — Directing Award", roleEs: "Sundance Film Festival 2009", roleEn: "Sundance Film Festival 2009" },
-  { titleEs: "Premio Ariel — Mejor Escenografía", titleEn: "Ariel Award — Best Set Design", roleEs: "De noche vienes Esmeralda, 1997", roleEn: "De noche vienes Esmeralda, 1997" },
-  { titleEs: "Premio Nacional de Arte Joven", titleEn: "National Young Art Prize", roleEs: "Feria de San Marcos, Aguascalientes 1991", roleEn: "San Marcos Fair, Aguascalientes 1991" },
-  { titleEs: "55+ Premios Internacionales", titleEn: "55+ International Awards", roleEs: "El Violín — Festivales mundiales", roleEn: "El Violín — World festivals" },
-  { titleEs: "Premio del Público", titleEn: "Audience Award", roleEs: "Festival de Cine de Guadalajara 2005", roleEn: "Guadalajara Film Festival 2005" },
-];
 
 const TEAM = [
   {
@@ -211,8 +203,7 @@ export default function About() {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const isEn = i18n.language.startsWith("en");
-  const recentProjects = getProjectCards().slice(0, 9);
-  const [heroIndex, setHeroIndex] = useState(0);
+const [heroIndex, setHeroIndex] = useState(0);
 
   const heroPrev = () => setHeroIndex((i) => (i === 0 ? HERO_IMAGES.length - 1 : i - 1));
   const heroNext = () => setHeroIndex((i) => (i === HERO_IMAGES.length - 1 ? 0 : i + 1));
@@ -343,56 +334,6 @@ export default function About() {
             );
           })}
 
-          {/* ═══ AWARDS ═══ */}
-          <div style={{ marginBottom: "40px" }}>
-            <h2 style={{
-              fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400,
-              fontSize: "28px", lineHeight: "32px", color: "#FFFFFF", marginBottom: "24px",
-            }}>
-              {isEn ? "AWARDS & ACCOLADES" : "PREMIOS & GALARDONES"}
-            </h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              {AWARDS.map((award, idx) => (
-                <div key={idx} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "24px", color: "#FFFFFF" }}>
-                      {isEn ? award.titleEn : award.titleEs}
-                    </span>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "14px", lineHeight: "17px", color: "#FBFEF9" }}>
-                      {isEn ? award.roleEn : award.roleEs}
-                    </span>
-                  </div>
-                  <img src="/assets/galardones.svg" alt="Award" style={{ width: "50px", height: "46px", objectFit: "contain" }} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ═══ RECENT PROJECTS — mobile dock ═══ */}
-          <div style={{ marginBottom: "20px" }}>
-            <h2 style={{
-              fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400,
-              fontSize: "28px", lineHeight: "32px", color: "#FFFFFF", marginBottom: "20px",
-            }}>
-              {isEn ? "RECENT PROJECTS" : "PROYECTOS RECIENTES"}
-            </h2>
-            <div className="about-strip-mobile">
-              {recentProjects.map((project, idx) => (
-                <button
-                  key={idx}
-                  className="about-swatch-mobile"
-                  style={{
-                    backgroundImage: `url(${project.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundColor: "#333",
-                  }}
-                  onClick={() => navigate(`/portfolio/${project.id}`)}
-                  aria-label={project.title}
-                />
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -483,55 +424,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* AWARDS */}
-            <div className="mx-auto" style={{ maxWidth: "1440px", padding: "120px 50px 100px" }}>
-              <h2 className="about-section-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "68px" }}>
-                {isEn ? "AWARDS & ACCOLADES" : "PREMIOS & GALARDONES"}
-              </h2>
-              <div className="about-awards-row flex" style={{ gap: "304px" }}>
-                {[AWARDS.slice(0, 3), AWARDS.slice(3)].map((colAwards, col) => (
-                  <div key={col} className="about-awards-col flex flex-col" style={{ width: "543px", gap: "19px" }}>
-                    {colAwards.map((award, idx) => (
-                      <div key={`${col}-${idx}`} className="flex items-center justify-between" style={{ minHeight: "143px", gap: "16px" }}>
-                        <div className="flex flex-col" style={{ flex: 1 }}>
-                          <span className="about-award-title-text" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>
-                            {isEn ? award.titleEn : award.titleEs}
-                          </span>
-                          <span className="about-award-role-text" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "24px", lineHeight: "29px", color: "#FFFFFF" }}>
-                            {isEn ? award.roleEn : award.roleEs}
-                          </span>
-                        </div>
-                        <img src="/assets/galardones.svg" alt="Award" style={{ width: "87px", height: "80px", objectFit: "contain", flexShrink: 0 }} />
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* RECENT PROJECTS dock */}
-            <div className="mx-auto" style={{ maxWidth: "1440px", padding: "0 50px 80px" }}>
-              <h2 className="about-section-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "74px" }}>
-                {isEn ? "RECENT PROJECTS" : "PROYECTOS RECIENTES"}
-              </h2>
-              <div className="about-gallery-strip" style={{ width: "100%", maxWidth: "1341px" }}>
-                {recentProjects.map((project, idx) => (
-                  <button
-                    key={idx}
-                    className="about-color-swatch"
-                    style={{
-                      backgroundImage: `url(${project.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundColor: "#333",
-                    }}
-                    data-label={project.title}
-                    onClick={() => navigate(`/portfolio/${project.id}`)}
-                    aria-label={project.title}
-                  />
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>

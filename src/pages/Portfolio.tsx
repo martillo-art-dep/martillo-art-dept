@@ -109,7 +109,7 @@ function ListCard({ project, onClick }: { project: ProjectCard; onClick: () => v
     <article className="cursor-pointer" style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "20px", alignItems: "start" }}
       onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onClick={onClick}>
       <div className="overflow-hidden" style={{ width: "140px", height: "190px" }}>
-        <img className="block w-full h-full object-cover" alt={`${project.title} preview`} src={project.image}
+        <img className="block w-full h-full object-cover" alt={`${project.title} preview`} src={project.posterImage}
           onError={(e) => { e.currentTarget.style.backgroundColor = "#333"; }} />
       </div>
       <div className="flex flex-col" style={{ gap: "8px" }}>
@@ -128,7 +128,7 @@ function MobileListCard({ project, onClick }: { project: ProjectCard; onClick: (
   return (
     <article className="cursor-pointer grid gap-4" style={{ gridTemplateColumns: "100px 1fr", alignItems: "start" }} onClick={onClick}>
       <div className="overflow-hidden" style={{ width: "100px", height: "136px" }}>
-        <img className="block w-full h-full object-cover" alt={`${project.title} preview`} src={project.image}
+        <img className="block w-full h-full object-cover" alt={`${project.title} preview`} src={project.posterImage}
           onError={(e) => { e.currentTarget.style.backgroundColor = "#333"; }} />
       </div>
       <div className="flex flex-col gap-2">

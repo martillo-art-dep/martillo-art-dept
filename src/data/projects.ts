@@ -10,6 +10,7 @@ export interface ProjectCard {
   category: "largometrajes" | "series" | "comerciales" | "videoclips";
   image: string;
   description: string;
+  posterImage: string;
 }
 
 export interface Credit { role: string; name: string; }
@@ -100,7 +101,7 @@ export const projects: ProjectFull[] = [
     productionDesignTextEn: "GIAB entails the challenge of recreating in a road movie filmed mostly in Mexico the landscape and the oppressive and hot atmosphere of the desert corridor between California and the Mexican border crossing through New Mexico.",
     galleries: [
       {
-        title: "SET ERROL'S BATHROOM",
+        title: "SET ERROL'S BAR",
         images: [
           "/assets/projects/giab/errol-01.webp",
           "/assets/projects/giab/errol-02.webp",
@@ -531,8 +532,8 @@ export const projects: ProjectFull[] = [
 export function getProjectCards(): ProjectCard[] {
   return projects
     .filter(p => !p.hidden)
-    .map(({ id, title, year, category, image, description }) => ({
-      id, title, year, category, image, description,
+    .map(({ id, title, year, category, image, description, posterImage }) => ({
+      id, title, year, category, image, description, posterImage,
     }));
 }
 

@@ -85,10 +85,6 @@ const COLOR_STRIP = [
   "#C32F27", "#F80078", "#751A46", "#338AF3",
 ];
 
-const COLOR_STRIP_MOBILE = [
-  "#F8F1CD", "#FB5000", "#FFDA44", "#338AF3", "#00FF8C",
-  "#C32F27", "#F80078", "#751A46", "#338AF3",
-];
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const memberCSS = `
@@ -345,22 +341,6 @@ export default function TeamMember() {
               {role}
             </p>
 
-            {/* Awards mini list */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "11px" }}>
-              {member.awards.slice(0, 4).map((award, idx) => (
-                <div key={idx} style={{
-                  display: "flex", alignItems: "center", gap: "8px",
-                }}>
-                  <img src="/assets/galardones.svg" alt="Award" style={{ width: "24px", height: "22px", objectFit: "contain" }} />
-                  <span style={{
-                    fontFamily: "'Inter', sans-serif", fontWeight: 400,
-                    fontSize: "11px", lineHeight: "14px", color: "#FFFFFF",
-                  }}>
-                    {isEn ? award.titleEn : award.titleEs}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: Photo */}
@@ -411,25 +391,6 @@ export default function TeamMember() {
             </button>
           </div>
 
-          {/* Filmography label */}
-          <h3 style={{
-            fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400,
-            fontSize: "18px", lineHeight: "22px", color: "#FFFFFF",
-            marginBottom: "12px", textAlign: "center",
-          }}>
-            {isEn ? "FEATURED FILMOGRAPHY" : "FILMOGRAFIA DESTACADA"}
-          </h3>
-
-          {/* Color dock strip */}
-          <div className="member-strip-mobile" style={{ marginTop: "12px", paddingBottom: "16px" }}>
-            {COLOR_STRIP_MOBILE.map((color, idx) => (
-              <button
-                key={`m-swatch-${idx}`}
-                className="member-swatch-mobile"
-                style={{ "--color": color } as React.CSSProperties}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Back button */}
@@ -597,45 +558,6 @@ export default function TeamMember() {
             </div>
           </div>
 
-          {/* ═══ FILMOGRAPHY ═══
-              Figma: Title 72px + 6 thumbnails (201×302, gap 27px)
-          */}
-          <div className="member-filmography-section mx-auto" style={{ maxWidth: "1440px", padding: "80px 50px 0" }}>
-            <h2 className="member-filmography-title" style={{
-              fontFamily: "'Martillo Completa', sans-serif",
-              fontWeight: 400,
-              fontSize: "72px",
-              lineHeight: "72px",
-              color: "#FFFFFF",
-              marginBottom: "76px",
-            }}>
-              {isEn ? "FEATURED FILMOGRAPHY" : "FILMOGRAFIA DESTACADA"}
-            </h2>
-
-            <div className="member-filmography-grid flex" style={{ gap: "27px" }}>
-              {member.filmography.map((film, idx) => (
-                <div
-                  key={idx}
-                  className="member-film-card"
-                  style={{
-                    width: "201px",
-                    height: "302px",
-                    backgroundColor: "#D9D9D9",
-                    flexShrink: 0,
-                    overflow: "hidden",
-                  }}
-                >
-                  <img
-                    src={film.image}
-                    alt={isEn ? film.titleEn : film.titleEs}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.style.display = "none"; }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* ═══ AWARDS + FEATURED IMAGE ═══
               Figma: Left side = featured image (770×513) + color strip (770×76)
                      Right side = 6 award rows (543px wide)
@@ -682,42 +604,6 @@ export default function TeamMember() {
               </div>
             </div>
 
-            {/* Right: Awards list */}
-            <div className="member-awards-list flex flex-col" style={{ width: "543px", gap: "19px" }}>
-              {member.awards.map((award, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-between"
-                  style={{ height: "90px" }}
-                >
-                  <div className="flex flex-col">
-                    <span className="member-award-title" style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontWeight: 400,
-                      fontSize: "40px",
-                      lineHeight: "48px",
-                      color: "#FFFFFF",
-                    }}>
-                      {isEn ? award.titleEn : award.titleEs}
-                    </span>
-                    <span className="member-award-role" style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontWeight: 300,
-                      fontSize: "24px",
-                      lineHeight: "29px",
-                      color: "#FFFFFF",
-                    }}>
-                      {isEn ? award.roleEn : award.roleEs}
-                    </span>
-                  </div>
-                  <img
-                    src="/assets/galardones.svg"
-                    alt="Award"
-                    style={{ width: "87px", height: "80px", objectFit: "contain" }}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>

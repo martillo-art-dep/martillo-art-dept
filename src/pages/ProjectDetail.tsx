@@ -742,7 +742,7 @@ export default function ProjectDetail() {
               </h2>
 
               {/* Main image */}
-              <div style={{ position: "relative", width: "100%", aspectRatio: "1340 / 894", backgroundColor: "#555", overflow: "hidden" }}>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", backgroundColor: "#555", overflow: "hidden" }}>
                 {gallery.images[getActiveIdx(gi)] && (
                   imgErrors[`${gi}-${getActiveIdx(gi)}`]
                     ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
