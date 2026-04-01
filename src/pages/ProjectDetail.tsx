@@ -6,17 +6,21 @@ import { getProjectById } from "../data/projects";
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const dockCSS = `
-/* ── Desktop dock effect ── */
+/* ── Desktop dock effect (Cobp-style) ── */
+/* Figma: strip is 1340×107, flex, space-between, align-self: stretch */
+/* Each frame: 160×107 base, aspect-ratio: 157/105 */
 .gallery-strip {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  align-items: flex-end;
 }
 .color-swatch {
   position: relative;
-  flex-shrink: 0;
-  width: calc(1340px / 13);
+  flex: 1 1 0;
+  min-width: 0;
   height: 107px;
   border: none;
   outline: none;
@@ -243,6 +247,33 @@ export default function ProjectDetail() {
     setFacadeSrc(project?.posterImage ?? "");
   }, [id]);
 
+  // ── Lightbox state ──
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxGi, setLightboxGi] = useState(0);
+  const [lightboxImgIdx, setLightboxImgIdx] = useState(0);
+
+  const openLightbox = (gi: number, imgIdx: number) => {
+    setLightboxGi(gi);
+    setLightboxImgIdx(imgIdx);
+    setLightboxOpen(true);
+  };
+  const closeLightbox = () => setLightboxOpen(false);
+
+  // Close lightbox on Escape key
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+    };
+    if (lightboxOpen) {
+      document.addEventListener("keydown", handleKey);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightboxOpen]);
+
   const trailer = parseTrailerUrl(project?.trailerUrl);
 
   // 404
@@ -255,6 +286,34 @@ export default function ProjectDetail() {
         <button
           onClick={() => navigate("/portfolio")}
           style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#fb5000", background: "none", border: "2px solid #fb5000", padding: "12px 32px", borderRadius: "4px", cursor: "pointer" }}
+        >
+          {currentLang.startsWith("en") ? "Back to Projects" : "Volver a Proyectos"}
+        </button>
+      </div>
+    );
+  }
+
+  // "Coming soon" placeholder for projects with incomplete data
+  const isIncomplete =
+    !project.heroImage ||
+    !project.synopsis ||
+    project.synopsis === "[PENDIENTE — CLIENTE]";
+
+  if (isIncomplete) {
+    return (
+      <div
+        className="w-full min-h-screen flex flex-col items-center justify-center"
+        style={{ backgroundColor: "#1b1b1b", backgroundImage: "url(/assets/bg-gradient-dark.jpeg)", backgroundSize: "cover", backgroundPosition: "center", gap: "24px", padding: "40px 24px" }}
+      >
+        <p style={{ fontFamily: "'Martillo Completa', sans-serif", fontSize: "clamp(28px, 5vw, 56px)", color: "#f8f1cd", textAlign: "center", lineHeight: 1.1, margin: 0 }}>
+          {project.title}
+        </p>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(16px, 2vw, 22px)", color: "#9ca3af", textAlign: "center", margin: 0 }}>
+          {currentLang.startsWith("en") ? "Coming soon" : "Próximamente"}
+        </p>
+        <button
+          onClick={() => navigate("/portfolio")}
+          style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#fb5000", background: "none", border: "2px solid #fb5000", padding: "12px 32px", borderRadius: "4px", cursor: "pointer", marginTop: "8px" }}
         >
           {currentLang.startsWith("en") ? "Back to Projects" : "Volver a Proyectos"}
         </button>
@@ -460,7 +519,7 @@ export default function ProjectDetail() {
               </h3>
 
               {/* Main image */}
-              <div style={{ position: "relative", width: "100%", aspectRatio: "383 / 255", backgroundColor: "#555", overflow: "hidden", marginBottom: "8px" }}>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "383 / 255", backgroundColor: "#555", overflow: "hidden", marginBottom: "8px", cursor: "pointer" }}>
                 {gallery.images[getActiveIdx(gi)] && (
                   imgErrors[`${gi}-${getActiveIdx(gi)}`]
                     ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
@@ -468,7 +527,9 @@ export default function ProjectDetail() {
                         src={gallery.images[getActiveIdx(gi)]}
                         alt={`${gallery.title} main`}
                         className="block w-full h-full object-cover"
+                        style={{ cursor: "pointer" }}
                         onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
+                        onClick={() => openLightbox(gi, getActiveIdx(gi))}
                       />
                 )}
                 {getActiveIdx(gi) > 0 && (
@@ -499,9 +560,9 @@ export default function ProjectDetail() {
                 )}
               </div>
 
-              {/* Thumbnail filmstrip */}
+              {/* Thumbnail filmstrip (max 10 visible) */}
               <div className="gallery-strip-mobile" style={{ paddingBottom: "20px" }}>
-                {gallery.images.map((imgSrc, i) => (
+                {gallery.images.slice(0, 10).map((imgSrc, i) => (
                   <button
                     key={`mstrip-${gi}-${i}`}
                     className={`color-swatch-mobile${getActiveIdx(gi) === i ? " swatch-active" : ""}`}
@@ -519,6 +580,27 @@ export default function ProjectDetail() {
                     }
                   </button>
                 ))}
+                {gallery.images.length > 10 && (
+                  <div
+                    style={{
+                      flex: "1 1 0",
+                      minWidth: 0,
+                      height: "55px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "rgba(251,80,0,0.15)",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      flexShrink: 0,
+                    }}
+                    onClick={() => setActiveIdx(gi, 10)}
+                  >
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#FB5000" }}>
+                      +{gallery.images.length - 10}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -544,7 +626,7 @@ export default function ProjectDetail() {
       {/* ════════════════════════════════════════════════════════════════
           DESKTOP LAYOUT (≥ 768px) — Original, untouched
           ════════════════════════════════════════════════════════════════ */}
-      <div className="hidden md:block">
+      <div className="hidden md:block w-full">
         <div
           className="w-full"
           style={{
@@ -617,7 +699,7 @@ export default function ProjectDetail() {
           <section
             className="pd-tech-grid mx-auto"
             style={{
-              maxWidth: "1440px", padding: "45px 50px 0",
+              maxWidth: "1440px", width: "100%", padding: "45px 50px 0",
               display: "grid", gridTemplateColumns: "543px 1fr", gap: "27px",
             }}
           >
@@ -685,47 +767,66 @@ export default function ProjectDetail() {
             </div>
           </section>
 
-          {/* ═══ NOMINATIONS + SINOPSIS + DESIGN TEXT ═══ */}
+          {/* ═══ SINOPSIS + DISEÑO DE PRODUCCIÓN — 2 columns side by side ═══
+              Figma: two text blocks in equal columns
+              Font: Helvetica 20px, color #FBFEF9, text-align: justify */}
           <section
-            className="pd-nom-grid mx-auto"
+            className="pd-text-blocks mx-auto"
             style={{
-              maxWidth: "1440px", padding: "60px 50px 0",
-              display: "grid", gridTemplateColumns: "545px 1fr", gap: "25px", alignItems: "start",
+              maxWidth: "1440px", width: "100%", padding: "60px 50px 0",
+              display: "grid", gridTemplateColumns: "1fr 1fr", gap: "50px", alignItems: "start",
             }}
           >
-            {/* Nominations */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "19px" }}>
-              {project.nominations.map((nom, i) => (
-                <div key={i} style={{ display: "flex", flexDirection: "row-reverse", justifyContent: "space-between", alignItems: "center", height: "80px" }}>
-                  <LaurelIcon />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span className="pd-nom-title" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "40px", lineHeight: "48px", color: "#FFFFFF" }}>{nom.title}</span>
-                    <span className="pd-nom-area" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: "24px", lineHeight: "29px", color: "#FFFFFF" }}>{nom.area}</span>
-                  </div>
-                </div>
-              ))}
+            <div>
+              <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
+                {project.subtitle || (currentLang.startsWith("en") ? "PRODUCTION DESIGN" : "DISEÑO DE PRODUCCIÓN")}
+              </h2>
+              <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "normal", textAlign: "justify", color: "#FBFEF9" }}>
+                {currentLang.startsWith("en") ? (project.productionDesignTextEn || project.productionDesignText) : project.productionDesignText}
+              </p>
             </div>
-
-            {/* Text blocks */}
-            <div className="pd-text-blocks" style={{ padding: "0 50px", display: "flex", flexDirection: "column", gap: "48px" }}>
-              <div>
-                <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
-                  {currentLang.startsWith("en") ? "SYNOPSIS" : "SINOPSIS"}
-                </h2>
-                <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
-                  {currentLang.startsWith("en") ? (project.synopsisEn || project.synopsis) : project.synopsis}
-                </p>
-              </div>
-              <div>
-                <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
-                  {project.subtitle}
-                </h2>
-                <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "23px", textAlign: "justify", color: "#FBFEF9" }}>
-                  {currentLang.startsWith("en") ? (project.productionDesignTextEn || project.productionDesignText) : project.productionDesignText}
-                </p>
-              </div>
+            <div>
+              <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
+                {currentLang.startsWith("en") ? "SYNOPSIS" : "SINOPSIS"}
+              </h2>
+              <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "normal", textAlign: "justify", color: "#FBFEF9" }}>
+                {currentLang.startsWith("en") ? (project.synopsisEn || project.synopsis) : project.synopsis}
+              </p>
             </div>
           </section>
+
+          {/* ═══ NOMINATIONS — title only, linked to IMDb ═══
+              Figma: Arial 40px, #FFF, uppercase */}
+          {project.nominations.length > 0 && (
+            <section
+              className="mx-auto"
+              style={{
+                maxWidth: "1440px", width: "100%", padding: "50px 50px 0",
+              }}
+            >
+              {project.nominations.map((nom, i) => (
+                <p
+                  key={i}
+                  style={{
+                    fontFamily: "'Arial', sans-serif",
+                    fontSize: "40px",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                    color: "#FFFFFF",
+                    textTransform: "uppercase",
+                    margin: 0,
+                    marginBottom: i < project.nominations.length - 1 ? "12px" : "0",
+                    cursor: "pointer",
+                    transition: "color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "#FB5000"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
+                >
+                  {nom.title}
+                </p>
+              ))}
+            </section>
+          )}
 
           {/* ═══ GALLERIES WITH COBP DOCK STRIP ═══ */}
           {project.galleries.map((gallery, gi) => (
@@ -733,8 +834,8 @@ export default function ProjectDetail() {
               key={gi}
               className="pd-gallery-section mx-auto"
               style={{
-                maxWidth: "1440px", padding: "80px 50px 0",
-                display: "flex", flexDirection: "column", gap: "20px",
+                maxWidth: "1440px", width: "100%", padding: "80px 50px 0",
+                display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "49px", alignSelf: "stretch",
               }}
             >
               <h2 className="pd-gallery-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "96px", lineHeight: "96px", color: "#FFFFFF" }}>
@@ -742,7 +843,7 @@ export default function ProjectDetail() {
               </h2>
 
               {/* Main image */}
-              <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", backgroundColor: "#555", overflow: "hidden" }}>
+              <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", backgroundColor: "#555", overflow: "hidden", cursor: "pointer" }}>
                 {gallery.images[getActiveIdx(gi)] && (
                   imgErrors[`${gi}-${getActiveIdx(gi)}`]
                     ? <div style={{ width: "100%", height: "100%", backgroundColor: "#333" }} />
@@ -750,7 +851,9 @@ export default function ProjectDetail() {
                         src={gallery.images[getActiveIdx(gi)]}
                         alt={`${gallery.title} main`}
                         className="block w-full h-full object-cover"
+                        style={{ cursor: "pointer" }}
                         onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
+                        onClick={() => openLightbox(gi, getActiveIdx(gi))}
                       />
                 )}
                 {getActiveIdx(gi) > 0 && (
@@ -781,30 +884,30 @@ export default function ProjectDetail() {
                 )}
               </div>
 
-              {/* ── Thumbnail filmstrip ── */}
-              <div className="gallery-strip" style={{ paddingBottom: "40px" }}>
-                {gallery.images.map((imgSrc, i) => (
+              {/* ── Dock strip (max 10 frames, Cobp-style hover) ── */}
+              <div className="gallery-strip">
+                {gallery.images.slice(0, 10).map((imgSrc, i) => (
                   <button
                     key={`strip-${gi}-${i}`}
                     className={`color-swatch${getActiveIdx(gi) === i ? " swatch-active" : ""}`}
                     style={{
                       "--color": "#333",
-                      width: `calc(100% / ${gallery.images.length})`,
                       position: "relative",
                       overflow: "hidden",
                     } as React.CSSProperties}
                     data-label={`${i + 1} / ${gallery.images.length}`}
                     onClick={() => setActiveIdx(gi, i)}
                   >
-                    {imgErrors[`${gi}-${i}`]
-                      ? <div style={{ position: "absolute", inset: 0, backgroundColor: "#333" }} />
-                      : <img
-                          src={imgSrc}
-                          alt={`${i + 1} / ${gallery.images.length}`}
-                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                          onError={() => markImgError(`${gi}-${i}`)}
-                        />
-                    }
+                    {imgErrors[`${gi}-${i}`] ? (
+                      <div style={{ position: "absolute", inset: 0, backgroundColor: "#333" }} />
+                    ) : (
+                      <img
+                        src={imgSrc}
+                        alt={`${i + 1} / ${gallery.images.length}`}
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                        onError={() => markImgError(`${gi}-${i}`)}
+                      />
+                    )}
                   </button>
                 ))}
               </div>
@@ -812,6 +915,201 @@ export default function ProjectDetail() {
           ))}
         </div>
       </div>
+
+      {/* ═══ LIGHTBOX OVERLAY ═══
+          Figma: image 972×649, nav container 1340px space-between */}
+      {lightboxOpen && project && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 99999,
+            backgroundColor: "rgba(0,0,0,0.92)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={closeLightbox}
+        >
+          {/* Close button */}
+          <button
+            onClick={closeLightbox}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              width: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(255,255,255,0.1)",
+              border: "2px solid rgba(255,255,255,0.3)",
+              color: "#fff",
+              fontSize: "24px",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 100001,
+              transition: "background-color 0.2s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.6)")}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.1)")}
+            aria-label="Cerrar"
+          >
+            ✕
+          </button>
+
+          {/* Navigation container — Figma: 1340px, space-between */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              display: "flex",
+              width: "100%",
+              maxWidth: "1340px",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "0 20px",
+            }}
+          >
+            {/* Prev arrow */}
+            <button
+              onClick={() => lightboxImgIdx > 0 && setLightboxImgIdx(lightboxImgIdx - 1)}
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                backgroundColor: lightboxImgIdx > 0 ? "rgba(0,0,0,0.5)" : "transparent",
+                border: lightboxImgIdx > 0 ? "2px solid rgba(255,255,255,0.3)" : "none",
+                cursor: lightboxImgIdx > 0 ? "pointer" : "default",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                transition: "background-color 0.2s",
+                opacity: lightboxImgIdx > 0 ? 1 : 0,
+              }}
+              onMouseEnter={e => { if (lightboxImgIdx > 0) e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.7)"; }}
+              onMouseLeave={e => { if (lightboxImgIdx > 0) e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.5)"; }}
+              aria-label="Anterior"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="13 4 7 10 13 16" />
+              </svg>
+            </button>
+
+            {/* Image — Figma: 972×649 max */}
+            <div
+              style={{
+                width: "972px",
+                maxWidth: "calc(100vw - 160px)",
+                height: "649px",
+                maxHeight: "85vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src={project.galleries[lightboxGi]?.images[lightboxImgIdx]}
+                alt=""
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                  borderRadius: "4px",
+                }}
+              />
+            </div>
+
+            {/* Next arrow */}
+            <button
+              onClick={() => {
+                const maxIdx = (project.galleries[lightboxGi]?.images.length ?? 1) - 1;
+                if (lightboxImgIdx < maxIdx) setLightboxImgIdx(lightboxImgIdx + 1);
+              }}
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "50%",
+                backgroundColor: (project.galleries[lightboxGi] && lightboxImgIdx < project.galleries[lightboxGi].images.length - 1) ? "rgba(0,0,0,0.5)" : "transparent",
+                border: (project.galleries[lightboxGi] && lightboxImgIdx < project.galleries[lightboxGi].images.length - 1) ? "2px solid rgba(255,255,255,0.3)" : "none",
+                cursor: (project.galleries[lightboxGi] && lightboxImgIdx < project.galleries[lightboxGi].images.length - 1) ? "pointer" : "default",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                transition: "background-color 0.2s",
+                opacity: (project.galleries[lightboxGi] && lightboxImgIdx < project.galleries[lightboxGi].images.length - 1) ? 1 : 0,
+              }}
+              onMouseEnter={e => {
+                if (project.galleries[lightboxGi] && lightboxImgIdx < project.galleries[lightboxGi].images.length - 1)
+                  e.currentTarget.style.backgroundColor = "rgba(251,80,0,0.7)";
+              }}
+              onMouseLeave={e => {
+                if (project.galleries[lightboxGi] && lightboxImgIdx < project.galleries[lightboxGi].images.length - 1)
+                  e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.5)";
+              }}
+              aria-label="Siguiente"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="7 4 13 10 7 16" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Lightbox thumbnail strip — ALL images, 114×76, aspect 3/2
+              Figma: 1340px, space-between */}
+          {project.galleries[lightboxGi] && (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: "absolute",
+                bottom: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                width: "100%",
+                maxWidth: "1340px",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "4px",
+                padding: "0 20px",
+                overflowX: "auto",
+              }}
+            >
+              {project.galleries[lightboxGi].images.map((imgSrc, i) => (
+                <button
+                  key={`lb-thumb-${i}`}
+                  onClick={() => setLightboxImgIdx(i)}
+                  style={{
+                    width: "114px",
+                    minWidth: "114px",
+                    height: "76px",
+                    aspectRatio: "3 / 2",
+                    flexShrink: 0,
+                    border: lightboxImgIdx === i ? "2px solid #FB5000" : "2px solid transparent",
+                    borderRadius: "2px",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    opacity: lightboxImgIdx === i ? 1 : 0.6,
+                    transition: "opacity 0.2s ease, border-color 0.2s ease",
+                    padding: 0,
+                    background: "#333",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
+                  onMouseLeave={(e) => { if (lightboxImgIdx !== i) e.currentTarget.style.opacity = "0.6"; }}
+                >
+                  <img
+                    src={imgSrc}
+                    alt={`${i + 1}`}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }

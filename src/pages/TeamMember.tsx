@@ -517,7 +517,7 @@ export default function TeamMember() {
           */}
           <div
             className="member-bio-container mx-auto flex"
-            style={{ maxWidth: "1440px", padding: "0 50px", gap: "27px" }}
+            style={{ maxWidth: "1440px", width: "100%", padding: "0 50px", gap: "27px" }}
           >
             {/* Left: Bio text */}
             <div className="member-bio-text" style={{ width: "770px", flexShrink: 0 }}>
@@ -564,7 +564,7 @@ export default function TeamMember() {
           */}
           <div
             className="member-awards-container mx-auto flex"
-            style={{ maxWidth: "1440px", padding: "80px 50px 80px", gap: "27px" }}
+            style={{ maxWidth: "1440px", width: "100%", padding: "80px 50px 80px", gap: "27px" }}
           >
             {/* Left: Featured image + color strip */}
             <div className="member-featured-col" style={{ width: "770px", flexShrink: 0 }}>

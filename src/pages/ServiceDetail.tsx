@@ -274,7 +274,7 @@ export default function ServiceDetailPage() {
           }}>
 
             {/* 2-column: text left (657px) + photo+dock right */}
-            <div className="svcd-content-row mx-auto" style={{ maxWidth: "1440px", padding: "60px 50px 0", display: "flex", gap: "27px", alignItems: "flex-start" }}>
+            <div className="svcd-content-row mx-auto" style={{ maxWidth: "1440px", width: "100%", padding: "60px 50px 0", display: "flex", gap: "27px", alignItems: "flex-start" }}>
               {/* Left: subtitle + description — Figma: Frame 110, 657px */}
               <div className="svcd-text-col" style={{ width: "657px", flexShrink: 0, display: "flex", flexDirection: "column", gap: "25px" }}>
                 <div style={{ padding: "0 10px" }}>
@@ -301,7 +301,7 @@ export default function ServiceDetailPage() {
             </div>
 
             {/* Related Projects — Figma: at y:1450, 1341px wide, 302px tall blocks */}
-            <div className="svcd-related-section mx-auto" style={{ maxWidth: "1440px", padding: "100px 50px 80px" }}>
+            <div className="svcd-related-section mx-auto" style={{ maxWidth: "1440px", width: "100%", padding: "100px 50px 80px" }}>
               <h2 className="svcd-related-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "70px", lineHeight: "70px", color: "#FFFFFF", marginBottom: "74px" }}>
                 {isEn ? "RELATED PROJECTS" : "PROYECTOS RELACIONADOS"}
               </h2>

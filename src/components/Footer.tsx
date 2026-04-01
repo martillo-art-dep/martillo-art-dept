@@ -64,15 +64,15 @@ export default function Footer() {
 
   const legalLinks = [
     { labelEs: "Información Legal", labelEn: "Legal Information" },
-    { labelEs: "Acreditaciones", labelEn: "Accreditations" },
-    { labelEs: "Certificaciones", labelEn: "Certifications" },
+    { labelEs: "Acreditaciones",    labelEn: "Accreditations" },
+    { labelEs: "Certificaciones",   labelEn: "Certifications" },
   ];
 
   const socialIcons = [
-    { id: "instagram", Icon: IgIcon, href: "https://instagram.com" },
-    { id: "vimeo", Icon: VimeoIcon, href: "https://vimeo.com" },
-    { id: "linkedin", Icon: LinkedInIcon, href: "https://linkedin.com" },
-    { id: "imdb", Icon: ImdbIcon, href: "https://imdb.com" },
+    { id: "instagram", Icon: IgIcon,       href: "https://instagram.com" },
+    { id: "vimeo",     Icon: VimeoIcon,    href: "https://vimeo.com" },
+    { id: "linkedin",  Icon: LinkedInIcon, href: "https://linkedin.com" },
+    { id: "imdb",      Icon: ImdbIcon,     href: "https://imdb.com" },
   ];
 
   return (
@@ -155,7 +155,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Legal links — Figma: 20px, 16px gap, ~85.35% from top */}
+          {/* Legal links — Figma: 20px, 16px gap */}
           <nav style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "50px" }} aria-label="Legal">
             {legalLinks.map((link, i) => (
               <a key={i} href={`#${link.labelEs.toLowerCase().replace(/\s/g, "-")}`} style={{
@@ -167,14 +167,13 @@ export default function Footer() {
             ))}
           </nav>
 
-          {/* Bottom row: Social icons (left) + Web by caja. (right)
-              Figma: icons at left:7.91%, "Web by caja." at right:8.14%
-              Icons: 41×41px, bg #F2F2F2, radius 9px, gap 16px (53-41=12 ≈ gap accounting for position offsets) */}
+          {/* Bottom row: Social icons (left) + Web by caja. (right) */}
           <div style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}>
+            {/* Social icons — Figma: 41×41px, bg #F2F2F2, radius 9px, gap ~12px */}
             <div style={{ display: "flex", gap: "13px" }}>
               {socialIcons.map((social) => (
                 <a
@@ -215,12 +214,13 @@ export default function Footer() {
 
         {/* ════════════════════════════════════════════════════════════
             DESKTOP FOOTER (≥ 768px) — 4-column layout
+            Figma: h-[309px], pt 44px (14.24% of 309px)
             ════════════════════════════════════════════════════════════ */}
         <div className="hidden md:block">
-          <div className="mx-auto w-full max-w-[1440px] px-12 pt-10 pb-6 lg:px-[50px]">
+          <div className="mx-auto w-full max-w-[1440px]" style={{ paddingTop: "44px", paddingBottom: "55px", paddingLeft: "51px", paddingRight: "50px" }}>
             <div className="flex flex-row justify-between gap-0">
 
-              {/* Col 1: MARTILLO ART DEPT */}
+              {/* Col 1: MARTILLO ART DEPT — Figma: 78px / 51px, color #001011 */}
               <div className="flex-shrink-0">
                 <div style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, color: "#001011" }}>
                   <div className="text-[60px] leading-[60px] lg:text-[78px] lg:leading-[78px]">MARTILLO</div>
@@ -228,7 +228,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Col 2: Contáctanos */}
+              {/* Col 2: Contáctanos — Figma: 35px title, 20px Arial body, gap-16 */}
               <address className="flex flex-col gap-4 not-italic">
                 <h3 className="text-[30px] leading-[30px] lg:text-[35px] lg:leading-[35px]" style={{
                   fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, color: "#000000", margin: 0,
@@ -256,8 +256,8 @@ export default function Footer() {
                 </p>
               </address>
 
-              {/* Col 3: Legal links */}
-              <nav className="flex flex-col gap-4 lg:pt-[65px]" aria-label="Legal">
+              {/* Col 3: Legal links — aligned with email row (title 35px + gap 16px = 51px) */}
+              <nav className="flex flex-col gap-4" style={{ paddingTop: "51px" }} aria-label="Legal">
                 {legalLinks.map((link, i) => (
                   <a key={i} href={`#${link.labelEs.toLowerCase().replace(/\s/g, "-")}`} className="text-[18px] lg:text-[20px]" style={{
                     fontFamily: "'Arial', sans-serif", color: "#000000", textDecoration: "none", lineHeight: "23px",
@@ -267,13 +267,14 @@ export default function Footer() {
                 ))}
               </nav>
 
-              {/* Col 4: Logo + Social icons */}
+              {/* Col 4: Logo (149×131px) + Social icons (41×41px, #F2F2F2, rounded-[9px], gap-3=12px) */}
               <div className="flex flex-col items-center gap-4">
                 <img
                   src="/assets/logo-martillo-black.png"
                   alt="Martillo Art Department"
                   className="w-[120px] h-[106px] lg:w-[149px] lg:h-[131px] object-contain"
                 />
+                {/* Figma: IG(ml-0), VIMEO(ml-53), LINKEDIN(ml-107), IMDB(ml-160) → ~12px gaps */}
                 <div className="flex gap-3">
                   {socialIcons.map((social) => (
                     <a
@@ -292,7 +293,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Divider */}
+            {/* Divider — Figma: at 82.2% from top (254px of 309px) */}
             <div className="mt-10" style={{
               height: "0px", borderTop: "1.5px solid #000000",
               boxShadow: "0px 0px 6.8px rgba(0, 0, 0, 0.3)",

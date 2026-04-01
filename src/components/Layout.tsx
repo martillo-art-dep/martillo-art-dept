@@ -14,9 +14,9 @@ export default function Layout() {
     location.pathname === "/en/";
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col w-full overflow-x-hidden">
       <Header />
-      <main className={`flex-1 ${isHome ? "" : ""}`}>
+      <main className="flex-1 w-full">
         <Suspense
           fallback={
             <div className="flex min-h-[50vh] items-center justify-center bg-black">

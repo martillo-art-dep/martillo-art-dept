@@ -365,7 +365,7 @@ const [heroIndex, setHeroIndex] = useState(0);
           </section>
 
           {/* OUR HISTORY */}
-          <div className="about-history-row mx-auto flex items-center" style={{ maxWidth: "1440px", padding: "63px 116px", gap: "51px" }}>
+          <div className="about-history-row mx-auto flex items-center" style={{ maxWidth: "1440px", width: "100%", padding: "63px 116px", gap: "51px" }}>
             <div className="about-history-left relative flex-shrink-0" style={{ width: "595px", height: "527px" }}>
               <img src="/assets/martillo-about.svg" alt="" className="absolute"
                 style={{ top: "0", left: "0", width: "575px", height: "507px", objectFit: "contain", opacity: 0.2 }} />
@@ -393,7 +393,7 @@ const [heroIndex, setHeroIndex] = useState(0);
             backgroundImage: `linear-gradient(180deg, rgba(1,1,0,0) 0%, rgba(1,1,0,1) 28%, rgba(1,1,0,1) 68%, rgba(0,0,0,0) 100%)`,
           }}>
             {/* TEAM */}
-            <div className="mx-auto" style={{ maxWidth: "1440px", padding: "60px 50px 0" }}>
+            <div className="mx-auto" style={{ maxWidth: "1440px", width: "100%", padding: "60px 50px 0" }}>
               <div className="about-team-row flex justify-between" style={{ gap: "96px" }}>
                 {TEAM.map((member, idx) => (
                   <div key={idx} className="about-team-card flex flex-col items-center" style={{ width: "620px", gap: "43px" }}>
