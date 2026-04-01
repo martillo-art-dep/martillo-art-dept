@@ -82,11 +82,6 @@ const MEMBERS: Record<string, TeamMemberData> = {
   },
 };
 
-// ─── Color strip colors (Figma Cobp dock) ────────────────────────────
-const COLOR_STRIP = [
-  "#F8F1CD", "#FB5000", "#FFDA44", "#338AF3", "#00FF8C",
-  "#C32F27", "#F80078", "#751A46", "#338AF3",
-];
 
 
 // ─── CSS ─────────────────────────────────────────────────────────────
