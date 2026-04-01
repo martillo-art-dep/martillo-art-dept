@@ -15,6 +15,7 @@ interface TeamMemberData {
   bioEn: string;
   filmography: { image: string; titleEs: string; titleEn: string }[];
   featuredImage: string;
+  cvUrl: string;
   awards: { titleEs: string; titleEn: string; roleEs: string; roleEn: string }[];
 }
 
@@ -39,6 +40,7 @@ const MEMBERS: Record<string, TeamMemberData> = {
       { image: "/assets/filmography/film-6.jpg", titleEs: "Proyecto 6", titleEn: "Project 6" },
     ],
     featuredImage: "/assets/team/hector-featured.jpg",
+    cvUrl: "/assets/team/hector-cv.pdf",
     awards: [
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
@@ -68,6 +70,7 @@ const MEMBERS: Record<string, TeamMemberData> = {
       { image: "/assets/filmography/film-6.jpg", titleEs: "Proyecto 6", titleEn: "Project 6" },
     ],
     featuredImage: "/assets/team/claudio-featured.jpg",
+    cvUrl: "/assets/team/claudio-cv.pdf",
     awards: [
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
@@ -88,6 +91,62 @@ const COLOR_STRIP = [
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const memberCSS = `
+/* ── VER CV button animation (Uiverse by alexmaracinaru) ── */
+.cta-cv {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.cta-cv span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 18px;
+  padding-right: 15px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+.cta-cv svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+.cta-cv:hover svg {
+  transform: translateX(0);
+}
+.cta-cv:active svg {
+  transform: scale(0.9);
+}
+.hover-underline-cv {
+  position: relative;
+  color: #FFFFFF;
+  padding-bottom: 20px;
+}
+.hover-underline-cv:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #FB5000;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.cta-cv:hover .hover-underline-cv:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.cta-cv:hover span {
+  color: #FB5000;
+}
+.cta-cv:hover svg path {
+  fill: #FB5000;
+}
+
 /* ── Tablet overrides (768–1199px) ── */
 @media (min-width: 768px) and (max-width: 1199px) {
   .member-hero-name-block {
@@ -413,7 +472,7 @@ export default function TeamMember() {
       </div>
 
       {/* DESKTOP LAYOUT */}
-      <div className="hidden md:block">
+      <div className="hidden md:block w-full">
       <div
         className="w-full"
         style={{
@@ -422,6 +481,7 @@ export default function TeamMember() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
+          paddingBottom: "80px",
         }}
       >
 
@@ -538,72 +598,59 @@ export default function TeamMember() {
               ))}
             </div>
 
-            {/* Right: Photo */}
+            {/* Right: Photo + VER CV */}
             <div
-              className="member-bio-photo"
+              className="member-bio-photo-col"
               style={{
-                width: "543px",
-                height: "814px",
-                backgroundColor: "#D9D9D9",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
                 flexShrink: 0,
-                overflow: "hidden",
+                width: "543px",
               }}
             >
-              <img
-                src={member.image}
-                alt={`${firstName} ${lastName}`}
-                className="w-full h-full object-cover"
-                onError={(e) => { e.currentTarget.style.display = "none"; }}
-              />
-            </div>
-          </div>
-
-          {/* ═══ AWARDS + FEATURED IMAGE ═══
-              Figma: Left side = featured image (770×513) + color strip (770×76)
-                     Right side = 6 award rows (543px wide)
-          */}
-          <div
-            className="member-awards-container mx-auto flex"
-            style={{ maxWidth: "1440px", width: "100%", padding: "80px 50px 80px", gap: "27px" }}
-          >
-            {/* Left: Featured image + color strip */}
-            <div className="member-featured-col" style={{ width: "770px", flexShrink: 0 }}>
-              {/* Featured image */}
               <div
-                className="member-featured-img"
                 style={{
-                  width: "770px",
-                  height: "513px",
+                  width: "543px",
+                  height: "814px",
                   backgroundColor: "#D9D9D9",
                   overflow: "hidden",
-                  marginBottom: "49px",
                 }}
               >
                 <img
-                  src={member.featuredImage}
-                  alt=""
+                  src={member.image}
+                  alt={`${firstName} ${lastName}`}
                   className="w-full h-full object-cover"
                   onError={(e) => { e.currentTarget.style.display = "none"; }}
                 />
               </div>
 
-              {/* Color strip — Cobp dock effect */}
-              <div
-                className="member-strip member-strip-desktop"
-                style={{ width: "770px" }}
+              {/* VER CV — aligned bottom-right of photo */}
+              <a
+                href={member.cvUrl}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-cv"
+                style={{ marginTop: "17px" }}
               >
-                {COLOR_STRIP.map((color, idx) => (
-                  <button
-                    key={idx}
-                    className="member-swatch"
-                    style={{ "--color": color } as React.CSSProperties}
-                    data-label={color}
-                    aria-label={color}
+                <span className="hover-underline-cv">
+                  {isEn ? "VIEW CV" : "VER CV"}
+                </span>
+                <svg
+                  width="46"
+                  height="16"
+                  viewBox="0 0 46 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M45.7071 8.70711C46.0976 8.31658 46.0976 7.68342 45.7071 7.29289L39.3431 0.928932C38.9526 0.538408 38.3195 0.538408 37.9289 0.928932C37.5384 1.31946 37.5384 1.95262 37.9289 2.34315L43.5858 8L37.9289 13.6569C37.5384 14.0474 37.5384 14.6805 37.9289 15.0711C38.3195 15.4616 38.9526 15.4616 39.3431 15.0711L45.7071 8.70711ZM0 9H45V7H0V9Z"
+                    fill="#FFFFFF"
                   />
-                ))}
-              </div>
+                </svg>
+              </a>
             </div>
-
           </div>
 
         </div>

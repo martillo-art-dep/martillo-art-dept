@@ -345,6 +345,7 @@ const [heroIndex, setHeroIndex] = useState(0);
           backgroundColor: "#1b1b1b",
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
           backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed",
+          paddingBottom: "80px",
         }}>
           {/* HERO */}
           <section className="relative w-full flex items-center justify-center" style={{ height: "700px", overflow: "hidden" }}>
