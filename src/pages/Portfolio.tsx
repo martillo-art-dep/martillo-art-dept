@@ -6,6 +6,15 @@ import SEO from "../components/SEO";
 
 // ─── Styles ──────────────────────────────────────────────────────────
 const portfolioCSS = `
+  .portfolio-bg {
+    background-attachment: fixed;
+  }
+  @media (max-width: 767px) {
+    .portfolio-bg {
+      background-attachment: scroll;
+    }
+  }
+
   .grid-card-image {
     position: relative;
     overflow: hidden;
@@ -507,13 +516,12 @@ export default function Portfolio() {
         url="/portfolio"
       />
       <div
-        className="w-full min-h-screen"
+        className="w-full min-h-screen portfolio-bg"
         style={{
           backgroundColor: "#1b1b1b",
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: "fixed",
           paddingBottom: "200px",
         }}
       >
