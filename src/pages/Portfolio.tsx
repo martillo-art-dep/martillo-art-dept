@@ -14,6 +14,13 @@ const portfolioCSS = `
       background-attachment: scroll;
     }
   }
+  @media (max-width: 767px) {
+    .page-bg {
+      background-size: auto !important;
+      background-repeat: repeat !important;
+      background-position: top left !important;
+    }
+  }
 
   .grid-card-image {
     position: relative;
@@ -516,7 +523,7 @@ export default function Portfolio() {
         url="/portfolio"
       />
       <div
-        className="w-full min-h-screen portfolio-bg"
+        className="w-full min-h-screen portfolio-bg page-bg"
         style={{
           backgroundColor: "#1b1b1b",
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",

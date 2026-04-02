@@ -197,6 +197,14 @@ const dockCSS = `
     line-height: clamp(48px, 7vw, 96px) !important;
   }
 }
+
+@media (max-width: 767px) {
+  .page-bg {
+    background-size: auto !important;
+    background-repeat: repeat !important;
+    background-position: top left !important;
+  }
+}
 `;
 
 // ─── Laurel SVG (87x80px per Figma) ─────────────────────────────────
@@ -302,7 +310,7 @@ export default function ProjectDetail() {
   if (isIncomplete) {
     return (
       <div
-        className="w-full min-h-screen flex flex-col items-center justify-center"
+        className="w-full min-h-screen flex flex-col items-center justify-center page-bg"
         style={{ backgroundColor: "#1b1b1b", backgroundImage: "url(/assets/bg-gradient-dark.jpeg)", backgroundSize: "cover", backgroundPosition: "center", gap: "24px", padding: "40px 24px" }}
       >
         <p style={{ fontFamily: "'Martillo Completa', sans-serif", fontSize: "clamp(28px, 5vw, 56px)", color: "#f8f1cd", textAlign: "center", lineHeight: 1.1, margin: 0 }}>
@@ -338,7 +346,7 @@ export default function ProjectDetail() {
           MOBILE LAYOUT (< 768px) — Figma wireframe: 430×1425px
           Background: #DBDBDB with hero gradient overlay
           ════════════════════════════════════════════════════════════════ */}
-      <div className="block md:hidden" style={{
+      <div className="block md:hidden page-bg" style={{
         backgroundColor: "#1b1b1b",
         backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
         backgroundSize: "cover",
@@ -628,7 +636,7 @@ export default function ProjectDetail() {
           ════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:block w-full">
         <div
-          className="w-full"
+          className="w-full page-bg"
           style={{
             backgroundColor: "#1b1b1b",
             backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",

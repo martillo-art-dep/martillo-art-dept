@@ -219,6 +219,14 @@ const memberCSS = `
   }
 }
 
+@media (max-width: 767px) {
+  .page-bg {
+    background-size: auto !important;
+    background-repeat: repeat !important;
+    background-position: top left !important;
+  }
+}
+
 /* Cobp dock for color strip */
 .member-strip {
   display: flex;
@@ -364,7 +372,7 @@ export default function TeamMember() {
       <style>{memberCSS}</style>
 
       {/* MOBILE LAYOUT */}
-      <div className="block md:hidden" style={{
+      <div className="block md:hidden page-bg" style={{
         backgroundColor: "#1b1b1b",
         backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
         backgroundSize: "cover",
@@ -468,7 +476,7 @@ export default function TeamMember() {
       {/* DESKTOP LAYOUT */}
       <div className="hidden md:block w-full">
       <div
-        className="w-full"
+        className="w-full page-bg"
         style={{
           backgroundColor: "#1b1b1b",
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",

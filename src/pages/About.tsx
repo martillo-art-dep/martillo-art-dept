@@ -153,6 +153,14 @@ const aboutCSS = `
   }
 }
 
+@media (max-width: 767px) {
+  .page-bg {
+    background-size: auto !important;
+    background-repeat: repeat !important;
+    background-position: top left !important;
+  }
+}
+
 /* ── Mobile dock ── */
 .about-strip-mobile {
   display: flex;
@@ -220,7 +228,7 @@ const [heroIndex, setHeroIndex] = useState(0);
       {/* ════════════════════════════════════════════════════════════════
           MOBILE LAYOUT (< 768px) — Figma wireframe: 430×1630px
           ════════════════════════════════════════════════════════════════ */}
-      <div className="block md:hidden" style={{
+      <div className="block md:hidden page-bg" style={{
         backgroundColor: "#1b1b1b",
         backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
         backgroundSize: "cover",
@@ -341,7 +349,7 @@ const [heroIndex, setHeroIndex] = useState(0);
           DESKTOP LAYOUT (≥ 768px) — Original, untouched
           ════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:block">
-        <div className="w-full" style={{
+        <div className="w-full page-bg" style={{
           backgroundColor: "#1b1b1b",
           backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
           backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed",
