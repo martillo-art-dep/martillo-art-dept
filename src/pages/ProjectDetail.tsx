@@ -200,9 +200,10 @@ const dockCSS = `
 
 @media (max-width: 767px) {
   .page-bg {
-    background-size: auto !important;
-    background-repeat: repeat !important;
-    background-position: top left !important;
+    background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
+    background-size: 100% auto !important;
+    background-repeat: repeat-y !important;
+    background-position: center top !important;
   }
 }
 `;
@@ -588,27 +589,6 @@ export default function ProjectDetail() {
                     }
                   </button>
                 ))}
-                {gallery.images.length > 10 && (
-                  <div
-                    style={{
-                      flex: "1 1 0",
-                      minWidth: 0,
-                      height: "55px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: "rgba(251,80,0,0.15)",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      flexShrink: 0,
-                    }}
-                    onClick={() => setActiveIdx(gi, 10)}
-                  >
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#FB5000" }}>
-                      +{gallery.images.length - 10}
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
           ))}

@@ -155,9 +155,10 @@ const aboutCSS = `
 
 @media (max-width: 767px) {
   .page-bg {
-    background-size: auto !important;
-    background-repeat: repeat !important;
-    background-position: top left !important;
+    background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
+    background-size: 100% auto !important;
+    background-repeat: repeat-y !important;
+    background-position: center top !important;
   }
 }
 
