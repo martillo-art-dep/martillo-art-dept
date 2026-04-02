@@ -83,7 +83,6 @@ const MEMBERS: Record<string, TeamMemberData> = {
 };
 
 
-
 // ─── CSS ─────────────────────────────────────────────────────────────
 const memberCSS = `
 /* ── VER CV button animation (Uiverse by alexmaracinaru) ── */
