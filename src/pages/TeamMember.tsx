@@ -15,7 +15,8 @@ interface TeamMemberData {
   bioEn: string;
   filmography: { image: string; titleEs: string; titleEn: string }[];
   featuredImage: string;
-  cvUrl: string;
+  cvUrlEs: string;
+  cvUrlEn: string;
   awards: { titleEs: string; titleEn: string; roleEs: string; roleEn: string }[];
 }
 
@@ -40,7 +41,8 @@ const MEMBERS: Record<string, TeamMemberData> = {
       { image: "/assets/filmography/film-6.jpg", titleEs: "Proyecto 6", titleEn: "Project 6" },
     ],
     featuredImage: "/assets/team/hector-featured.jpg",
-    cvUrl: "/assets/team/hector-cv.pdf",
+    cvUrlEs: "/assets/cvs/cv-hector-iruegas-es.pdf",
+    cvUrlEn: "/assets/cvs/cv-hector-iruegas-en.pdf",
     awards: [
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
@@ -70,7 +72,8 @@ const MEMBERS: Record<string, TeamMemberData> = {
       { image: "/assets/filmography/film-6.jpg", titleEs: "Proyecto 6", titleEn: "Project 6" },
     ],
     featuredImage: "/assets/team/claudio-featured.jpg",
-    cvUrl: "/assets/team/claudio-cv.pdf",
+    cvUrlEs: "/assets/cvs/cv-claudio-contreras-es.pdf",
+    cvUrlEn: "/assets/cvs/cv-claudio-contreras-en.pdf",
     awards: [
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
       { titleEs: "Nominación", titleEn: "Nomination", roleEs: "Rol Cargo o Area", roleEn: "Role or Area" },
@@ -368,6 +371,16 @@ export default function TeamMember() {
   const role = isEn ? member.roleEn : member.roleEs;
   const bio = isEn ? member.bioEn : member.bioEs;
 
+  const handleDownloadCV = () => {
+    const url = isEn ? member.cvUrlEn : member.cvUrlEs;
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = url.split('/').pop() || 'cv.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       <style>{memberCSS}</style>
@@ -629,11 +642,8 @@ export default function TeamMember() {
               </div>
 
               {/* VER CV — aligned bottom-right of photo */}
-              <a
-                href={member.cvUrl}
-                download
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={handleDownloadCV}
                 className="cta-cv"
                 style={{ marginTop: "17px" }}
               >
@@ -652,7 +662,7 @@ export default function TeamMember() {
                     fill="#FFFFFF"
                   />
                 </svg>
-              </a>
+              </button>
             </div>
           </div>
 
