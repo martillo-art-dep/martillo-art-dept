@@ -162,6 +162,41 @@ const aboutCSS = `
   }
 }
 
+/* ── Leer más button animation (alexmaracinaru style) ── */
+.team-readmore {
+  position: relative;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  color: #FFFFFF;
+  background: none;
+  border: none;
+  padding: 0 0 4px 0;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  overflow: hidden;
+}
+.team-readmore::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fb5000;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+.team-readmore:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.team-readmore:hover {
+  color: #fb5000;
+  transition: color 0.3s ease-out;
+}
+
 /* ── Mobile dock ── */
 .about-strip-mobile {
   display: flex;
@@ -336,9 +371,20 @@ const [heroIndex, setHeroIndex] = useState(0);
                 <p style={{
                   fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400,
                   fontSize: "14px", lineHeight: "18px", color: "#FBFEF9", textAlign: "justify",
+                  marginBottom: "10px",
                 }}>
                   {isEn ? member.bioEn : member.bioEs}
                 </p>
+                {/* Leer más / Read more */}
+                <div style={{ textAlign: "right" }}>
+                  <button
+                    className="team-readmore"
+                    onClick={() => navigate(`/about/${member.id}`)}
+                    style={{ fontSize: "14px", lineHeight: "18px" }}
+                  >
+                    {isEn ? "Read more" : "Leer más"}
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -426,9 +472,20 @@ const [heroIndex, setHeroIndex] = useState(0);
                     <p className="about-team-bio" style={{
                       fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "25px",
                       lineHeight: "29px", textAlign: "justify", color: "#FFFFFF", width: "100%",
+                      marginBottom: "16px",
                     }}>
                       {isEn ? member.bioEn : member.bioEs}
                     </p>
+                    {/* Leer más / Read more */}
+                    <div style={{ width: "100%", textAlign: "right" }}>
+                      <button
+                        className="team-readmore"
+                        onClick={() => navigate(`/about/${member.id}`)}
+                        style={{ fontSize: "25px", lineHeight: "29px" }}
+                      >
+                        {isEn ? "Read more" : "Leer más"}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
