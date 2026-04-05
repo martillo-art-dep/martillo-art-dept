@@ -31,6 +31,16 @@ const HERO_IMAGES = [
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const aboutCSS = `
+@media (max-width: 767px) {
+  .page-bg > div[aria-hidden="true"] {
+    background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
+    background-size: 100% auto !important;
+    background-repeat: repeat-y !important;
+    background-position: center top !important;
+    background-attachment: scroll !important;
+  }
+}
+
 .about-gallery-strip {
   display: flex;
   transform-style: preserve-3d;
@@ -153,15 +163,6 @@ const aboutCSS = `
   }
 }
 
-@media (max-width: 767px) {
-  .page-bg {
-    background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
-    background-size: 100% auto !important;
-    background-repeat: repeat-y !important;
-    background-position: center top !important;
-  }
-}
-
 /* ── Leer más button animation (alexmaracinaru style) ── */
 .team-readmore {
   position: relative;
@@ -265,16 +266,28 @@ const [heroIndex, setHeroIndex] = useState(0);
           MOBILE LAYOUT (< 768px) — Figma wireframe: 430×1630px
           ════════════════════════════════════════════════════════════════ */}
       <div className="block md:hidden page-bg" style={{
+        position: "relative",
         backgroundColor: "#1b1b1b",
-        backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "scroll",
         minHeight: "100vh",
       }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+            pointerEvents: "none",
+          }}
+        />
 
         {/* ═══ HERO CAROUSEL — Figma: 430×441px ═══ */}
-        <section className="relative w-full" style={{ height: "441px", overflow: "hidden" }}>
+        <section className="relative w-full" style={{ height: "441px", overflow: "hidden", zIndex: 1 }}>
           <div className="absolute inset-0 flex">
             <div className="w-1/2 h-full" style={{ backgroundColor: "#D9D9D9", overflow: "hidden" }}>
               <img src={HERO_IMAGES[heroIndex].left} alt="" className="w-full h-full object-cover"
@@ -311,7 +324,7 @@ const [heroIndex, setHeroIndex] = useState(0);
         </section>
 
         {/* ═══ CONTENT ═══ */}
-        <div style={{ padding: "24px 24px 40px" }}>
+        <div style={{ padding: "24px 24px 40px", position: "relative", zIndex: 1 }}>
 
           {/* Title */}
           <h2 style={{
@@ -397,13 +410,27 @@ const [heroIndex, setHeroIndex] = useState(0);
           ════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:block">
         <div className="w-full page-bg" style={{
+          position: "relative",
           backgroundColor: "#1b1b1b",
-          backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-          backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed",
           paddingBottom: "80px",
         }}>
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 0,
+              backgroundColor: "#1b1b1b",
+              backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center top",
+              backgroundRepeat: "no-repeat",
+              backgroundAttachment: "fixed",
+              pointerEvents: "none",
+            }}
+          />
           {/* HERO */}
-          <section className="relative w-full flex items-center justify-center" style={{ height: "700px", overflow: "hidden" }}>
+          <section className="relative w-full flex items-center justify-center" style={{ height: "700px", overflow: "hidden", zIndex: 1 }}>
             <div className="absolute inset-0 flex">
               <div className="w-1/2 h-full" style={{ backgroundColor: "#D9D9D9", overflow: "hidden" }}>
                 <img src="/assets/about/hero-left.jpg" alt="" className="w-full h-full object-cover"
@@ -421,7 +448,7 @@ const [heroIndex, setHeroIndex] = useState(0);
           </section>
 
           {/* OUR HISTORY */}
-          <div className="about-history-row mx-auto flex items-center" style={{ maxWidth: "1440px", width: "100%", padding: "63px 116px", gap: "51px" }}>
+          <div className="about-history-row mx-auto flex items-center" style={{ maxWidth: "1440px", width: "100%", padding: "63px 116px", gap: "51px", position: "relative", zIndex: 1 }}>
             <div className="about-history-left relative flex-shrink-0" style={{ width: "595px", height: "527px" }}>
               <img src="/assets/martillo-about.svg" alt="" className="absolute"
                 style={{ top: "0", left: "0", width: "575px", height: "507px", objectFit: "contain", opacity: 0.2 }} />
@@ -447,6 +474,7 @@ const [heroIndex, setHeroIndex] = useState(0);
           {/* GRADIENT OVERLAY section */}
           <div className="relative w-full" style={{
             backgroundImage: `linear-gradient(180deg, rgba(1,1,0,0) 0%, rgba(1,1,0,1) 28%, rgba(1,1,0,1) 68%, rgba(0,0,0,0) 100%)`,
+            zIndex: 1,
           }}>
             {/* TEAM */}
             <div className="mx-auto" style={{ maxWidth: "1440px", width: "100%", padding: "60px 50px 0" }}>

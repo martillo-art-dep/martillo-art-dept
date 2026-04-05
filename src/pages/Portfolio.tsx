@@ -6,20 +6,13 @@ import SEO from "../components/SEO";
 
 // ─── Styles ──────────────────────────────────────────────────────────
 const portfolioCSS = `
-  .portfolio-bg {
-    background-attachment: fixed;
-  }
   @media (max-width: 767px) {
-    .portfolio-bg {
-      background-attachment: scroll;
-    }
-  }
-  @media (max-width: 767px) {
-    .page-bg {
+    .page-bg > div[aria-hidden="true"] {
       background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
       background-size: 100% auto !important;
       background-repeat: repeat-y !important;
       background-position: center top !important;
+      background-attachment: scroll !important;
     }
   }
 
@@ -526,14 +519,27 @@ export default function Portfolio() {
       <div
         className="w-full min-h-screen portfolio-bg page-bg"
         style={{
+          position: "relative",
           backgroundColor: "#1b1b1b",
-          backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           paddingBottom: "200px",
         }}
       >
-        <div className="mx-auto w-full" style={{ maxWidth: "1440px" }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+            pointerEvents: "none",
+          }}
+        />
+        <div className="mx-auto w-full" style={{ maxWidth: "1440px", position: "relative", zIndex: 1 }}>
 
           {/* ════════════════════════════════════════════════════════════
               MOBILE LAYOUT (< 768px)

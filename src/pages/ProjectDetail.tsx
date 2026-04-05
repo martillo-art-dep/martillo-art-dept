@@ -6,6 +6,17 @@ import { getProjectById } from "../data/projects";
 
 // ─── CSS ─────────────────────────────────────────────────────────────
 const dockCSS = `
+/* ── Mobile background fix ── */
+@media (max-width: 767px) {
+  .page-bg > div[aria-hidden="true"] {
+    background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
+    background-size: 100% auto !important;
+    background-repeat: repeat-y !important;
+    background-position: center top !important;
+    background-attachment: scroll !important;
+  }
+}
+
 /* ── Desktop dock effect (Cobp-style) ── */
 /* Figma: strip is 1340×107, flex, space-between, align-self: stretch */
 /* Each frame: 160×107 base, aspect-ratio: 157/105 */
@@ -198,14 +209,6 @@ const dockCSS = `
   }
 }
 
-@media (max-width: 767px) {
-  .page-bg {
-    background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
-    background-size: 100% auto !important;
-    background-repeat: repeat-y !important;
-    background-position: center top !important;
-  }
-}
 `;
 
 // ─── Laurel SVG (87x80px per Figma) ─────────────────────────────────
@@ -312,17 +315,32 @@ export default function ProjectDetail() {
     return (
       <div
         className="w-full min-h-screen flex flex-col items-center justify-center page-bg"
-        style={{ backgroundColor: "#1b1b1b", backgroundImage: "url(/assets/bg-gradient-dark.jpeg)", backgroundSize: "cover", backgroundPosition: "center", gap: "24px", padding: "40px 24px" }}
+        style={{ position: "relative", backgroundColor: "#1b1b1b", gap: "24px", padding: "40px 24px" }}
       >
-        <p style={{ fontFamily: "'Martillo Completa', sans-serif", fontSize: "clamp(28px, 5vw, 56px)", color: "#f8f1cd", textAlign: "center", lineHeight: 1.1, margin: 0 }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+            pointerEvents: "none",
+          }}
+        />
+        <p style={{ fontFamily: "'Martillo Completa', sans-serif", fontSize: "clamp(28px, 5vw, 56px)", color: "#f8f1cd", textAlign: "center", lineHeight: 1.1, margin: 0, position: "relative", zIndex: 1 }}>
           {project.title}
         </p>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(16px, 2vw, 22px)", color: "#9ca3af", textAlign: "center", margin: 0 }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(16px, 2vw, 22px)", color: "#9ca3af", textAlign: "center", margin: 0, position: "relative", zIndex: 1 }}>
           {currentLang.startsWith("en") ? "Coming soon" : "Próximamente"}
         </p>
         <button
           onClick={() => navigate("/portfolio")}
-          style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#fb5000", background: "none", border: "2px solid #fb5000", padding: "12px 32px", borderRadius: "4px", cursor: "pointer", marginTop: "8px" }}
+          style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#fb5000", background: "none", border: "2px solid #fb5000", padding: "12px 32px", borderRadius: "4px", cursor: "pointer", marginTop: "8px", position: "relative", zIndex: 1 }}
         >
           {currentLang.startsWith("en") ? "Back to Projects" : "Volver a Proyectos"}
         </button>
@@ -348,17 +366,29 @@ export default function ProjectDetail() {
           Background: #DBDBDB with hero gradient overlay
           ════════════════════════════════════════════════════════════════ */}
       <div className="block md:hidden page-bg" style={{
+        position: "relative",
         backgroundColor: "#1b1b1b",
-        backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "scroll",
         minHeight: "100vh",
         paddingBottom: "40px",
       }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+            pointerEvents: "none",
+          }}
+        />
 
         {/* ═══ HERO — Figma: 430×347px with gradient ═══ */}
-        <section className="relative w-full overflow-hidden" style={{ height: "347px" }}>
+        <section className="relative w-full overflow-hidden" style={{ height: "347px", zIndex: 1 }}>
           <div className="absolute inset-0" style={{
             backgroundImage: `url(${project.heroImage})`,
             backgroundSize: "cover", backgroundPosition: "center", backgroundColor: "#333",
@@ -392,7 +422,7 @@ export default function ProjectDetail() {
         </div>
 
         {/* ═══ CONTENT AREA — padding 24px ═══ */}
-        <div style={{ padding: "0 24px" }}>
+        <div style={{ padding: "0 24px", position: "relative", zIndex: 1 }}>
 
           {/* ── Trailer — Figma: 383×163px ── */}
           <div style={{
@@ -618,16 +648,28 @@ export default function ProjectDetail() {
         <div
           className="w-full page-bg"
           style={{
+            position: "relative",
             backgroundColor: "#1b1b1b",
-            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
             paddingBottom: "200px",
           }}
         >
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 0,
+              backgroundColor: "#1b1b1b",
+              backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center top",
+              backgroundRepeat: "no-repeat",
+              backgroundAttachment: "fixed",
+              pointerEvents: "none",
+            }}
+          />
           {/* ═══ HERO: 1440 x 648 ═══ */}
-          <section className="relative w-full" style={{ height: "648px", overflow: "hidden" }}>
+          <section className="relative w-full" style={{ height: "648px", overflow: "hidden", zIndex: 1 }}>
             <div
               className="absolute inset-0"
               style={{
@@ -689,6 +731,7 @@ export default function ProjectDetail() {
             style={{
               maxWidth: "1440px", width: "100%", padding: "45px 50px 0",
               display: "grid", gridTemplateColumns: "543px 1fr", gap: "27px",
+              position: "relative", zIndex: 1,
             }}
           >
             {/* Credits */}
@@ -763,6 +806,7 @@ export default function ProjectDetail() {
             style={{
               maxWidth: "1440px", width: "100%", padding: "60px 50px 0",
               display: "grid", gridTemplateColumns: "1fr 1fr", gap: "50px", alignItems: "start",
+              position: "relative", zIndex: 1,
             }}
           >
             <div>
@@ -790,6 +834,7 @@ export default function ProjectDetail() {
               className="mx-auto"
               style={{
                 maxWidth: "1440px", width: "100%", padding: "50px 50px 0",
+                position: "relative", zIndex: 1,
               }}
             >
               {project.nominations.map((nom, i) => (
@@ -824,6 +869,7 @@ export default function ProjectDetail() {
               style={{
                 maxWidth: "1440px", width: "100%", padding: "80px 50px 0",
                 display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "49px", alignSelf: "stretch",
+                position: "relative", zIndex: 1,
               }}
             >
               <h2 className="pd-gallery-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "96px", lineHeight: "96px", color: "#FFFFFF" }}>

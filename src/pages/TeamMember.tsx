@@ -223,11 +223,12 @@ const memberCSS = `
 }
 
 @media (max-width: 767px) {
-  .page-bg {
+  .page-bg > div[aria-hidden="true"] {
     background-image: url(/assets/bg-gradient-dark-mobile.jpeg) !important;
     background-size: 100% auto !important;
     background-repeat: repeat-y !important;
     background-position: center top !important;
+    background-attachment: scroll !important;
   }
 }
 
@@ -387,17 +388,29 @@ export default function TeamMember() {
 
       {/* MOBILE LAYOUT */}
       <div className="block md:hidden page-bg" style={{
+        position: "relative",
         backgroundColor: "#1b1b1b",
-        backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "scroll",
         minHeight: "100vh",
         paddingBottom: "40px",
       }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+            pointerEvents: "none",
+          }}
+        />
 
         {/* Name + Photo row */}
-        <div style={{ padding: "116px 16px 0", display: "flex", gap: "0px" }}>
+        <div style={{ padding: "116px 16px 0", display: "flex", gap: "0px", position: "relative", zIndex: 1 }}>
           {/* Left: Name + Role + Awards */}
           <div style={{ flex: 1, paddingTop: "16px" }}>
             {/* Name */}
@@ -430,7 +443,7 @@ export default function TeamMember() {
         </div>
 
         {/* Bio text */}
-        <div style={{ padding: "32px 16px 0" }}>
+        <div style={{ padding: "32px 16px 0", position: "relative", zIndex: 1 }}>
           {bio.split("\n\n").map((paragraph, idx) => (
             <p key={idx} style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 400,
@@ -443,7 +456,7 @@ export default function TeamMember() {
         </div>
 
         {/* Featured image with arrows */}
-        <div style={{ padding: "24px 22px 0" }}>
+        <div style={{ padding: "24px 22px 0", position: "relative", zIndex: 1 }}>
           <div style={{
             position: "relative", width: "100%", aspectRatio: "385 / 268",
             backgroundColor: "#D9D9D9", overflow: "hidden", marginBottom: "16px",
@@ -469,7 +482,7 @@ export default function TeamMember() {
         </div>
 
         {/* Back button */}
-        <div style={{ padding: "32px 16px 0" }}>
+        <div style={{ padding: "32px 16px 0", position: "relative", zIndex: 1 }}>
           <button
             onClick={() => navigate("/about")}
             style={{
@@ -492,14 +505,26 @@ export default function TeamMember() {
       <div
         className="w-full page-bg"
         style={{
+          position: "relative",
           backgroundColor: "#1b1b1b",
-          backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "scroll",
           paddingBottom: "80px",
         }}
       >
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundColor: "#1b1b1b",
+            backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+            pointerEvents: "none",
+          }}
+        />
 
         {/* ═══ HERO — 700px, Checker bg + giant name ═══
             Figma: Rectangle 39 with Checker.png + gradient overlay
@@ -512,6 +537,7 @@ export default function TeamMember() {
             backgroundImage: "linear-gradient(180deg, rgba(102,102,102,0) 0%, rgba(0,0,0,0.2) 48.56%), url(/assets/Checker.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            zIndex: 1,
           }}
         >
           {/* Name — left aligned, large */}
@@ -585,6 +611,7 @@ export default function TeamMember() {
               rgba(1, 1, 0, 1) 80%,
               rgba(0, 0, 0, 0) 100%
             )`,
+            zIndex: 1,
           }}
         >
 
@@ -593,7 +620,7 @@ export default function TeamMember() {
           */}
           <div
             className="member-bio-container mx-auto flex"
-            style={{ maxWidth: "1440px", width: "100%", padding: "0 50px", gap: "27px" }}
+            style={{ maxWidth: "1440px", width: "100%", padding: "0 50px", gap: "27px", position: "relative", zIndex: 1 }}
           >
             {/* Left: Bio text */}
             <div className="member-bio-text" style={{ width: "770px", flexShrink: 0 }}>
