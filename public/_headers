@@ -1,3 +1,12 @@
-/assets/cvs/*.pdf
+/assets/cvs/cv-hector-iruegas-es.pdf
   Content-Type: application/pdf
-  Content-Disposition: attachment
+  Content-Disposition: attachment; filename="cv-hector-iruegas-es.pdf"
+/assets/cvs/cv-hector-iruegas-en.pdf
+  Content-Type: application/pdf
+  Content-Disposition: attachment; filename="cv-hector-iruegas-en.pdf"
+/assets/cvs/cv-claudio-contreras-es.pdf
+  Content-Type: application/pdf
+  Content-Disposition: attachment; filename="cv-claudio-contreras-es.pdf"
+/assets/cvs/cv-claudio-contreras-en.pdf
+  Content-Type: application/pdf
+  Content-Disposition: attachment; filename="cv-claudio-contreras-en.pdf"
