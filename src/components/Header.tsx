@@ -528,7 +528,7 @@ export default function Header() {
           </div>
 
           {/* Nav links */}
-          <div style={{ display: "flex", flexDirection: "column", paddingLeft: "46px", paddingRight: "46px", paddingTop: "60px", gap: "0px" }}>
+          <div style={{ display: "flex", flexDirection: "column", paddingLeft: "46px", paddingRight: "46px", paddingTop: "60px", gap: "0px", flex: 1, overflowY: "auto" }}>
             {/* Proyectos with accordion */}
             <div>
               <button
@@ -604,8 +604,9 @@ export default function Header() {
 
           {/* Bottom: social icons + flags */}
           <div style={{
-            position: "absolute", bottom: "60px", left: "26px", right: "26px",
+            padding: "24px 26px 60px",
             display: "flex", alignItems: "center", justifyContent: "space-between",
+            flexShrink: 0,
           }}>
             <div style={{ display: "flex", alignItems: "center" }}>
               {socialLinks.map((social) => (

@@ -455,30 +455,20 @@ export default function TeamMember() {
           ))}
         </div>
 
-        {/* Featured image with arrows */}
-        <div style={{ padding: "24px 22px 0", position: "relative", zIndex: 1 }}>
-          <div style={{
-            position: "relative", width: "100%", aspectRatio: "385 / 268",
-            backgroundColor: "#D9D9D9", overflow: "hidden", marginBottom: "16px",
-          }}>
-            <img src={member.featuredImage} alt="" className="w-full h-full object-cover"
-              onError={(e) => { e.currentTarget.style.display = "none"; }} />
-            <button style={{
-              position: "absolute", left: "8px", top: "50%", transform: "translateY(-50%)",
-              width: "36px", height: "36px", display: "flex", alignItems: "center", justifyContent: "center",
-              backgroundColor: "rgba(0,0,0,0.4)", borderRadius: "50%", border: "none", cursor: "pointer",
-            }} aria-label="Previous">
-              <svg width="22" height="21" viewBox="0 0 22 21" fill="none"><path d="M14 3L6 10.5L14 18" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
-            <button style={{
-              position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)",
-              width: "36px", height: "36px", display: "flex", alignItems: "center", justifyContent: "center",
-              backgroundColor: "rgba(0,0,0,0.4)", borderRadius: "50%", border: "none", cursor: "pointer",
-            }} aria-label="Next">
-              <svg width="22" height="21" viewBox="0 0 22 21" fill="none"><path d="M8 3L16 10.5L8 18" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
-          </div>
-
+        {/* Download CV — mobile */}
+        <div style={{ padding: "0 16px", position: "relative", zIndex: 1 }}>
+          <button
+            onClick={handleDownloadCV}
+            className="cta-cv"
+            style={{ marginTop: "8px" }}
+          >
+            <span className="hover-underline-cv" style={{ fontSize: "14px", letterSpacing: "3px" }}>
+              {isEn ? "VIEW CV" : "VER CV"}
+            </span>
+            <svg width="36" height="13" viewBox="0 0 46 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M45.7071 8.70711C46.0976 8.31658 46.0976 7.68342 45.7071 7.29289L39.3431 0.928932C38.9526 0.538408 38.3195 0.538408 37.9289 0.928932C37.5384 1.31946 37.5384 1.95262 37.9289 2.34315L43.5858 8L37.9289 13.6569C37.5384 14.0474 37.5384 14.6805 37.9289 15.0711C38.3195 15.4616 38.9526 15.4616 39.3431 15.0711L45.7071 8.70711ZM0 9H45V7H0V9Z" fill="#FFFFFF" />
+            </svg>
+          </button>
         </div>
 
         {/* Back button */}
