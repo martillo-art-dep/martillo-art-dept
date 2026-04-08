@@ -57,9 +57,9 @@ export default function Footer() {
   const currentLang = i18n.language;
 
   const contactInfo = {
-    email: "martillo@correo.com",
-    phones: ["55 0000 0000", "55 0000 0000"],
-    address: "Av 500, Calle Colonia, CDMX",
+    email: "artdeptmartillo@gmail.com",
+    phones: ["+52 1 55 9197 4547", "+52 1 55 2250 6682"],
+    address: "Calle Sur 21, 357, Leyes de Reforma 2da Sección, Iztapalapa, 09310 CDMX, México",
   };
 
   const legalLinks = [
@@ -80,13 +80,9 @@ export default function Footer() {
       <style>{footerCSS}</style>
       <footer className="w-full" style={{ backgroundColor: "#FBFEF9" }}>
 
-        {/* ════════════════════════════════════════════════════════════
-            MOBILE FOOTER (< 768px) — Figma: 430×741px
-            Padding: left 34px (7.91% of 430), right ~81px (18.84%)
-            ════════════════════════════════════════════════════════════ */}
+        {/* MOBILE FOOTER (< 768px) */}
         <div className="block md:hidden" style={{ padding: "33px 34px 30px" }}>
 
-          {/* MARTILLO / ART DEPT — Figma: 78px / 51px */}
           <div style={{ marginBottom: "28px" }}>
             <div style={{
               fontFamily: "'Martillo Completa', sans-serif",
@@ -109,7 +105,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Divider line — Figma: 362px centered, 1.5px solid, box-shadow */}
           <div style={{
             width: "362px",
             maxWidth: "100%",
@@ -119,7 +114,6 @@ export default function Footer() {
             margin: "0 auto 40px",
           }} />
 
-          {/* CONTACTANOS — Figma: 35px title, 20px body, 16px gap */}
           <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "40px" }}>
             <h3 style={{
               fontFamily: "'Martillo Completa', sans-serif",
@@ -155,7 +149,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Legal links — Figma: 20px, 16px gap */}
           <nav style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "50px" }} aria-label="Legal">
             {legalLinks.map((link, i) => (
               <a key={i} href={`#${link.labelEs.toLowerCase().replace(/\s/g, "-")}`} style={{
@@ -167,13 +160,11 @@ export default function Footer() {
             ))}
           </nav>
 
-          {/* Bottom row: Social icons (left) + Web by caja. (right) */}
           <div style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}>
-            {/* Social icons — Figma: 41×41px, bg #F2F2F2, radius 9px, gap ~12px */}
             <div style={{ display: "flex", gap: "13px" }}>
               {socialIcons.map((social) => (
                 <a
@@ -194,7 +185,6 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Web by caja. — Figma: "Web by" 15px Arial, "caja." 20px Alkia, red underline */}
             <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
               <span style={{
                 fontFamily: "'Arial', sans-serif", fontWeight: 400,
@@ -212,15 +202,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ════════════════════════════════════════════════════════════
-            DESKTOP FOOTER (≥ 768px) — 4-column layout
-            Figma: h-[309px], pt 44px (14.24% of 309px)
-            ════════════════════════════════════════════════════════════ */}
+        {/* DESKTOP FOOTER (≥ 768px) */}
         <div className="hidden md:block">
           <div className="mx-auto w-full max-w-[1440px]" style={{ paddingTop: "44px", paddingBottom: "55px", paddingLeft: "51px", paddingRight: "50px" }}>
             <div className="flex flex-row justify-between gap-0">
 
-              {/* Col 1: MARTILLO ART DEPT — Figma: 78px / 51px, color #001011 */}
               <div className="flex-shrink-0">
                 <div style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, color: "#001011" }}>
                   <div className="text-[60px] leading-[60px] lg:text-[78px] lg:leading-[78px]">MARTILLO</div>
@@ -228,7 +214,6 @@ export default function Footer() {
                 </div>
               </div>
 
-              {/* Col 2: Contáctanos — Figma: 35px title, 20px Arial body, gap-16 */}
               <address className="flex flex-col gap-4 not-italic">
                 <h3 className="text-[30px] leading-[30px] lg:text-[35px] lg:leading-[35px]" style={{
                   fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, color: "#000000", margin: 0,
@@ -249,14 +234,13 @@ export default function Footer() {
                     </a>
                   ))}
                 </div>
-                <p className="text-[18px] lg:text-[20px]" style={{
+                <p className="text-[18px] lg:text-[20px] max-w-[300px]" style={{
                   fontFamily: "'Arial', sans-serif", color: "#000000", margin: 0, lineHeight: "23px",
                 }}>
                   {contactInfo.address}
                 </p>
               </address>
 
-              {/* Col 3: Legal links — aligned with email row (title 35px + gap 16px = 51px) */}
               <nav className="flex flex-col gap-4" style={{ paddingTop: "51px" }} aria-label="Legal">
                 {legalLinks.map((link, i) => (
                   <a key={i} href={`#${link.labelEs.toLowerCase().replace(/\s/g, "-")}`} className="text-[18px] lg:text-[20px]" style={{
@@ -267,14 +251,12 @@ export default function Footer() {
                 ))}
               </nav>
 
-              {/* Col 4: Logo (149×131px) + Social icons (41×41px, #F2F2F2, rounded-[9px], gap-3=12px) */}
               <div className="flex flex-col items-center gap-4">
                 <img
                   src="/assets/logo-martillo-black.png"
                   alt="Martillo Art Department"
                   className="w-[120px] h-[106px] lg:w-[149px] lg:h-[131px] object-contain"
                 />
-                {/* Figma: IG(ml-0), VIMEO(ml-53), LINKEDIN(ml-107), IMDB(ml-160) → ~12px gaps */}
                 <div className="flex gap-3">
                   {socialIcons.map((social) => (
                     <a
@@ -293,13 +275,11 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Divider — Figma: at 82.2% from top (254px of 309px) */}
             <div className="mt-10" style={{
               height: "0px", borderTop: "1.5px solid #000000",
               boxShadow: "0px 0px 6.8px rgba(0, 0, 0, 0.3)",
             }} />
 
-            {/* Web by caja. */}
             <div className="mt-3 flex justify-end items-center gap-[9px]">
               <span style={{ fontFamily: "'Arial', sans-serif", fontWeight: 400, fontSize: "15px", lineHeight: "17px", color: "#000000" }}>
                 Web by
