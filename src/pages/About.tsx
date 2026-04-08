@@ -24,11 +24,6 @@ const TEAM = [
   },
 ];
 
-const HERO_IMAGES = [
-  { left: "/assets/about/hero-left.jpg", right: "/assets/about/hero-right.jpg" },
-  { left: "/assets/about/hero-right.jpg", right: "/assets/about/hero-left.jpg" },
-];
-
 // ─── CSS ─────────────────────────────────────────────────────────────
 const aboutCSS = `
 @media (max-width: 767px) {
@@ -227,31 +222,11 @@ const aboutCSS = `
 .about-swatch-mobile:has(+ .about-swatch-mobile + .about-swatch-mobile:hover) { transform: scaleY(1.15) scaleX(1.04); z-index: 999; }
 `;
 
-// ─── Arrow Icons ─────────────────────────────────────────────────────
-function ArrowLeft() {
-  return (
-    <svg width="22" height="21" viewBox="0 0 22 21" fill="none">
-      <path d="M14 3L6 10.5L14 18" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-function ArrowRight() {
-  return (
-    <svg width="22" height="21" viewBox="0 0 22 21" fill="none">
-      <path d="M8 3L16 10.5L8 18" stroke="#000000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 // ─── Component ───────────────────────────────────────────────────────
 export default function About() {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const isEn = i18n.language.startsWith("en");
-const [heroIndex, setHeroIndex] = useState(0);
-
-  const heroPrev = () => setHeroIndex((i) => (i === 0 ? HERO_IMAGES.length - 1 : i - 1));
-  const heroNext = () => setHeroIndex((i) => (i === HERO_IMAGES.length - 1 ? 0 : i + 1));
 
   return (
     <>
@@ -286,41 +261,32 @@ const [heroIndex, setHeroIndex] = useState(0);
           }}
         />
 
-        {/* ═══ HERO CAROUSEL — Figma: 430×441px ═══ */}
+        {/* ═══ HERO IMAGE — Single Photo — FIGMA: 430×441px ═══ */}
         <section className="relative w-full" style={{ height: "441px", overflow: "hidden", zIndex: 1 }}>
-          <div className="absolute inset-0 flex">
-            <div className="w-1/2 h-full" style={{ backgroundColor: "#D9D9D9", overflow: "hidden" }}>
-              <img src={HERO_IMAGES[heroIndex].left} alt="" className="w-full h-full object-cover"
-                onError={(e) => { e.currentTarget.style.display = "none"; }} />
-            </div>
-            <div className="w-1/2 h-full" style={{ backgroundColor: "#D9D9D9", overflow: "hidden" }}>
-              <img src={HERO_IMAGES[heroIndex].right} alt="" className="w-full h-full object-cover"
-                onError={(e) => { e.currentTarget.style.display = "none"; }} />
-            </div>
+          <div className="absolute inset-0">
+            <img 
+              src="/assets/about-img.png" 
+              alt="Martillo Art Dept" 
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          {/* Center logo — Figma: 142×142px */}
-          <div className="absolute" style={{
-            left: "50%", top: "139px", transform: "translateX(-50%)",
-            width: "142px", height: "142px", backgroundColor: "#D9D9D9",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <img src="/assets/logo-martillo-black.png" alt="Martillo"
-              style={{ width: "100px", height: "88px", objectFit: "contain" }}
-              onError={(e) => { e.currentTarget.style.display = "none"; }} />
+          {/* Reemplazo del cuadro del logo por el texto unificado en blanco */}
+          <div className="relative z-10 flex flex-col items-center justify-center h-full" style={{ width: "100%", padding: "0 24px" }}>
+            <span className="about-hero-title" style={{ 
+              fontFamily: "'Martillo Completa', sans-serif", 
+              fontWeight: 400, 
+              fontSize: "64px", // Tamaño móvil ajustado
+              lineHeight: "60px", // Interlineado ajustado
+              color: "#FFFFFF", // Tipografía en blanco
+              textAlign: "center",
+              display: "block",
+              width: "100%",
+              textShadow: "0px 0px 10px rgba(0,0,0,0.5)" // Sombra para legibilidad
+            }}>
+              MARTILLO<br/>ART DEPT
+            </span>
           </div>
-
-          {/* Arrows — Figma: at top:209px */}
-          <button onClick={heroPrev} className="absolute" style={{
-            left: "12px", top: "209px", width: "36px", height: "36px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            backgroundColor: "rgba(255,255,255,0.7)", borderRadius: "50%", border: "none", cursor: "pointer", zIndex: 5,
-          }} aria-label="Previous"><ArrowLeft /></button>
-          <button onClick={heroNext} className="absolute" style={{
-            right: "12px", top: "209px", width: "36px", height: "36px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            backgroundColor: "rgba(255,255,255,0.7)", borderRadius: "50%", border: "none", cursor: "pointer", zIndex: 5,
-          }} aria-label="Next"><ArrowRight /></button>
         </section>
 
         {/* ═══ CONTENT ═══ */}
@@ -406,7 +372,7 @@ const [heroIndex, setHeroIndex] = useState(0);
       </div>
 
       {/* ════════════════════════════════════════════════════════════════
-          DESKTOP LAYOUT (≥ 768px) — Original, untouched
+          DESKTOP LAYOUT (≥ 768px) — Single Photo
           ════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:block">
         <div className="w-full page-bg" style={{
@@ -429,21 +395,19 @@ const [heroIndex, setHeroIndex] = useState(0);
               pointerEvents: "none",
             }}
           />
-          {/* HERO */}
+          {/* HERO — Single Photo */}
           <section className="relative w-full flex items-center justify-center" style={{ height: "700px", overflow: "hidden", zIndex: 1 }}>
-            <div className="absolute inset-0 flex">
-              <div className="w-1/2 h-full" style={{ backgroundColor: "#D9D9D9", overflow: "hidden" }}>
-                <img src="/assets/about/hero-left.jpg" alt="" className="w-full h-full object-cover"
-                  onError={(e) => { e.currentTarget.style.display = "none"; }} />
-              </div>
-              <div className="w-1/2 h-full" style={{ backgroundColor: "#D9D9D9", overflow: "hidden" }}>
-                <img src="/assets/about/hero-right.jpg" alt="" className="w-full h-full object-cover"
-                  onError={(e) => { e.currentTarget.style.display = "none"; }} />
-              </div>
+            <div className="absolute inset-0">
+              <img 
+                src="/assets/about-img.png" 
+                alt="Martillo Art Dept" 
+                className="w-full h-full object-cover"
+              />
             </div>
+            {/* Corrección de color a blanco y adición de sombra */}
             <div className="relative z-10 flex flex-col items-center" style={{ width: "484px" }}>
-              <span className="about-hero-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#001011", display: "block", width: "100%", textAlign: "center" }}>MARTILLO</span>
-              <span className="about-hero-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#001011", display: "block", width: "100%", textAlign: "center" }}>ART DEPT</span>
+              <span className="about-hero-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#FFFFFF", display: "block", width: "100%", textAlign: "center", textShadow: "0px 0px 10px rgba(0,0,0,0.5)" }}>MARTILLO</span>
+              <span className="about-hero-title" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "120px", lineHeight: "120px", color: "#FFFFFF", display: "block", width: "100%", textAlign: "center", textShadow: "0px 0px 10px rgba(0,0,0,0.5)" }}>ART DEPT</span>
             </div>
           </section>
 
