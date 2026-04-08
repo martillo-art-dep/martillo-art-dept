@@ -1,14 +1,10 @@
 /* ─── Services Page ─────────────────────────────────────────────────── */
-
 .services-page {
   width: 100%;
   min-height: 100vh;
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   SECCIÓN 1 — SLIDESHOW
-   ════════════════════════════════════════════════════════════════════ */
-
+/* ─── Slideshow Section ─────────────────────────────────────────────── */
 .services-slideshow {
   position: relative;
   width: 100%;
@@ -20,12 +16,6 @@
   overflow: hidden;
 }
 
-/*
- * Capa de fondo completamente separada del flujo del contenido.
- * Esto evita cualquier recalculo de background-size al cambiar el DOM.
- * Cuando haya fotos: añadir divs .slideshow-bg-img con opacity transition
- * apilados aquí, con z-index 0. El dark texture queda en ::before como fallback.
- */
 .slideshow-bg {
   position: absolute;
   inset: 0;
@@ -35,24 +25,7 @@
   background-size: cover;
   background-position: center top;
   background-attachment: scroll;
-  /* Overlay oscuro para cuando haya fotos de fondo */
-  /* Si se agregan fotos, añadir aquí: background-blend-mode + un ::after con rgba overlay */
 }
-
-/* Slide individual de foto (placeholder para cuando lleguen assets) */
-.slideshow-bg-img {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-}
-.slideshow-bg-img.active {
-  opacity: 1;
-}
-
-/* ─── Slides de texto ─────────────────────────────────────────────── */
 
 .slideshow-slide {
   position: absolute;
@@ -62,7 +35,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 80px 72px;
+  padding: 40px 10%;
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
   pointer-events: none;
@@ -77,22 +50,18 @@
   color: #ffffff;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
-  font-size: clamp(24px, 3.3vw, 48px);
-  line-height: 1.4;
+  font-size: clamp(20px, 3.2vw, 48px);
+  line-height: 1.2;
   text-align: center;
   margin: 0;
 }
 
 .slide-line strong {
   font-weight: 700;
-  font-size: inherit;
   letter-spacing: 0.02em;
-  display: inline;
-  margin: 0;
 }
 
-/* ─── Flechas de navegación ───────────────────────────────────────── */
-
+/* ─── Navegación Slideshow ─── */
 .slideshow-nav {
   position: absolute;
   top: 50%;
@@ -110,20 +79,9 @@
   cursor: pointer;
   transition: background 0.2s ease;
 }
-
-.slideshow-nav:hover {
-  background: rgba(255, 255, 255, 0.22);
-}
-
-.slideshow-nav--prev {
-  left: 24px;
-}
-
-.slideshow-nav--next {
-  right: 24px;
-}
-
-/* ─── Dots ────────────────────────────────────────────────────────── */
+.slideshow-nav:hover { background: rgba(255, 255, 255, 0.22); }
+.slideshow-nav--prev { left: 24px; }
+.slideshow-nav--next { right: 24px; }
 
 .slideshow-dots {
   position: absolute;
@@ -133,9 +91,7 @@
   z-index: 2;
   display: flex;
   gap: 12px;
-  align-items: center;
 }
-
 .slideshow-dot {
   width: 15px;
   height: 15px;
@@ -143,29 +99,12 @@
   background: #999999;
   border: none;
   cursor: pointer;
-  padding: 0;
-  transition: background-color 0.3s ease;
 }
+.slideshow-dot.dot-active { background: #ffffff; }
 
-.slideshow-dot.dot-active {
-  background: #ffffff;
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   SECCIÓN 2 — ACCORDION
-   IMPORTANTE: el fondo usa background-attachment: scroll con un elemento
-   separado (.slideshow-bg pattern). Aquí usamos background-size: cover
-   en el section mismo, con position fija en px para evitar zoom glitch.
-   ════════════════════════════════════════════════════════════════════ */
-
+/* ─── Accordion Section ────────────────────────────────────────────── */
 .services-accordion-section {
   width: 100%;
-  /*
-   * FIX ZOOM: NO usar background-attachment: fixed (causa black en iOS).
-   * NO usar background-size con porcentajes dinámicos.
-   * Usar solo cover + scroll. El background no se recalcula al expandir
-   * el accordion porque el elemento de fondo es estático.
-   */
   background-color: #1b1b1b;
   background-image: url(/assets/bg-gradient-dark.jpeg);
   background-size: cover;
@@ -178,40 +117,19 @@
   max-width: 1440px;
   margin: 0 auto;
   display: grid;
-  /*
-   * Figma: col izq = 620px (x del accordion), col der = 822px
-   * 620/1442 = 43%, 822/1442 = 57%
-   * Usamos proporciones fijas en px para que el heading no desborde
-   */
   grid-template-columns: 620px 1fr;
-  gap: 0;
   align-items: start;
 }
-
-/* ─── Heading ────────────────────────────────────────────────────── */
 
 .services-accordion-heading {
   position: sticky;
   top: 100px;
-  /*
-   * Figma: heading y=867, accordion y=867 — arrancan iguales.
-   * padding-top = 867 - 748 (slideshow) = 119px. Pero el slideshow
-   * en el browser puede ser diferente, así que usamos un valor visual
-   * que alinee el heading con la primera línea del accordion.
-   */
-  padding-top: 80px;
-  padding-left: 68px;   /* Figma: x=68 */
-  padding-right: 20px;  /* margen hacia el accordion */
+  padding: 80px 20px 0 68px;
 }
 
 .services-heading-text {
   font-family: 'Martillo Completa', sans-serif;
   font-weight: 400;
-  /*
-   * Figma: 114px en columna de 515px de texto disponible.
-   * Columna izq = 620px, padding: 68px + 20px = 88px → 532px disponibles.
-   * 114px cabe holgado. Lo limitamos a 114px máximo.
-   */
   font-size: 114px;
   color: #fbfef9;
   text-transform: uppercase;
@@ -220,49 +138,34 @@
   margin: 0;
 }
 
-/* ─── Accordion list ─────────────────────────────────────────────── */
-
 .services-accordion-list {
-  padding-top: 80px;
-  padding-right: 40px;
+  padding: 80px 40px 0 0;
 }
-
-/* ─── Accordion item ─────────────────────────────────────────────── */
 
 .accordion-item {
   border-top: 1.5px solid rgba(251, 254, 249, 0.3);
 }
-
 .accordion-item:last-child {
   border-bottom: 1.5px solid rgba(251, 254, 249, 0.3);
 }
 
-/* ─── Trigger (botón del accordion) ─────────────────────────────── */
-
+/* ─── INTERACCIÓN HOVER RESTAURADA ─── */
 .accordion-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   min-height: 108px;
-  /*
-   * FIGMA: En Default, el inner div NO tiene padding-left.
-   * En Variant2 (hover), el inner div tiene padding-left: 20px.
-   * Simulamos esto transicionando el padding-left del trigger mismo.
-   * El ícono queda a la derecha y no se mueve.
-   */
-  padding: 20px 10px 20px 10px;
+  padding: 20px 10px;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
-  gap: 20px;
-  transition: padding-left 0.25s ease;
+  transition: padding-left 0.25s ease; /* Desplazamiento */
 }
 
-.accordion-trigger:hover {
-  /* Desplaza el texto 20px hacia la derecha — igual al Figma Variant2 */
-  padding-left: 30px;
+.accordion-trigger:hover { 
+  padding-left: 30px; /* Desplazamiento al hacer hover */
 }
 
 .accordion-title {
@@ -271,53 +174,30 @@
   font-size: clamp(20px, 2.5vw, 36px);
   color: #fbfef9;
   line-height: 1.2;
-  letter-spacing: 0.01em;
-  transition: color 0.25s ease;
-  /* flex-col para que las dos líneas se apilen sin depender del ancho */
   display: flex;
   flex-direction: column;
-}
-
-/* Cada línea del título cuando el Figma lo parte en dos */
-.accordion-title-line {
-  display: block;
+  transition: color 0.25s ease;
 }
 
 .accordion-icon {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
   font-size: clamp(24px, 2.5vw, 36px);
   color: #fbfef9;
-  line-height: 1;
-  flex-shrink: 0;
   width: 28px;
   text-align: center;
-  user-select: none;
   transition: color 0.25s ease;
 }
 
-/* Hover: naranja en título E ícono (Figma Variant2) */
+/* Cambio a naranja en Hover y cuando está abierto */
 .accordion-trigger:hover .accordion-title,
-.accordion-trigger:hover .accordion-icon {
-  color: #fb5000;
-}
-
-/* Item abierto: naranja permanente en título E ícono */
+.accordion-trigger:hover .accordion-icon,
 .accordion-item--open .accordion-trigger .accordion-title,
 .accordion-item--open .accordion-trigger .accordion-icon {
   color: #fb5000;
 }
 
-/* ─── Accordion body ─────────────────────────────────────────────── */
-
-/*
- * FIX ZOOM: overflow:hidden + transition en maxHeight (via inline style desde JS).
- * NO usar CSS max-height transition aquí — el inline style maneja los valores
- * exactos medidos con scrollHeight, evitando saltos de fondo.
- */
 .accordion-body {
   overflow: hidden;
-  max-height: 0;       /* valor inicial — JS lo sobreescribe con inline style */
+  max-height: 0;
   transition: max-height 0.4s ease;
   padding: 0 10px;
 }
@@ -335,102 +215,9 @@
   margin: 0;
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════════════════════════════════ */
-
+/* ─── Responsive ─── */
 @media (max-width: 1023px) {
-  .services-accordion-inner {
-    /* Colapsa a columna única cuando no hay espacio para 620px fijos */
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .services-accordion-heading {
-    position: static;
-    padding-top: 60px;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  .services-heading-text {
-    /* Escala libre en tablet — ya no hay riesgo de colisión con el accordion */
-    font-size: clamp(72px, 11vw, 100px);
-  }
-
-  .services-accordion-list {
-    padding-top: 16px;
-    padding-right: 40px;
-  }
-
-  .accordion-trigger {
-    min-height: 88px;
-    padding: 16px 10px;
-  }
-
-  .accordion-trigger:hover {
-    padding-left: 24px;
-  }
-}
-
-@media (max-width: 767px) {
-  .services-slideshow {
-    min-height: 360px;
-  }
-
-  .slideshow-slide {
-    padding: 60px 64px 60px;
-  }
-
-  .slide-line {
-    font-size: clamp(18px, 5vw, 28px);
-  }
-
-  .slideshow-nav--prev {
-    left: 12px;
-  }
-
-  .slideshow-nav--next {
-    right: 12px;
-  }
-
-  .services-accordion-inner {
-    padding-right: 0;
-  }
-
-  .services-accordion-heading {
-    padding-top: 40px;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .services-accordion-list {
-    padding-right: 24px;
-  }
-
-  .services-heading-text {
-    font-size: clamp(60px, 18vw, 86px);
-  }
-
-  .accordion-title {
-    font-size: clamp(16px, 4.5vw, 22px);
-  }
-
-  .accordion-description {
-    font-size: clamp(14px, 3.8vw, 18px);
-  }
-
-  .accordion-trigger {
-    min-height: 80px;
-    padding: 14px 10px;
-  }
-
-  .services-accordion-section {
-    padding-bottom: 80px;
-  }
-
-  /* En mobile reducimos el indent del hover para no cortar contenido */
-  .accordion-trigger:hover {
-    padding-left: 22px;
-  }
+  .services-accordion-inner { grid-template-columns: 1fr; }
+  .services-accordion-heading { position: static; padding: 60px 40px 0; }
+  .services-accordion-list { padding: 16px 40px 0; }
 }
