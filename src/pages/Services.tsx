@@ -219,7 +219,7 @@ export default function Services() {
   const { i18n } = useTranslation();
   const isEn = i18n.language.startsWith("en");
   const [activeSlide, setActiveSlide] = useState(0);
-  const [openId, setOpenId] = useState<string | null>("production-design");
+  const [openId, setOpenId] = useState<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const total = SLIDES.length;
 
