@@ -1,19 +1,15 @@
 import { useState } from "react";
 
 // ─── ASSETS ─────────────────────────────────────────────────────────────────
-// Todos los logos viven en /public/assets/logos/
-// IIMCINE: [PENDIENTE — CLIENTE] agregar iimcine.png cuando lo entreguen
-// ────────────────────────────────────────────────────────────────────────────
-
-// scale: multiplicador sobre el max-h base (1 = normal, 1.8 = 80% más grande)
 const LOGOS = [
   { src: "/assets/logos/netflix.svg",                        alt: "Netflix",            rounded: false, scale: 1   },
   { src: "/assets/logos/prime-video-amazon-mgm-studios.svg", alt: "Amazon MGM Studios", rounded: false, scale: 1   },
+  { src: "/assets/logos/hbo-max.svg",                        alt: "HBO Max",            rounded: false, scale: 1   }, // <--- NUEVO LOGO
   { src: "/assets/logos/focus-features.svg",                 alt: "Focus Features",     rounded: true,  scale: 1   },
   { src: "/assets/logos/warner-bros.svg",                    alt: "Warner Bros.",       rounded: false, scale: 1   },
   { src: "/assets/logos/21st-century-fox.svg",               alt: "21st Century Fox",   rounded: false, scale: 1.8 },
   { src: "/assets/logos/europacorp.svg",                     alt: "Europa Corp",        rounded: false, scale: 1   },
-  { src: "/assets/logos/iimcine.png",                     alt: "IMCINE",             rounded: false, scale: 1   },
+  { src: "/assets/logos/iimcine.png",                        alt: "IMCINE",             rounded: false, scale: 1   },
 ] as const;
 
 function LogoImg({ src, alt, rounded }: { src: string; alt: string; rounded?: boolean }) {
@@ -66,7 +62,14 @@ export default function LogoMarquee() {
         className="w-full overflow-hidden h-[80px] md:h-[100px] lg:h-[130px]"
         style={{
           backgroundColor: "#FBFEF9",
-          boxShadow: "0px -34px 24.3px rgba(0, 0, 0, 0.1)",
+          /* Explicación del boxShadow:
+             - inset: lo hace sombra interna.
+             - 0px: desplazamiento horizontal nulo.
+             - 15px: la sombra cae hacia abajo desde el borde superior.
+             - 20px: difuminado (blur).
+             - -10px: el 'spread' negativo ayuda a que la sombra se sienta más sutil y no manche los lados.
+          */
+          boxShadow: "inset 0px 32px 20px -10px rgba(0, 0, 0, 0.3)",
         }}
       >
         <div className="flex h-full items-center overflow-hidden">
