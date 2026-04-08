@@ -16,7 +16,10 @@ function LogoImg({ src, alt, rounded }: { src: string; alt: string; rounded?: bo
 
   if (hasError) {
     return (
-      <div className="flex items-center justify-center border border-neutral-300 bg-white px-2 py-1 text-[9px] md:text-[11px] font-sans font-medium text-neutral-500" style={{ borderRadius: rounded ? 8 : 4 }}>
+      <div
+        className="flex items-center justify-center border border-neutral-300 bg-white px-2 py-1 text-[9px] md:text-[11px] font-sans font-medium text-neutral-500"
+        style={{ borderRadius: rounded ? 8 : 4 }}
+      >
         {alt}
       </div>
     );
@@ -27,6 +30,7 @@ function LogoImg({ src, alt, rounded }: { src: string; alt: string; rounded?: bo
       src={src}
       alt={alt}
       loading="eager"
+      decoding="async"
       className="w-auto object-contain max-w-full"
       style={{ borderRadius: rounded ? 8 : undefined }}
       onError={() => setHasError(true)}
@@ -42,11 +46,19 @@ export default function LogoMarquee() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+
         .logo-marquee-track {
           display: flex;
           width: max-content;
+          /* 1. Velocidad ajustada a 60s */
           animation: scroll 60s linear infinite;
         }
+
+        /* 2. Pausa al hacer hover */
+        .logo-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
         .logo-item img {
           max-height: var(--logo-h-mobile);
         }
@@ -66,7 +78,7 @@ export default function LogoMarquee() {
         className="w-full overflow-hidden h-[80px] md:h-[100px] lg:h-[130px]"
         style={{
           backgroundColor: "#FBFEF9",
-          boxShadow: "inset 0px 33px 30px -10px rgba(0, 0, 0, 0.3)", // Sombra más suave
+          boxShadow: "inset 0px 33px 30px -10px rgba(0, 0, 0, 0.3)",
         }}
       >
         <div className="flex h-full items-center overflow-hidden">
@@ -74,7 +86,6 @@ export default function LogoMarquee() {
             {[...LOGOS, ...LOGOS].map((logo, i) => (
               <div
                 key={`${logo.alt}-${i}`}
-                // Restauramos las alturas originales aquí:
                 className="logo-item flex shrink-0 items-center justify-center w-[72px] md:w-[120px] lg:w-[160px] h-[60px] md:h-[72px] lg:h-[84px]"
                 style={{
                   "--logo-h-mobile":  `${Math.round(24 * logo.scale)}px`,
