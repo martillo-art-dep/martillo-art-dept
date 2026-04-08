@@ -69,7 +69,7 @@ export default function LogoMarquee() {
              - 20px: difuminado (blur).
              - -10px: el 'spread' negativo ayuda a que la sombra se sienta más sutil y no manche los lados.
           */
-          boxShadow: "inset 0px 32px 20px -10px rgba(0, 0, 0, 0.3)",
+          boxShadow: "inset 0px 32px 30px -10px rgba(0, 0, 0, 0.5)",
         }}
       >
         <div className="flex h-full items-center overflow-hidden">
