@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-// ─── ASSETS ─────────────────────────────────────────────────────────────────
 const LOGOS = [
   { src: "/assets/logos/netflix.svg",                        alt: "Netflix",            rounded: false, scale: 1   },
   { src: "/assets/logos/prime-video-amazon-mgm-studios.svg", alt: "Amazon MGM Studios", rounded: false, scale: 1   },
-  { src: "/assets/logos/hbo-max.svg",                        alt: "HBO Max",            rounded: false, scale: 1   }, // <--- NUEVO LOGO
+  { src: "/assets/logos/hbo-max.svg",                        alt: "HBO Max",            rounded: false, scale: 1   },
   { src: "/assets/logos/focus-features.svg",                 alt: "Focus Features",     rounded: true,  scale: 1   },
   { src: "/assets/logos/warner-bros.svg",                    alt: "Warner Bros.",       rounded: false, scale: 1   },
   { src: "/assets/logos/21st-century-fox.svg",               alt: "21st Century Fox",   rounded: false, scale: 1.8 },
@@ -43,6 +42,21 @@ export default function LogoMarquee() {
   return (
     <>
       <style>{`
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .logo-marquee-track {
+          display: flex;
+          width: max-content;
+          animation: scroll 60s linear infinite;
+        }
+
+        .logo-marquee-track:hover {
+          animation-play-state: paused;
+        }
+
         .logo-item img {
           max-height: var(--logo-h-mobile);
         }
@@ -62,18 +76,11 @@ export default function LogoMarquee() {
         className="w-full overflow-hidden h-[80px] md:h-[100px] lg:h-[130px]"
         style={{
           backgroundColor: "#FBFEF9",
-          /* Explicación del boxShadow:
-             - inset: lo hace sombra interna.
-             - 0px: desplazamiento horizontal nulo.
-             - 15px: la sombra cae hacia abajo desde el borde superior.
-             - 20px: difuminado (blur).
-             - -10px: el 'spread' negativo ayuda a que la sombra se sienta más sutil y no manche los lados.
-          */
-          boxShadow: "inset 0px 32px 30px -10px rgba(0, 0, 0, 0.5)",
+          boxShadow: "inset 0px 33px 30px -10px rgba(0, 0, 0, 0.3)",
         }}
       >
         <div className="flex h-full items-center overflow-hidden">
-          <div className="logo-marquee-track flex shrink-0 items-center gap-[24px] px-[12px] md:gap-[48px] md:px-[24px] lg:gap-[80px] lg:px-[40px]">
+          <div className="logo-marquee-track items-center gap-[24px] px-[12px] md:gap-[48px] md:px-[24px] lg:gap-[80px] lg:px-[40px]">
             {[...LOGOS, ...LOGOS].map((logo, i) => (
               <div
                 key={`${logo.alt}-${i}`}
