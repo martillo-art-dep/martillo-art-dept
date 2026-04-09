@@ -240,7 +240,14 @@ export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { i18n } = useTranslation();
-  const currentLang = i18n.language;
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  useEffect(() => {
+    const onChange = (l: string) => setCurrentLang(l);
+    i18n.on("languageChanged", onChange);
+    return () => {
+      i18n.off("languageChanged", onChange);
+    };
+  }, [i18n]);
   const project = id ? getProjectById(id) : undefined;
 
   const [activeImgIdx, setActiveImgIdx] = useState<Record<number, number>>({});
