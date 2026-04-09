@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./Services.css";
 
-// ─── Types ────────────────────────────────────────────────────────────
 interface ServiceItem {
   id: string;
   titleEs: string;
@@ -23,37 +22,42 @@ interface SlideContent {
 interface Slide {
   es: SlideContent;
   en: SlideContent;
+  image: string;
 }
 
-// ─── Slideshow Data (Textos Figma) ────────────────────────────────────
 const SLIDES: Slide[] = [
   {
+    image: "/assets/servicios-01.jpg",
     es: { line1: "Somos una firma de", highlight: "DISEÑO DE PRODUCCIÓN", line2: "basada en", highlightEnd: "MÉXICO." },
     en: { line1: "We are a", highlight: "PRODUCTION DESIGN", line2: "firm based in", highlightEnd: "MEXICO." },
   },
   {
+    image: "/assets/servicios-02.jpg",
     es: { line1: "Un equipo multidisciplinario de", highlight: "ARTISTAS Y TÉCNICOS ESPECIALIZADOS", line2: "en la creación de universos visuales para la", highlightEnd: "INDUSTRIA DEL ENTRETENIMIENTO." },
     en: { line1: "A multidisciplinary team of", highlight: "SPECIALIZED ARTISTS AND TECHNICIANS", line2: "creating visual universes for the", highlightEnd: "ENTERTAINMENT INDUSTRY." },
   },
   {
+    image: "/assets/servicios-03.jpeg",
     es: { line1: "Operamos en dos registros simultáneos: como proveedores estratégicos del", highlight: "DEPARTAMENTO DE ARTE,", line2: "y como", highlightEnd: "CASA PRODUCTORA INDEPENDIENTE." },
     en: { line1: "We operate in two simultaneous roles: as strategic providers for the", highlight: "ART DEPARTMENT,", line2: "and as an", highlightEnd: "INDEPENDENT PRODUCTION HOUSE." },
   },
   {
+    image: "/assets/servicios-04.jpg",
     es: { line1: "No solo ejecutamos la visión —", highlight: "LA RESPALDAMOS ESTRUCTURALMENTE.", line2: "", highlightEnd: "" },
     en: { line1: "We don't just execute the vision —", highlight: "WE BACK IT UP STRUCTURALLY.", line2: "", highlightEnd: "" },
   },
   {
+    image: "/assets/servicios-05.jpg",
     es: { line1: "Cada", highlight: "PESO INVERTIDO", line2: "en el arte es visible en pantalla, auditable en libros y", highlightEnd: "DEDUCIBLE EN TU DECLARACIÓN." },
     en: { line1: "Every", highlight: "INVESTED PENNY", line2: "in art is visible on screen, auditable in books, and", highlightEnd: "TAX DEDUCTIBLE." },
   },
   {
+    image: "/assets/servicios-06.jpg",
     es: { line1: "En", highlight: "MARTILLO ART DEPT.,", line2: "la libertad creativa y el rigor administrativo no se contradicen:", highlightEnd: "SE FORJAN JUNTOS." },
     en: { line1: "At", highlight: "MARTILLO ART DEPT.,", line2: "creative freedom and administrative rigor do not contradict: ", highlightEnd: "THEY ARE FORGED TOGETHER." },
   },
 ];
 
-// ─── Services Data (Textos Word) ──────────────────────────────────────
 const SERVICES: ServiceItem[] = [
   {
     id: "production-design",
@@ -164,7 +168,7 @@ export default function Services() {
   const { i18n } = useTranslation();
   const isEn = i18n.language.startsWith("en");
   const [activeSlide, setActiveSlide] = useState(0);
-  const [openId, setOpenId] = useState<string | null>(null); // TODO CERRADO AL INICIO
+  const [openId, setOpenId] = useState<string | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const total = SLIDES.length;
 
@@ -192,7 +196,11 @@ export default function Services() {
         {SLIDES.map((slide, i) => {
           const content = isEn ? slide.en : slide.es;
           return (
-            <div key={i} className={`slideshow-slide${i === activeSlide ? " active" : ""}`}>
+            <div 
+              key={i} 
+              className={`slideshow-slide${i === activeSlide ? " active" : ""}`}
+              style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(${slide.image})` }}
+            >
               <p className="slide-line">{content.line1}</p>
               <p className="slide-line"><strong>{content.highlight}</strong></p>
               <p className="slide-line">{content.line2} <strong>{content.highlightEnd}</strong></p>

@@ -1,10 +1,8 @@
-/* ─── Services Page ─────────────────────────────────────────────────── */
 .services-page {
   width: 100%;
   min-height: 100vh;
 }
 
-/* ─── Slideshow Section ─────────────────────────────────────────────── */
 .services-slideshow {
   position: relative;
   width: 100%;
@@ -21,10 +19,6 @@
   inset: 0;
   z-index: 0;
   background-color: #1b1b1b;
-  background-image: url(/assets/bg-gradient-dark.jpeg);
-  background-size: cover;
-  background-position: center top;
-  background-attachment: scroll;
 }
 
 .slideshow-slide {
@@ -39,6 +33,9 @@
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
   pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .slideshow-slide.active {
@@ -54,6 +51,7 @@
   line-height: 1.2;
   text-align: center;
   margin: 0;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .slide-line strong {
@@ -61,7 +59,6 @@
   letter-spacing: 0.02em;
 }
 
-/* ─── Navegación Slideshow ─── */
 .slideshow-nav {
   position: absolute;
   top: 50%;
@@ -102,7 +99,6 @@
 }
 .slideshow-dot.dot-active { background: #ffffff; }
 
-/* ─── Accordion Section ────────────────────────────────────────────── */
 .services-accordion-section {
   width: 100%;
   background-color: #1b1b1b;
@@ -149,7 +145,6 @@
   border-bottom: 1.5px solid rgba(251, 254, 249, 0.3);
 }
 
-/* ─── INTERACCIÓN HOVER RESTAURADA ─── */
 .accordion-trigger {
   display: flex;
   align-items: center;
@@ -161,11 +156,11 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  transition: padding-left 0.25s ease; /* Desplazamiento */
+  transition: padding-left 0.25s ease;
 }
 
 .accordion-trigger:hover { 
-  padding-left: 30px; /* Desplazamiento al hacer hover */
+  padding-left: 30px;
 }
 
 .accordion-title {
@@ -187,7 +182,6 @@
   transition: color 0.25s ease;
 }
 
-/* Cambio a naranja en Hover y cuando está abierto */
 .accordion-trigger:hover .accordion-title,
 .accordion-trigger:hover .accordion-icon,
 .accordion-item--open .accordion-trigger .accordion-title,
@@ -215,7 +209,6 @@
   margin: 0;
 }
 
-/* ─── Responsive ─── */
 @media (max-width: 1023px) {
   .services-accordion-inner { grid-template-columns: 1fr; }
   .services-accordion-heading { position: static; padding: 60px 40px 0; }
