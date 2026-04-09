@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
 import { getProjectCards, type ProjectCard } from "../data/projects";
@@ -360,7 +360,14 @@ function MobileListCard({ project, onClick }: { project: ProjectCard; onClick: (
 // ═════════════════════════════════════════════════════════════════════
 export default function Portfolio() {
   const { i18n } = useTranslation();
-  const currentLang = i18n.language;
+  const [currentLang, setCurrentLang] = useState(i18n.language);
+  useEffect(() => {
+    const onChange = (l: string) => setCurrentLang(l);
+    i18n.on("languageChanged", onChange);
+    return () => {
+      i18n.off("languageChanged", onChange);
+    };
+  }, [i18n]);
   const navigate = useNavigate();
 
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
