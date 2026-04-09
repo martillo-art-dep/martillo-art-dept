@@ -149,8 +149,10 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
       className="cursor-pointer grid-card"
       style={{
         display: "grid",
-        gridTemplateRows: "auto 1fr auto",
-        gap: "18px",
+        gridTemplateRows: "subgrid",
+        gridRow: "span 3",
+        gap: "0px",
+        paddingBottom: "48px",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -158,8 +160,8 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
     >
       {/* Title + Year — ABOVE image per Figma */}
       <header
-        className="flex items-start justify-between"
-        style={{ minHeight: "3.2em" }}
+        className="flex items-end justify-between"
+        style={{ alignSelf: "end" }}
       >
         <h3
           style={{
@@ -193,7 +195,7 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
       </header>
 
       {/* Image — Figma: 429×286, inset box-shadow */}
-      <div className="grid-card-image w-full" style={{ aspectRatio: "429 / 286" }}>
+      <div className="grid-card-image w-full" style={{ aspectRatio: "429 / 286", marginTop: "12px" }}>
         <img
           className="block w-full h-full object-cover"
           alt={`${project.title} preview`}
@@ -218,7 +220,7 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
           WebkitLineClamp: 4,
           WebkitBoxOrient: "vertical" as const,
           overflow: "hidden",
-          minHeight: "calc(1.5em * 4)",
+          marginTop: "12px",
         }}
       >
         {lang.startsWith("en") && project.descriptionEn ? project.descriptionEn : project.description}
@@ -665,7 +667,7 @@ export default function Portfolio() {
 
             {/* Grid View — 3 columns */}
             {viewMode === "grid" && (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: "27px", rowGap: "60px", alignItems: "start" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridAutoRows: "auto", columnGap: "27px", rowGap: "0px" }}>
                 {filteredProjects.map((project) => (
                   <GridCard key={project.id} project={project} lang={currentLang} onClick={() => handleProjectClick(project.id)} />
                 ))}
