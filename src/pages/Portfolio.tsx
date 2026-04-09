@@ -146,22 +146,30 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
   const [hovered, setHovered] = useState(false);
   return (
     <article
-      className="flex flex-col cursor-pointer grid-card"
-      style={{ gap: "18px" }}
+      className="cursor-pointer grid-card"
+      style={{
+        display: "grid",
+        gridTemplateRows: "auto 1fr auto",
+        gap: "18px",
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={onClick}
     >
       {/* Title + Year — ABOVE image per Figma */}
-      <header className="flex items-center justify-between">
+      <header
+        className="flex items-start justify-between"
+        style={{ minHeight: "3.2em" }}
+      >
         <h3
           style={{
             fontFamily: "'Helvetica', 'Arial', sans-serif",
             fontWeight: hovered ? 700 : 400,
             fontSize: "clamp(18px, 1.8vw, 25px)",
-            lineHeight: "normal",
+            lineHeight: "1.3",
             color: "#f8f1cd",
             transition: "font-weight 0.2s ease",
+            paddingRight: "12px",
           }}
         >
           {project.title}
@@ -171,12 +179,13 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
             fontFamily: "'Helvetica', 'Arial', sans-serif",
             fontWeight: hovered ? 700 : 400,
             fontSize: "clamp(18px, 1.8vw, 25px)",
-            lineHeight: "normal",
+            lineHeight: "1.3",
             color: hovered ? "#010100" : "#f8f1cd",
             backgroundColor: hovered ? "#f8f1cd" : "transparent",
             padding: hovered ? "2px 12px" : "2px 0",
             borderRadius: "3px",
             transition: "all 0.2s ease",
+            flexShrink: 0,
           }}
         >
           {project.year}
@@ -196,15 +205,20 @@ function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: stri
         />
       </div>
 
-      {/* Description */}
+      {/* Description — clamped to 4 lines for uniform row height */}
       <p
         style={{
           fontFamily: "'Helvetica', 'Arial', sans-serif",
           fontWeight: 400,
           fontSize: "clamp(14px, 1.3vw, 18px)",
-          lineHeight: "normal",
+          lineHeight: "1.5",
           color: "#f8f1cd",
           textAlign: "justify",
+          display: "-webkit-box",
+          WebkitLineClamp: 4,
+          WebkitBoxOrient: "vertical" as const,
+          overflow: "hidden",
+          minHeight: "calc(1.5em * 4)",
         }}
       >
         {lang.startsWith("en") && project.descriptionEn ? project.descriptionEn : project.description}
@@ -651,7 +665,7 @@ export default function Portfolio() {
 
             {/* Grid View — 3 columns */}
             {viewMode === "grid" && (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: "27px", rowGap: "60px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: "27px", rowGap: "60px", alignItems: "start" }}>
                 {filteredProjects.map((project) => (
                   <GridCard key={project.id} project={project} lang={currentLang} onClick={() => handleProjectClick(project.id)} />
                 ))}
