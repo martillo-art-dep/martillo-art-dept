@@ -126,7 +126,7 @@
 .services-heading-text {
   font-family: 'Martillo Completa', sans-serif;
   font-weight: 400;
-  font-size: 114px;
+  font-size: clamp(48px, 10vw, 114px);
   color: #fbfef9;
   text-transform: uppercase;
   line-height: 1.0;
@@ -210,7 +210,17 @@
 }
 
 @media (max-width: 1023px) {
-  .services-accordion-inner { grid-template-columns: 1fr; }
-  .services-accordion-heading { position: static; padding: 60px 40px 0; }
-  .services-accordion-list { padding: 16px 40px 0; }
+  .services-accordion-inner { 
+    grid-template-columns: 1fr;
+  }
+  .services-accordion-heading { 
+    position: static; 
+    padding: 60px 20px 0;
+  }
+  .services-accordion-list { 
+    padding: 16px 20px 0;
+  }
+  .accordion-trigger:hover {
+    padding-left: 10px;
+  }
 }

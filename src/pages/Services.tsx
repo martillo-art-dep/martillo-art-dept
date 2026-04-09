@@ -84,7 +84,7 @@ const SERVICES: ServiceItem[] = [
   },
   {
     id: "set-dressing",
-    titleEs: "DECORACIÓN Y SET DRESSING",
+    titleEs: "DECORACIÓN y SET DRESSING",
     titleEn: "DECORATION AND SET DRESSING",
     descriptionEs: "Selección, colocación y ajuste fino de cada objeto en cuadro — por profesionales con criterio y trayectoria en cine, series y comerciales.",
     descriptionEn: "Selection, placement and fine-tuning of each object in the frame — by professionals with criteria and experience in film, series and commercials.",
