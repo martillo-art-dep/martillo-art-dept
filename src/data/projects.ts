@@ -351,7 +351,7 @@ export const projects: ProjectFull[] = [
       { role: "Producción", name: "Focus Features (EUA)" },
     ],
     posterImage: "/assets/projects/sin-nombre/poster.webp",
-    trailerUrl: "https://www.youtube.com/watch?v=Fvbqwx3e_bQ",
+    trailerUrl: "https://player.vimeo.com/video/1172030957",
     logos: [{ src: "/assets/logos/focus-features.png", alt: "Focus Features" }],
     nominations: [
       { title: "Sundance Film Festival 2009", area: "Directing Award: U.S. Dramatic — Cary Joji Fukunaga" },
@@ -564,7 +564,7 @@ export const projects: ProjectFull[] = [
       { role: "Producción", name: "Cine Feral (México)" },
     ],
     posterImage: "/assets/projects/feral/poster.webp",
-    trailerUrl: "https://www.youtube.com/watch?v=fVI4GjFkEq8",
+    trailerUrl: "https://player.vimeo.com/video/1172030986",
     logos: [],
     nominations: [],
     synopsis: "En las profundidades de la sierra oaxaqueña yacen los restos quemados de un refugio que alguna vez albergó un experimento místico y perturbador. En 1986, Juan Felipe de Jesús, un sacerdote y psicoanalista, documentó en decenas de cintas de video su intento por reintegrar a la sociedad a tres niños salvajes encontrados en una cueva. A través de este material de archivo y entrevistas actuales, la película desentraña la verdad sobre un proceso de rehabilitación que se tornó sangriento, cuestionando la delgada línea entre la fe, la civilización y la naturaleza animal del ser humano.",
