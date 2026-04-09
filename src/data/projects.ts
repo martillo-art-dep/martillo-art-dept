@@ -2941,8 +2941,8 @@ export const projects: ProjectFull[] = [
 export function getProjectCards(): ProjectCard[] {
   return projects
     .filter(p => !p.hidden)
-    .map(({ id, title, year, category, image, heroImage, description, posterImage }) => ({
-      id, title, year, category, image, heroImage, description, posterImage,
+    .map(({ id, title, year, category, image, heroImage, description, descriptionEn, posterImage }) => ({
+      id, title, year, category, image, heroImage, description, descriptionEn, posterImage,
     }));
 }
 
