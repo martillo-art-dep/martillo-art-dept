@@ -142,7 +142,7 @@ function ViewToggleButtons({
 //   NOMBRE PROYECTO  AÑO     ← title row on top
 //   [image 429×286]           ← image with inset shadow
 //   description text          ← below image
-function GridCard({ project, onClick }: { project: ProjectCard; onClick: () => void }) {
+function GridCard({ project, lang, onClick }: { project: ProjectCard; lang: string; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
   return (
     <article
@@ -207,7 +207,7 @@ function GridCard({ project, onClick }: { project: ProjectCard; onClick: () => v
           textAlign: "justify",
         }}
       >
-        {project.description}
+        {lang.startsWith("en") && project.descriptionEn ? project.descriptionEn : project.description}
       </p>
     </article>
   );
@@ -220,7 +220,7 @@ function GridCard({ project, onClick }: { project: ProjectCard; onClick: () => v
 //   Image (Rectangle 173): 279×157 rotated -90° → visually 157×279 portrait poster
 //   Text column: flex-col, justify-end, align-end, gap: 20px
 //   Poster uses posterImage (movie poster)
-function ListCard({ project, onClick }: { project: ProjectCard; onClick: () => void }) {
+function ListCard({ project, lang, onClick }: { project: ProjectCard; lang: string; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
   return (
     <article
@@ -310,7 +310,7 @@ function ListCard({ project, onClick }: { project: ProjectCard; onClick: () => v
             width: "100%",
           }}
         >
-          {project.description}
+          {lang.startsWith("en") && project.descriptionEn ? project.descriptionEn : project.description}
         </p>
       </div>
     </article>
@@ -318,7 +318,7 @@ function ListCard({ project, onClick }: { project: ProjectCard; onClick: () => v
 }
 
 // ─── Mobile List Card ────────────────────────────────────────────────
-function MobileListCard({ project, onClick }: { project: ProjectCard; onClick: () => void }) {
+function MobileListCard({ project, lang, onClick }: { project: ProjectCard; lang: string; onClick: () => void }) {
   return (
     <article
       className="cursor-pointer grid gap-4"
@@ -348,7 +348,7 @@ function MobileListCard({ project, onClick }: { project: ProjectCard; onClick: (
           className="line-clamp-3"
           style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "13px", lineHeight: "1.5", color: "#f8f1cd", textAlign: "justify" }}
         >
-          {project.description}
+          {lang.startsWith("en") && project.descriptionEn ? project.descriptionEn : project.description}
         </p>
       </div>
     </article>
@@ -600,7 +600,7 @@ export default function Portfolio() {
             {viewMode === "grid" && (
               <div className="flex flex-col" style={{ gap: "32px" }}>
                 {filteredProjects.map((project) => (
-                  <GridCard key={project.id} project={project} onClick={() => handleProjectClick(project.id)} />
+                  <GridCard key={project.id} project={project} lang={currentLang} onClick={() => handleProjectClick(project.id)} />
                 ))}
               </div>
             )}
@@ -608,7 +608,7 @@ export default function Portfolio() {
             {viewMode === "list" && (
               <div className="flex flex-col" style={{ gap: "24px" }}>
                 {filteredProjects.map((project) => (
-                  <MobileListCard key={project.id} project={project} onClick={() => handleProjectClick(project.id)} />
+                  <MobileListCard key={project.id} project={project} lang={currentLang} onClick={() => handleProjectClick(project.id)} />
                 ))}
               </div>
             )}
@@ -653,7 +653,7 @@ export default function Portfolio() {
             {viewMode === "grid" && (
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: "27px", rowGap: "60px" }}>
                 {filteredProjects.map((project) => (
-                  <GridCard key={project.id} project={project} onClick={() => handleProjectClick(project.id)} />
+                  <GridCard key={project.id} project={project} lang={currentLang} onClick={() => handleProjectClick(project.id)} />
                 ))}
               </div>
             )}
@@ -662,7 +662,7 @@ export default function Portfolio() {
             {viewMode === "list" && (
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", columnGap: "27px", rowGap: "40px" }}>
                 {filteredProjects.map((project) => (
-                  <ListCard key={project.id} project={project} onClick={() => handleProjectClick(project.id)} />
+                  <ListCard key={project.id} project={project} lang={currentLang} onClick={() => handleProjectClick(project.id)} />
                 ))}
               </div>
             )}
