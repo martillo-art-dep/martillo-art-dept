@@ -154,7 +154,7 @@ export default function Contact() {
         {/* Hero image */}
         <div style={{ width: "100%", height: "266px", overflow: "hidden", position: "relative" }}>
           <img
-            src="/assets/contact/contact-photo.jpg"
+            src="/assets/contacto.JPG"
             alt=""
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             onError={(e) => { e.currentTarget.style.display = "none"; }}
@@ -550,7 +550,7 @@ export default function Contact() {
               }}
             >
               <img
-                src="/assets/contact/contact-photo.jpg"
+                src="/assets/contacto.JPG"
                 alt=""
                 className="w-full h-full object-cover"
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
