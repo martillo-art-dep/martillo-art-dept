@@ -55,6 +55,7 @@ export default function Contact() {
     email: "",
     telefono: "",
     mensaje: "",
+    "bot-field": "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
