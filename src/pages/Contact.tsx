@@ -72,12 +72,12 @@ export default function Contact() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
           "form-name": "contacto-martillo",
-          ...formData,
+          ...(formData as Record<string, string>),
         }).toString(),
       });
       if (response.ok) {
         setStatus("success");
-        setFormData({ nombre: "", email: "", telefono: "", mensaje: "" });
+        setFormData({ nombre: "", email: "", telefono: "", mensaje: "", "bot-field": "" });
       } else {
         setStatus("error");
       }
