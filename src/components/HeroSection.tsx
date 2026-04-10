@@ -1,21 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Player from "@vimeo/player";
-import MartilloLogo from "./MartilloLogo";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [aspect, setAspect] = useState<string>("16 / 9");
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // IMPORTANTE: NO usamos background:true porque ese modo le aplica
-    // object-fit:cover internamente al <video> y recorta el contenido
-    // sin importar el tamaño del wrapper. En su lugar simulamos el
-    // comportamiento de "background" con los parámetros individuales.
     const player = new Player(containerRef.current, {
       id: 1181013005,
       autoplay: true,
@@ -26,23 +20,15 @@ export default function HeroSection() {
       byline: false,
       portrait: false,
       dnt: true,
-      // background: true  ← ¡AUSENTE A PROPÓSITO!
+      background: true,
     });
 
     playerRef.current = player;
 
     player.on("play", () => setIsLoaded(true));
 
-    // Asegurar autoplay silencioso (algunos navegadores requieren forzarlo)
     player.setVolume(0).catch(() => {});
     player.play().catch(() => {});
-
-    // Leer el ratio REAL del video para que el wrapper coincida exactamente.
-    Promise.all([player.getVideoWidth(), player.getVideoHeight()])
-      .then(([w, h]) => {
-        if (w && h) setAspect(`${w} / ${h}`);
-      })
-      .catch(() => {});
 
     return () => {
       player.unload();
@@ -58,67 +44,33 @@ export default function HeroSection() {
 
   return (
     <section
+      className="hero-section"
       style={{
         width: "100%",
         height: "100%",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#1b1b1b",
+        backgroundImage: 'url("/assets/hero-poster.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center 69%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
-      {/* Logo de carga */}
+      <div style={{ height: "var(--header-h)", flexShrink: 0, position: "relative", zIndex: 1 }} />
+
       <div
+        ref={containerRef}
+        className="vimeo-wrapper"
         style={{
           position: "absolute",
           inset: 0,
-          zIndex: 10,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#1b1b1b",
-          transition: "opacity 0.8s ease",
-          opacity: isLoaded ? 0 : 1,
-          pointerEvents: "none",
-        }}
-      >
-        <MartilloLogo width={220} />
-      </div>
-
-      {/*
-        Wrapper del iframe — comportamiento contain real:
-        - aspect-ratio = ratio nativo del video (lo lee de Vimeo SDK)
-        - max-width / max-height: 100% → siempre cabe en el contenedor
-        - El navegador decide qué dimensión limita y deja barras del otro lado
-      */}
-      <div
-        ref={containerRef}
-        style={{
-          aspectRatio: aspect,
-          maxWidth: "100%",
-          maxHeight: "100%",
-          width: "100%",
+          opacity: isLoaded ? 1 : 0,
+          transition: "opacity 0.4s ease-out",
         }}
       />
 
-      {/*
-        Sin background:true, Vimeo respeta el ratio del video dentro del
-        iframe y NO aplica object-fit:cover. El iframe llena nuestro wrapper
-        y dentro del iframe el video se ve completo.
-      */}
-      <style>{`
-        section iframe {
-          width: 100% !important;
-          height: 100% !important;
-          display: block;
-          border: 0;
-          pointer-events: none;
-        }
-      `}</style>
-
-      {/* Botón de Audio */}
       <button
         onClick={toggleMute}
         style={{

@@ -36,3 +36,4 @@ export default function SEO({ title, description, image, url }: SEOProps) {
     </Helmet>
   );
 }
+

@@ -75,7 +75,7 @@ export default function LogoMarquee() {
       `}</style>
 
       <section
-        className="w-full overflow-hidden h-[56px] md:h-[70px] lg:h-[90px]"
+        className="w-full overflow-hidden h-[32px] md:h-[45px] lg:h-[55px]"
         style={{
           backgroundColor: "#FBFEF9",
           boxShadow: "inset 0px 25px 22px -8px rgba(0, 0, 0, 0.3)",
@@ -86,11 +86,11 @@ export default function LogoMarquee() {
             {[...LOGOS, ...LOGOS].map((logo, i) => (
               <div
                 key={`${logo.alt}-${i}`}
-                className="logo-item flex shrink-0 items-center justify-center w-[60px] md:w-[100px] lg:w-[140px] h-[40px] md:h-[52px] lg:h-[64px]"
+                className="logo-item flex shrink-0 items-center justify-center w-[60px] md:w-[100px] lg:w-[140px] h-[24px] md:h-[35px] lg:h-[40px]"
                 style={{
-                  "--logo-h-mobile": `${Math.round(20 * logo.scale)}px`,
-                  "--logo-h-tablet": `${Math.round(32 * logo.scale)}px`,
-                  "--logo-h-desktop": `${Math.round(44 * logo.scale)}px`,
+                  "--logo-h-mobile": `${Math.round(16 * logo.scale)}px`,
+                  "--logo-h-tablet": `${Math.round(24 * logo.scale)}px`,
+                  "--logo-h-desktop": `${Math.round(32 * logo.scale)}px`,
                 } as React.CSSProperties}
               >
                 <LogoImg src={logo.src} alt={logo.alt} rounded={logo.rounded} />

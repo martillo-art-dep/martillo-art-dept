@@ -87,3 +87,38 @@ body {
 .logo-marquee:hover .logo-marquee-track {
   animation-play-state: paused;
 }
+
+:root {
+  --header-h: 80px;
+}
+@media (min-width: 1024px) {
+  :root { --header-h: 110px; }
+}
+
+.vimeo-wrapper iframe {
+  position: absolute;
+  top: 69%;
+  left: 50%;
+  width: 100vw !important;
+  height: 120vh !important;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover !important;
+  transform: translate(-50%, -50%) scale(1.05);
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .vimeo-wrapper iframe {
+    top: 50% !important;
+    left: 50% !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    transform: translate(-50%, -50%) scale(2.8) !important;
+  }
+
+  .hero-section {
+    background-position: center center !important;
+  }
+}
