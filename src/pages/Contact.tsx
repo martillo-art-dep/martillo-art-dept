@@ -69,7 +69,10 @@ export default function Contact() {
     try {
       const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept": "application/x-www-form-urlencoded",
+        },
         body: new URLSearchParams({
           "form-name": "contacto-martillo",
           ...(formData as Record<string, string>),
