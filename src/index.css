@@ -113,9 +113,9 @@ body {
     top: 50% !important;
     left: 50% !important;
     width: 100vw !important;
-    height: 100vh !important;
+    height: 110% !important;
     object-fit: cover !important;
-    transform: translate(-50%, -50%) scale(2.8) !important;
+    transform: translate(-50%, -50%) scale(3.2) !important;
   }
 
   .hero-section {
