@@ -1,73 +1,50 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+
+  // Forzamos el play manualmente por si el autoPlay falla en el deploy
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Autoplay preventivo:", error);
+      });
+    }
+  }, []);
 
   const toggleMute = () => {
     if (videoRef.current) {
-      // Cambiamos el estado de mute directamente en el elemento nativo
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
     }
   };
 
   return (
-    <section
-      className="hero-section"
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "relative",
-        overflow: "hidden",
-        backgroundColor: "#000000",
-      }}
-    >
-      {/* 1. POSTER DE FONDO (Se desvanece cuando el video carga) */}
-      <div 
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: 'url("/assets/hero-poster.jpg")',
-          backgroundSize: "cover",
-          backgroundPosition: "center 69%",
-          opacity: isLoaded ? 0 : 1,
-          transition: "opacity 0.8s ease-in-out",
-          zIndex: 5
-        }}
-      />
-
-      {/* 2. VIDEO NATIVO OPTIMIZADO */}
+    <section style={{ width: "100%", height: "100%", position: "relative", backgroundColor: "#000" }}>
       <video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        onLoadedMetadata={() => setIsLoaded(true)}
-        src="/public/assets/REEL_Optimizado.mp4"
+        /* Añadimos el poster directamente al tag de video */
+        poster="/assets/hero-poster.jpg"
+        src="/assets/REEL_Optimizado.mp4"
         style={{
-          /* 102vw asegura que el video desborde cualquier micro-margen lateral */
-          width: "102vw", 
-          height: "100dvh", 
+          width: "102vw",
+          height: "100dvh",
           objectFit: "cover",
-          /* center = centrado horizontal
-             35% = sube el video para que no se corten las cabezas del reel
-          */
-          objectPosition: "center 5%", 
+          objectPosition: "center 35%",
           position: "absolute",
-          top: "67%",
+          top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
-          pointerEvents: "none", // Centrado físico perfecto
-          opacity: isLoaded ? 1 : 0,
-          transition: "opacity 0.8s ease-in-out",
+          transform: "translate(-50%, -50%) scale(1.01)",
+          pointerEvents: "none",
           zIndex: 10
         }}
       />
 
-      {/* 3. BOTÓN DE MUTE */}
       <button
         onClick={toggleMute}
         style={{
@@ -88,14 +65,9 @@ export default function HeroSection() {
         }}
       >
         {isMuted ? (
-          <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
-            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z" />
-            <line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2" />
-          </svg>
+          <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z" /><line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2" /></svg>
         ) : (
-          <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
-            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-          </svg>
+          <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" /></svg>
         )}
       </button>
     </section>
