@@ -1,44 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import Player from "@vimeo/player";
+import { useRef, useState } from "react";
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const playerRef = useRef<Player | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const player = new Player(containerRef.current, {
-      id: 1182138789,
-      autoplay: true,
-      muted: true,
-      loop: true,
-      controls: false,
-      title: false,
-      byline: false,
-      portrait: false,
-      dnt: true,
-      background: true,
-    });
-
-    playerRef.current = player;
-
-    player.on("play", () => {
-      // Un pequeño delay para asegurar que el video ya tiene frame antes de quitar el poster
-      setTimeout(() => setIsLoaded(true), 150);
-    });
-
-    return () => {
-      player.unload();
-    };
-  }, []);
-
   const toggleMute = () => {
-    if (playerRef.current) {
-      playerRef.current.setVolume(isMuted ? 1 : 0);
-      setIsMuted(!isMuted);
+    if (videoRef.current) {
+      // Cambiamos el estado de mute directamente en el elemento nativo
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
     }
   };
 
@@ -51,26 +22,52 @@ export default function HeroSection() {
         position: "relative",
         overflow: "hidden",
         backgroundColor: "#000000",
-        backgroundImage: 'url("/assets/hero-poster.jpg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center 69%", // Ajustado para que coincida con el video
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
       }}
     >
-      <div
-        ref={containerRef}
-        className="vimeo-wrapper"
+      {/* 1. POSTER DE FONDO (Se desvanece cuando el video carga) */}
+      <div 
         style={{
           position: "absolute",
           inset: 0,
-          opacity: isLoaded ? 1 : 0,
-          transition: "opacity 0.6s ease-in-out",
-          backgroundColor: "#000000",
+          backgroundImage: 'url("/assets/hero-poster.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center 69%",
+          opacity: isLoaded ? 0 : 1,
+          transition: "opacity 0.8s ease-in-out",
+          zIndex: 5
         }}
       />
 
+      {/* 2. VIDEO NATIVO OPTIMIZADO */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        onLoadedMetadata={() => setIsLoaded(true)}
+        src="/public/assets/REEL_Optimizado.mp4"
+        style={{
+          /* 102vw asegura que el video desborde cualquier micro-margen lateral */
+          width: "102vw", 
+          height: "100dvh", 
+          objectFit: "cover",
+          /* center = centrado horizontal
+             35% = sube el video para que no se corten las cabezas del reel
+          */
+          objectPosition: "center 5%", 
+          position: "absolute",
+          top: "67%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          pointerEvents: "none", // Centrado físico perfecto
+          opacity: isLoaded ? 1 : 0,
+          transition: "opacity 0.8s ease-in-out",
+          zIndex: 10
+        }}
+      />
+
+      {/* 3. BOTÓN DE MUTE */}
       <button
         onClick={toggleMute}
         style={{

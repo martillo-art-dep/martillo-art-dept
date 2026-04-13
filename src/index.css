@@ -38,6 +38,7 @@ html, body {
 }
 
 /* 3. ESTRUCTURA DE PÁGINAS (Centrado del contenido) */
+/* Esto asegura que Portfolio, About, Services, etc. mantengan su proporción */
 .page-container {
   width: 100%;
   max-width: 1440px;
@@ -54,45 +55,19 @@ html, body {
   }
 }
 
-/* 4. EL HERO (Ajuste Cinematográfico) */
-.vimeo-wrapper {
-  position: relative;
+/* 4. EL HERO 
+   Ya no necesitamos estilos para iframe. 
+   El contenedor simplemente asegura que el video ocupe todo el espacio.
+*/
+.hero-section {
   width: 100%;
-  height: 100%; /* Ocupa el espacio del contenedor flex del Home */
+  height: 100%;
+  position: relative;
   overflow: hidden;
   background-color: #000000;
 }
 
-.vimeo-wrapper iframe {
-  position: absolute;
-  /* Bajamos el top al 50% para centrarlo mejor con menos altura */
-  top: 65% !important; 
-  left: 50% !important;
-  width: 100vw !important; 
-  
-  /* Reducimos de 125vh a 109vh para rescatar más video original en Desktop */
-  height: 109vh !important; 
-  
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover !important;
-  
-  /* Reducimos el scale a 1.05. Es el margen de seguridad mínimo para que 
-     no se vean bordes negros en pantallas ultra-wide */
-  transform: translate(-50%, -50%) scale(1) !important; 
-  pointer-events: none;
-}
-
-/* Ajustes Hero para Mobile (Aquí sí necesitamos zoom por la pantalla vertical) */
-@media (max-width: 440px) {
-  .vimeo-wrapper iframe {
-    top: 50% !important;
-    transform: translate(-50%, -50%) scale(4.6) !important;
-    height: 110% !important;
-  }
-}
-
-/* 5. OTROS COMPONENTES */
+/* 5. OTROS COMPONENTES (Marquee) */
 @keyframes logomarquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
