@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
+/* 1. FUENTES Y TEMA */
 @font-face {
   font-family: 'Martillo Completa';
   src: url('/assets/fonts/MartilloCompleta-Full-Special.woff2') format('woff2'),
@@ -18,72 +19,80 @@
   --color-white: #ffffff;
   --color-accent-orange: #fb5000;
   --color-cream: #f8f1cd;
-  --color-logos-bg: #fbfef9;
-  --color-hero-gray: #757780;
-
-  --color-brand-50: #fff4f0;
-  --color-brand-100: #ffe4db;
-  --color-brand-500: #ff6b2c;
-  --color-brand-600: #fb5000;
-  --color-brand-700: #c63f00;
-
-  --color-neutral-50: #f9fafb;
-  --color-neutral-100: #e5e7eb;
-  --color-neutral-200: #9ca3af;
-  --color-neutral-300: #6b7280;
-  --color-neutral-400: #4b5563;
-  --color-neutral-500: #374151;
-  --color-neutral-600: #1f2933;
-  --color-neutral-700: #101827;
-  --color-neutral-800: #050816;
   --color-neutral-900: #000000;
 }
 
+/* 2. RESET Y BASE */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  scrollbar-gutter: stable;
-}
-
-body {
-  font-family: var(--font-sans);
+html, body {
+  background-color: #000000 !important;
   color: #f9fafb;
-  background-color: #000000;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   width: 100%;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-#root {
-  width: 100%;
-  min-height: 100vh;
-  background-color: #000000;
-  overflow-x: hidden;
-}
-
+/* 3. ESTRUCTURA DE PÁGINAS (Centrado del contenido) */
 .page-container {
   width: 100%;
   max-width: 1440px;
   margin-left: auto !important;
   margin-right: auto !important;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-:root {
-  --header-h: 80px;
-}
-@media (min-width: 1024px) {
-  :root { --header-h: 110px; }
+@media (min-width: 768px) {
+  .page-container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 
+/* 4. EL HERO (Ajuste Cinematográfico) */
+.vimeo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Ocupa el espacio del contenedor flex del Home */
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.vimeo-wrapper iframe {
+  position: absolute;
+  /* Bajamos el top al 50% para centrarlo mejor con menos altura */
+  top: 65% !important; 
+  left: 50% !important;
+  width: 100vw !important; 
+  
+  /* Reducimos de 125vh a 109vh para rescatar más video original en Desktop */
+  height: 109vh !important; 
+  
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover !important;
+  
+  /* Reducimos el scale a 1.05. Es el margen de seguridad mínimo para que 
+     no se vean bordes negros en pantallas ultra-wide */
+  transform: translate(-50%, -50%) scale(1) !important; 
+  pointer-events: none;
+}
+
+/* Ajustes Hero para Mobile (Aquí sí necesitamos zoom por la pantalla vertical) */
+@media (max-width: 440px) {
+  .vimeo-wrapper iframe {
+    top: 50% !important;
+    transform: translate(-50%, -50%) scale(4.6) !important;
+    height: 110% !important;
+  }
+}
+
+/* 5. OTROS COMPONENTES */
 @keyframes logomarquee-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -91,36 +100,4 @@ body {
 
 .logo-marquee-track {
   animation: logomarquee-scroll 25s linear infinite;
-}
-
-.logo-marquee:hover .logo-marquee-track {
-  animation-play-state: paused;
-}
-
-.vimeo-wrapper iframe {
-  position: absolute;
-  top: 70% !important;
-  left: 50% !important;
-  width: 100vw !important;
-  height: 125vh !important;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover !important;
-  transform: translate(-50%, -50%) scale(1) !important;
-  pointer-events: none;
-}
-
-@media (max-width: 767px) {
-  .vimeo-wrapper iframe {
-    top: 50% !important;
-    left: 50% !important;
-    width: 100vw !important;
-    height: 110% !important;
-    object-fit: cover !important;
-    transform: translate(-50%, -50%) scale(3.5) !important;
-  }
-
-  .hero-section {
-    background-position: center center !important;
-  }
 }
