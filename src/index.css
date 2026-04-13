@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee:wght@400&family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
-/* Fuente custom Martillo */
 @font-face {
   font-family: 'Martillo Completa';
   src: url('/assets/fonts/MartilloCompleta-Full-Special.woff2') format('woff2'),
@@ -12,26 +11,22 @@
 }
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: "Martillo", "Bungee", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Figma design system - Paleta Martillo */
-  --color-black: #010100;
+  --color-black: #000000;
   --color-white: #ffffff;
   --color-accent-orange: #fb5000;
   --color-cream: #f8f1cd;
   --color-logos-bg: #fbfef9;
   --color-hero-gray: #757780;
 
-  /* Brand scale (from accent orange) */
   --color-brand-50: #fff4f0;
   --color-brand-100: #ffe4db;
   --color-brand-500: #ff6b2c;
   --color-brand-600: #fb5000;
   --color-brand-700: #c63f00;
 
-  /* Neutral: cinematic dark */
   --color-neutral-50: #f9fafb;
   --color-neutral-100: #e5e7eb;
   --color-neutral-200: #9ca3af;
@@ -41,7 +36,7 @@
   --color-neutral-600: #1f2933;
   --color-neutral-700: #101827;
   --color-neutral-800: #050816;
-  --color-neutral-900: #020617;
+  --color-neutral-900: #000000;
 }
 
 * {
@@ -53,12 +48,13 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
 body {
   font-family: var(--font-sans);
   color: #f9fafb;
-  background-color: #020617;
+  background-color: #000000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
@@ -68,16 +64,29 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
+  background-color: #000000;
+  overflow-x: hidden;
 }
 
-/* LogoMarquee - scroll infinito */
+.page-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+:root {
+  --header-h: 80px;
+}
+@media (min-width: 1024px) {
+  :root { --header-h: 110px; }
+}
+
 @keyframes logomarquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .logo-marquee-track {
@@ -88,23 +97,16 @@ body {
   animation-play-state: paused;
 }
 
-:root {
-  --header-h: 80px;
-}
-@media (min-width: 1024px) {
-  :root { --header-h: 110px; }
-}
-
 .vimeo-wrapper iframe {
   position: absolute;
-  top: 69%;
-  left: 50%;
+  top: 70% !important;
+  left: 50% !important;
   width: 100vw !important;
-  height: 120vh !important;
+  height: 125vh !important;
   min-width: 100%;
   min-height: 100%;
   object-fit: cover !important;
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: translate(-50%, -50%) scale(1) !important;
   pointer-events: none;
 }
 
@@ -115,7 +117,7 @@ body {
     width: 100vw !important;
     height: 110% !important;
     object-fit: cover !important;
-    transform: translate(-50%, -50%) scale(3.2) !important;
+    transform: translate(-50%, -50%) scale(3.5) !important;
   }
 
   .hero-section {

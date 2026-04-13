@@ -289,16 +289,18 @@ export default function Header() {
             - Logo (70×60) | Categories (gap-16) | ICONS (gap-30)
           ═══════════════════════════════════════════════════════════════ */}
       <header
-        className="fixed left-0 right-0 top-0 z-50 flex items-center justify-center"
+        className="fixed left-0 right-0 top-0 z-50 flex items-center"
         style={{
           background: headerBg,
-          padding: "18px 50px",
+          padding: "18px 0",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
-        {/* MENU row — Figma: w-1340 h-60, flex, items-center, justify-between */}
         <nav
           className="flex w-full items-center justify-between"
-          style={{ maxWidth: "1340px", height: "60px" }}
+          style={{ maxWidth: "1440px", width: "100%", marginInline: "auto", height: "60px", padding: "0 50px" }}
         >
 
           {/* ═══ Logo ═══ — Figma: 70×60px */}

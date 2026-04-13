@@ -734,9 +734,9 @@ export default function ProjectDetail() {
 
           {/* ═══ TECH SHEET + TRAILER ═══ */}
           <section
-            className="pd-tech-grid mx-auto"
+            className="pd-tech-grid page-container"
             style={{
-              maxWidth: "1440px", width: "100%", padding: "45px 50px 0",
+              paddingTop: "45px",
               display: "grid", gridTemplateColumns: "543px 1fr", gap: "27px",
               position: "relative", zIndex: 1,
             }}
@@ -809,9 +809,9 @@ export default function ProjectDetail() {
               Figma: two text blocks in equal columns
               Font: Helvetica 20px, color #FBFEF9, text-align: justify */}
           <section
-            className="pd-text-blocks mx-auto"
+            className="pd-text-blocks page-container"
             style={{
-              maxWidth: "1440px", width: "100%", padding: "60px 50px 0",
+              paddingTop: "60px",
               display: "grid", gridTemplateColumns: "1fr 1fr", gap: "50px", alignItems: "start",
               position: "relative", zIndex: 1,
             }}
@@ -838,9 +838,9 @@ export default function ProjectDetail() {
               Figma: Arial 40px, #FFF, uppercase */}
           {project.nominations.length > 0 && (
             <section
-              className="mx-auto"
+              className="page-container"
               style={{
-                maxWidth: "1440px", width: "100%", padding: "50px 50px 0",
+                paddingTop: "50px",
                 position: "relative", zIndex: 1,
               }}
             >
@@ -872,9 +872,9 @@ export default function ProjectDetail() {
           {project.galleries.map((gallery, gi) => (
             <section
               key={gi}
-              className="pd-gallery-section mx-auto"
+              className="pd-gallery-section page-container"
               style={{
-                maxWidth: "1440px", width: "100%", padding: "80px 50px 0",
+                paddingTop: "80px",
                 display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "49px", alignSelf: "stretch",
                 position: "relative", zIndex: 1,
               }}
@@ -1007,6 +1007,8 @@ export default function ProjectDetail() {
               display: "flex",
               width: "100%",
               maxWidth: "1340px",
+              marginLeft: "auto",
+              marginRight: "auto",
               justifyContent: "space-between",
               alignItems: "center",
               padding: "0 20px",

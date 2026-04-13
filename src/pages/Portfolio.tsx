@@ -562,7 +562,7 @@ export default function Portfolio() {
             pointerEvents: "none",
           }}
         />
-        <div className="mx-auto w-full" style={{ maxWidth: "1440px", position: "relative", zIndex: 1 }}>
+        <div className="mx-auto w-full" style={{ maxWidth: "1440px", width: "100%", marginInline: "auto", position: "relative", zIndex: 1 }}>
 
           {/* ════════════════════════════════════════════════════════════
               MOBILE LAYOUT (< 768px)
@@ -636,8 +636,8 @@ export default function Portfolio() {
           <div
             className="hidden md:block"
             style={{
-              paddingLeft: "clamp(24px, 7vw, 100px)",
-              paddingRight: "clamp(24px, 7vw, 100px)",
+              paddingLeft: "clamp(24px, 3.5vw, 50px)",
+              paddingRight: "clamp(24px, 3.5vw, 50px)",
               paddingTop: "84px",
             }}
           >

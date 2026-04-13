@@ -347,10 +347,10 @@ export default function Contact() {
         >
           {/* ═══ MAIN CONTENT — Figma Frame 62: 1346×682, positioned at x:44 y:179 ═══ */}
           <div
-            className="ct-main-row mx-auto flex"
+            className="ct-main-row page-container flex"
             style={{
-              maxWidth: "1440px",
-              padding: "179px 47px 120px",
+              paddingTop: "179px",
+              paddingBottom: "120px",
               gap: "33px",
               alignItems: "flex-start",
             }}

@@ -157,6 +157,25 @@ const aboutCSS = `
   }
 }
 
+/* ── Medium-large screens (1200–1439px): team cards overflow fix ── */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .about-team-row {
+    gap: 48px !important;
+    justify-content: center !important;
+  }
+  .about-team-card {
+    width: calc(50% - 24px) !important;
+  }
+  .about-team-photo {
+    width: 100% !important;
+    height: 500px !important;
+  }
+  .about-team-name {
+    font-size: 64px !important;
+    line-height: 64px !important;
+  }
+}
+
 /* ── Leer más button animation (alexmaracinaru style) ── */
 .team-readmore {
   position: relative;
@@ -411,7 +430,7 @@ export default function About() {
           </section>
 
           {/* OUR HISTORY */}
-          <div className="about-history-row mx-auto flex items-center" style={{ maxWidth: "1440px", width: "100%", padding: "63px 116px", gap: "51px", position: "relative", zIndex: 1 }}>
+          <div className="about-history-row page-container flex items-center" style={{ paddingTop: "63px", paddingBottom: "63px", gap: "51px", position: "relative", zIndex: 1 }}>
             <div className="about-history-left relative flex-shrink-0" style={{ width: "595px", height: "527px" }}>
               <img src="/assets/martillo-about.svg" alt="" className="absolute"
                 style={{ top: "0", left: "0", width: "575px", height: "507px", objectFit: "contain", opacity: 0.2 }} />
@@ -440,7 +459,7 @@ export default function About() {
             zIndex: 1,
           }}>
             {/* TEAM */}
-            <div className="mx-auto" style={{ maxWidth: "1440px", width: "100%", padding: "60px 50px 0" }}>
+            <div className="page-container" style={{ paddingTop: "60px" }}>
               <div className="about-team-row flex justify-between" style={{ gap: "96px" }}>
                 {TEAM.map((member, idx) => (
                   <div key={idx} className="about-team-card flex flex-col items-center" style={{ width: "620px", gap: "43px" }}>

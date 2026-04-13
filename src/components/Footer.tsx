@@ -204,7 +204,7 @@ export default function Footer() {
 
         {/* DESKTOP FOOTER (≥ 768px) */}
         <div className="hidden md:block">
-          <div className="mx-auto w-full max-w-[1440px]" style={{ paddingTop: "44px", paddingBottom: "55px", paddingLeft: "51px", paddingRight: "50px" }}>
+          <div className="page-container" style={{ paddingTop: "44px", paddingBottom: "55px" }}>
             <div className="flex flex-row justify-between gap-0">
 
               <div className="flex-shrink-0">

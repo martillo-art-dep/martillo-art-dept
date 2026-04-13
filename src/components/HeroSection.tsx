@@ -11,7 +11,7 @@ export default function HeroSection() {
     if (!containerRef.current) return;
 
     const player = new Player(containerRef.current, {
-      id: 1181013005,
+      id: 1182138789,
       autoplay: true,
       muted: true,
       loop: true,
@@ -25,10 +25,10 @@ export default function HeroSection() {
 
     playerRef.current = player;
 
-    player.on("play", () => setIsLoaded(true));
-
-    player.setVolume(0).catch(() => {});
-    player.play().catch(() => {});
+    player.on("play", () => {
+      // Un pequeño delay para asegurar que el video ya tiene frame antes de quitar el poster
+      setTimeout(() => setIsLoaded(true), 150);
+    });
 
     return () => {
       player.unload();
@@ -50,16 +50,15 @@ export default function HeroSection() {
         height: "100%",
         position: "relative",
         overflow: "hidden",
+        backgroundColor: "#000000",
         backgroundImage: 'url("/assets/hero-poster.jpg")',
         backgroundSize: "cover",
-        backgroundPosition: "center 69%",
+        backgroundPosition: "center 69%", // Ajustado para que coincida con el video
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
-      <div style={{ height: "var(--header-h)", flexShrink: 0, position: "relative", zIndex: 1 }} />
-
       <div
         ref={containerRef}
         className="vimeo-wrapper"
@@ -67,7 +66,8 @@ export default function HeroSection() {
           position: "absolute",
           inset: 0,
           opacity: isLoaded ? 1 : 0,
-          transition: "opacity 0.4s ease-out",
+          transition: "opacity 0.6s ease-in-out",
+          backgroundColor: "#000000",
         }}
       />
 
@@ -78,7 +78,7 @@ export default function HeroSection() {
           bottom: "30px",
           right: "30px",
           zIndex: 30,
-          background: "rgba(0,0,0,0.5)",
+          background: "rgba(0,0,0,0.4)",
           border: "1px solid rgba(255,255,255,0.2)",
           borderRadius: "50%",
           width: "48px",
@@ -87,16 +87,16 @@ export default function HeroSection() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backdropFilter: "blur(10px)",
+          backdropFilter: "blur(8px)",
         }}
       >
         {isMuted ? (
-          <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+          <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
             <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z" />
             <line x1="1" y1="1" x2="23" y2="23" stroke="white" strokeWidth="2" />
           </svg>
         ) : (
-          <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+          <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
           </svg>
         )}

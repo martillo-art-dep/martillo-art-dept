@@ -609,8 +609,8 @@ export default function TeamMember() {
               Figma: Text 770px left + Photo 543×814 right
           */}
           <div
-            className="member-bio-container mx-auto flex"
-            style={{ maxWidth: "1440px", width: "100%", padding: "0 50px", gap: "27px", position: "relative", zIndex: 1 }}
+            className="member-bio-container page-container flex"
+            style={{ gap: "27px", position: "relative", zIndex: 1 }}
           >
             {/* Left: Bio text */}
             <div className="member-bio-text" style={{ width: "770px", flexShrink: 0 }}>
