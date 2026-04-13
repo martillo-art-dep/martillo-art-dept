@@ -221,7 +221,7 @@ export default function Header() {
             className="hidden items-center md:flex" 
             style={{ 
               gap: "16px",
-              transform: "translateX(-75px)" 
+              transform: "translateX(-95px)" 
             }}
           >
             {navLinks.map((link) => (
