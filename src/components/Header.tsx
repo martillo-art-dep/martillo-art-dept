@@ -110,6 +110,18 @@ const navCSS = `
     from { opacity: 0; }
     to   { opacity: 1; }
   }
+
+  /* Ajuste responsivo de padding para el nav */
+  .nav-container {
+    padding: 0 20px;
+  }
+  @media (min-width: 768px) {
+    .nav-container {
+      padding: 0 50px;
+      display: grid !important;
+      grid-template-columns: 1fr auto 1fr;
+    }
+  }
 `;
 
 function LinkedInIcon({ color }: { color: string }) {
@@ -198,14 +210,10 @@ export default function Header() {
         style={{ width: "100%", padding: "18px 0", background: headerBg }}
       >
         <nav
-          className="grid w-full items-center"
-          style={{ 
-            maxWidth: "1440px", 
-            gridTemplateColumns: "1fr auto 1fr", 
-            height: "60px", 
-            padding: "0 50px" 
-          }}
+          className="nav-container flex w-full items-center justify-between"
+          style={{ maxWidth: "1440px", height: "60px" }}
         >
+          {/* 1. LADO IZQUIERDO: Logo */}
           <div className="flex items-center justify-start">
             <NavLink to="/" className="flex-shrink-0" aria-label="Martillo Art Dept">
               <img
@@ -217,11 +225,12 @@ export default function Header() {
             </NavLink>
           </div>
 
+          {/* 2. CENTRO (Desktop) */}
           <div 
             className="hidden items-center md:flex" 
             style={{ 
               gap: "16px",
-              transform: "translateX(-95px)" 
+              transform: "translateX(-92px)" 
             }}
           >
             {navLinks.map((link) => (
@@ -256,6 +265,7 @@ export default function Header() {
             ))}
           </div>
 
+          {/* 3. LADO DERECHO (Desktop) */}
           <div className="hidden items-center justify-end md:flex" style={{ gap: "30px" }}>
             <div className="flex items-center">
               {["linkedin", "vimeo", "instagram", "imdb"].map((id) => (
@@ -283,16 +293,32 @@ export default function Header() {
             </div>
           </div>
 
+          {/* HAMBURGUESA MOBILE: Forzamos alineación al final en mobile */}
           <div className="flex items-center justify-end md:hidden">
-            <button onClick={() => setMenuOpen(!menuOpen)} className="flex h-10 w-10 flex-col items-center justify-center gap-1.5">
+            <button 
+              onClick={() => setMenuOpen(!menuOpen)} 
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+            >
               {[0, 1, 2].map((i) => (
-                <span key={i} style={{ display: "block", width: "28px", height: "3px", backgroundColor: textColor, transition: "all 0.2s", transform: menuOpen && i === 0 ? "translateY(8px) rotate(45deg)" : menuOpen && i === 2 ? "translateY(-8px) rotate(-45deg)" : "none", opacity: menuOpen && i === 1 ? 0 : 1 }} />
+                <span 
+                  key={i} 
+                  style={{ 
+                    display: "block", 
+                    width: "28px", 
+                    height: "3px", 
+                    backgroundColor: textColor, 
+                    transition: "all 0.2s", 
+                    transform: menuOpen && i === 0 ? "translateY(8px) rotate(45deg)" : menuOpen && i === 2 ? "translateY(-8px) rotate(-45deg)" : "none", 
+                    opacity: menuOpen && i === 1 ? 0 : 1 
+                  }} 
+                />
               ))}
             </button>
           </div>
         </nav>
       </header>
 
+      {/* OVERLAY MOBILE */}
       {menuOpen && (
         <div
           className="fixed inset-0 z-[100] flex flex-col md:hidden"
