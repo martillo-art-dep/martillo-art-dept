@@ -39,7 +39,7 @@ export default function HeroSection() {
           position: "absolute",
           top: "68%",
           left: "50%",
-          transform: "translate(-50%, -50%) scale(1.01)",
+          transform: "translate(-50%, -50%) scale(1)",
           pointerEvents: "none",
           zIndex: 10
         }}
