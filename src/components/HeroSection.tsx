@@ -37,7 +37,7 @@ export default function HeroSection() {
           objectFit: "cover",
           objectPosition: "center 20%",
           position: "absolute",
-          top: "68%",
+          top: "66%",
           left: "50%",
           transform: "translate(-50%, -50%) scale(1)",
           pointerEvents: "none",
