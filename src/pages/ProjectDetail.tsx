@@ -355,10 +355,37 @@ export default function ProjectDetail() {
     );
   }
 
+  // Subtitle translations (ES → EN)
+  const subtitleTranslations: Record<string, string> = {
+    "DISEÑO DE PRODUCCIÓN": "PRODUCTION DESIGN",
+    "DIRECCIÓN DE ARTE": "ART DIRECTION",
+    "SUPERVISIÓN DE DIRECCIÓN DE ARTE": "ART DIRECTION SUPERVISION",
+  };
+  const translatedSubtitle = currentLang.startsWith("en")
+    ? (subtitleTranslations[project.subtitle] || project.subtitle)
+    : project.subtitle;
+
+  // Role name translations (ES → EN)
+  const roleTranslations: Record<string, string> = {
+    "Dirección": "Direction",
+    "Diseño de producción": "Production Design",
+    "Dirección de arte": "Art Direction",
+    "Supervisión de dirección de arte": "Art Direction Supervision",
+    "Elenco": "Cast",
+    "Producción": "Production",
+    "Basada en la novela de": "Based on the novel by",
+    "Show Runner": "Showrunner",
+    "Showrunners": "Showrunners",
+    "Intérprete": "Performer",
+  };
+
   // Build credits
   const allCredits = [
     { role: currentLang.startsWith("en") ? "Original Title" : "Titulo Original", value: project.originalTitle },
-    ...project.credits.map((c) => ({ role: c.role, value: c.name })),
+    ...project.credits.map((c) => ({
+      role: currentLang.startsWith("en") ? (c.roleEn || roleTranslations[c.role] || c.role) : c.role,
+      value: c.name,
+    })),
     { role: currentLang.startsWith("en") ? "Year" : "Año", value: String(project.year) },
     { role: currentLang.startsWith("en") ? "Duration" : "Duración", value: project.duration },
     { role: currentLang.startsWith("en") ? "Genre" : "Género", value: project.genre },
@@ -424,7 +451,7 @@ export default function ProjectDetail() {
             fontSize: "18px", lineHeight: "22px", color: "#FFFFFF",
             textShadow: "0 2px 6px rgba(0,0,0,0.5)",
           }}>
-            {project.subtitle}
+            {translatedSubtitle}
           </p>
         </div>
 
@@ -543,7 +570,7 @@ export default function ProjectDetail() {
               fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400,
               fontSize: "24px", lineHeight: "28px", color: "#FFFFFF", marginBottom: "12px",
             }}>
-              {project.subtitle}
+              {translatedSubtitle}
             </h2>
             <p style={{
               fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400,
@@ -573,7 +600,7 @@ export default function ProjectDetail() {
                         src={gallery.images[getActiveIdx(gi)]}
                         alt={`${gallery.title} main`}
                         className="block w-full h-full object-cover"
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer", transform: gallery.imageRotations?.[getActiveIdx(gi)] ? `rotate(${gallery.imageRotations[getActiveIdx(gi)]}deg)` : undefined }}
                         onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
                         onClick={() => openLightbox(gi, getActiveIdx(gi))}
                       />
@@ -620,7 +647,7 @@ export default function ProjectDetail() {
                       : <img
                           src={imgSrc}
                           alt={`${i + 1} / ${gallery.images.length}`}
-                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block", transform: gallery.imageRotations?.[i] ? `rotate(${gallery.imageRotations[i]}deg)` : undefined }}
                           onError={() => markImgError(`${gi}-${i}`)}
                         />
                     }
@@ -727,7 +754,7 @@ export default function ProjectDetail() {
                   whiteSpace: "nowrap",
                 }}
               >
-                {project.subtitle}
+                {translatedSubtitle}
               </p>
             </div>
           </section>
@@ -818,7 +845,7 @@ export default function ProjectDetail() {
           >
             <div>
               <h2 className="pd-text-h2" style={{ fontFamily: "'Martillo Completa', sans-serif", fontWeight: 400, fontSize: "48px", lineHeight: "48px", color: "#FFFFFF", marginBottom: "24px" }}>
-                {project.subtitle || (currentLang.startsWith("en") ? "PRODUCTION DESIGN" : "DISEÑO DE PRODUCCIÓN")}
+                {translatedSubtitle}
               </h2>
               <p className="pd-text-p" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "20px", lineHeight: "normal", textAlign: "justify", color: "#FBFEF9" }}>
                 {currentLang.startsWith("en") ? (project.productionDesignTextEn || project.productionDesignText) : project.productionDesignText}
@@ -892,7 +919,7 @@ export default function ProjectDetail() {
                         src={gallery.images[getActiveIdx(gi)]}
                         alt={`${gallery.title} main`}
                         className="block w-full h-full object-cover"
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer", transform: gallery.imageRotations?.[getActiveIdx(gi)] ? `rotate(${gallery.imageRotations[getActiveIdx(gi)]}deg)` : undefined }}
                         onError={() => markImgError(`${gi}-${getActiveIdx(gi)}`)}
                         onClick={() => openLightbox(gi, getActiveIdx(gi))}
                       />
@@ -945,7 +972,7 @@ export default function ProjectDetail() {
                       <img
                         src={imgSrc}
                         alt={`${i + 1} / ${gallery.images.length}`}
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block", transform: gallery.imageRotations?.[i] ? `rotate(${gallery.imageRotations[i]}deg)` : undefined }}
                         onError={() => markImgError(`${gi}-${i}`)}
                       />
                     )}
@@ -1060,6 +1087,7 @@ export default function ProjectDetail() {
                   maxHeight: "100%",
                   objectFit: "contain",
                   borderRadius: "4px",
+                  transform: project.galleries[lightboxGi]?.imageRotations?.[lightboxImgIdx] ? `rotate(${project.galleries[lightboxGi].imageRotations![lightboxImgIdx]}deg)` : undefined,
                 }}
               />
             </div>

@@ -15,17 +15,19 @@ export interface ProjectCard {
   posterImage: string;
 }
 
-export interface Credit { role: string; name: string; }
-export interface Nomination { title: string; area: string; }
-export interface GallerySection { title: string; images: string[]; }
+export interface Credit { role: string; roleEn?: string; name: string; }
+export interface Nomination { title: string; titleEn?: string; area: string; areaEn?: string; }
+export interface GallerySection { title: string; titleEn?: string; images: string[]; imageRotations?: Record<number, number>; }
 
 export interface ProjectFull extends ProjectCard {
   hidden?: boolean;
   heroImage: string;
   subtitle: string;
+  subtitleEn?: string;
   originalTitle: string;
   duration: string;
   genre: string;
+  genreEn?: string;
   credits: Credit[];
   posterImage: string;
   trailerImage?: string;
@@ -368,6 +370,7 @@ export const projects: ProjectFull[] = [
     galleries: [
       {
         title: "SET CASA DESTROYER",
+        imageRotations: { 22: 90 }, // foto 23 (0-based: 22)
         images: [
           "/assets/projects/sin-nombre/casa-destroyer-01.webp",
           "/assets/projects/sin-nombre/casa-destroyer-02.webp",
@@ -435,6 +438,7 @@ export const projects: ProjectFull[] = [
       },
       {
         title: "SET TREN — LA BESTIA",
+        imageRotations: { 0: 180, 1: 180, 2: 180, 4: 180, 9: 180, 55: 180 }, // fotos 1,2,3,5 de cabeza; 10 y 56 a 180°
         images: [
           "/assets/projects/sin-nombre/tren-01.webp",
           "/assets/projects/sin-nombre/tren-02.webp",
@@ -826,6 +830,7 @@ export const projects: ProjectFull[] = [
       },
       {
         title: "SET HABITACIÓN PACO \"EL ELEGANTE\"",
+        imageRotations: { 1: 180, 2: 180 }, // fotos 2 y 3 invertidas (0-based: 1, 2)
         images: [
           "/assets/projects/club-eutanasia/hab-paco-01.webp",
           "/assets/projects/club-eutanasia/hab-paco-02.webp",
@@ -2410,7 +2415,7 @@ export const projects: ProjectFull[] = [
 
   {
     id: "futuro-desierto",
-    title: "Futuro Desierto",
+    title: "FUTURO DESIERTO",
     year: 2024,
     category: "series",
     image: "/assets/projects/futuro-desierto/thumb.webp",
@@ -2625,7 +2630,7 @@ export const projects: ProjectFull[] = [
 
   {
     id: "mis-planes-son-a-marte",
-    title: "MIS PLANES SON A MARTE",
+    title: "JUANES / MIS PLANES SON A MARTE",
     year: 2016,
     category: "videoclips",
     image: "/assets/projects/mis-planes-son-a-marte/thumb.webp",
@@ -2831,7 +2836,7 @@ export const projects: ProjectFull[] = [
 
   {
     id: "gatorade-shangai",
-    title: "GATORADE SHANGÁI",
+    title: "GATORADE / SHANGÁI",
     year: 2008,
     category: "comerciales",
     image: "/assets/projects/gatorade-shangai/thumb.webp",
@@ -2888,7 +2893,7 @@ export const projects: ProjectFull[] = [
 
   {
     id: "nissan-elefante",
-    title: "NISSAN ESTAQUITAS",
+    title: "NISSAN / ESTAQUITAS",
     year: 2008,
     category: "comerciales",
     image: "/assets/projects/nissan-elefante/thumb.webp",
