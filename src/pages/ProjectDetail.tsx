@@ -872,25 +872,39 @@ export default function ProjectDetail() {
               }}
             >
               {project.nominations.map((nom, i) => (
-                <p
+                <div
                   key={i}
-                  style={{
-                    fontFamily: "'Arial', sans-serif",
-                    fontSize: "40px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    color: "#FFFFFF",
-                    textTransform: "uppercase",
-                    margin: 0,
-                    marginBottom: i < project.nominations.length - 1 ? "12px" : "0",
-                    cursor: "pointer",
-                    transition: "color 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = "#FB5000"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
+                  style={{ marginBottom: i < project.nominations.length - 1 ? "24px" : "0" }}
                 >
-                  {nom.title}
-                </p>
+                  <p
+                    style={{
+                      fontFamily: "'Arial', sans-serif",
+                      fontSize: "40px",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                      color: "#FFFFFF",
+                      textTransform: "uppercase",
+                      margin: 0,
+                      cursor: "pointer",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "#FB5000"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "#FFFFFF"; }}
+                  >
+                    {nom.title}
+                  </p>
+                  {nom.area && (
+                    <p style={{
+                      fontFamily: "'Arial', sans-serif",
+                      fontSize: "20px",
+                      fontWeight: 300,
+                      color: "#FBFEF9",
+                      margin: "6px 0 0 0",
+                    }}>
+                      {nom.area}
+                    </p>
+                  )}
+                </div>
               ))}
             </section>
           )}

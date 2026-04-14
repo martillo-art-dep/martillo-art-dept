@@ -394,7 +394,6 @@ export default function Header() {
             <NavLink to="/services" onClick={() => { setMenuOpen(false); setProjectsExpanded(false); }} style={{ fontFamily: "'Inter', sans-serif", fontSize: "36px", color: "#F8F1CD", textDecoration: "none", padding: "8px 0" }}>
               {currentLang === "en" ? "Services" : "Servicios"}
             </NavLink>
-            <div style={{ height: "24px" }} />
             <NavLink to="/about" onClick={() => { setMenuOpen(false); setProjectsExpanded(false); }} style={{ fontFamily: "'Inter', sans-serif", fontSize: "36px", color: "#F8F1CD", textDecoration: "none", padding: "8px 0" }}>
               {currentLang === "en" ? "About Us" : "Quiénes Somos"}
             </NavLink>
