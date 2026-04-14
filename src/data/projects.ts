@@ -2452,6 +2452,8 @@ export const projects: ProjectFull[] = [
       { role: "Producción", name: "The Roots (Chi/Mex/Uy/Ar)" },
     ],
     posterImage: "/assets/projects/dead-dance/poster.webp",
+    trailerImage: "/assets/projects/dead-dance/thumb.webp",
+    trailerUrl: "https://player.vimeo.com/video/1172001317",
     logos: [],
     nominations: [],
     synopsis: "Videoclip dirigido por Tim Burton para el sencillo \"Dead Dance\" de Lady Gaga. Una pieza de 4:47 minutos filmada en México en 2025 que traduce el universo gótico-pop del director al lenguaje visual del videoclip contemporáneo.",
@@ -2512,6 +2514,7 @@ export const projects: ProjectFull[] = [
     galleries: [
       {
         title: "DISEÑOS Y PROCESOS",
+        imageRotations: { 22: 180, 23: 180 }, // fotos 23 y 24 invertidas (0-based: 22, 23)
         images: [
           "/assets/projects/casket-girl/disenos-01.webp",
           "/assets/projects/casket-girl/disenos-02.webp",
