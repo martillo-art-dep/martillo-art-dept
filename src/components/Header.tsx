@@ -207,8 +207,9 @@ export default function Header() {
 
   const changeLanguage = (lang: string) => { i18n.changeLanguage(lang); };
 
+  const isHome = location.pathname === "/" || location.pathname === "/es" || location.pathname === "/en";
   const isLightPage = location.pathname.startsWith("/services") || location.pathname.startsWith("/about");
-  const isDarkGradientPage = location.pathname.startsWith("/portfolio") || location.pathname.startsWith("/contact");
+  const isDarkGradientPage = isHome || location.pathname.startsWith("/portfolio") || location.pathname.startsWith("/contact");
 
   const textColor = isLightPage ? "#000000" : "#F8F1CD";
   const iconColor = isLightPage ? "#000000" : "#F8F1CD";
@@ -349,7 +350,7 @@ export default function Header() {
       {/* OVERLAY MOBILE */}
       {menuOpen && (
         <div
-          className="fixed inset-0 z-[100] flex flex-col md:hidden"
+          className="fixed inset-0 z-[100] flex flex-col lg:hidden"
           style={{
             backgroundColor: "#1b1b1b",
             backgroundImage: "url(/assets/bg-gradient-dark.jpeg)",
