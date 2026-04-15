@@ -77,13 +77,13 @@ export default function HeroSection() {
   // Ajusta Scale y Top aquí hasta que lo veas perfecto
   // ==========================================
   const mobileLandscapeStyle: React.CSSProperties = {
-    width: "100%",
-    height: "100%",
-    objectFit: "contain",     // <--- Aquí forzamos el CONTAIN para que no recorte
+    width: "100vh", 
+    height: "100vw",
+    objectFit: "contain",
     position: "absolute",
-    top: "57%",               // Juega con este valor para centrarlo visualmente
+    top: "55%",               // El valor que tienes en tu captura
     left: "50%",
-    transform: "translate(-50%, -50%) scale(.73)", // Juega con el Zoom aquí
+    transform: "translate(-50%, -50%) scale(1.3)", // El scale de tu captura
     pointerEvents: "none",
     zIndex: 10
   };
