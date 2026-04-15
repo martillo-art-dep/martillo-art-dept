@@ -81,9 +81,9 @@ export default function HeroSection() {
     height: "100%",
     objectFit: "contain",     // <--- Aquí forzamos el CONTAIN para que no recorte
     position: "absolute",
-    top: "62%",               // Juega con este valor para centrarlo visualmente
+    top: "57%",               // Juega con este valor para centrarlo visualmente
     left: "50%",
-    transform: "translate(-50%, -50%) scale(.78)", // Juega con el Zoom aquí
+    transform: "translate(-50%, -50%) scale(.73)", // Juega con el Zoom aquí
     pointerEvents: "none",
     zIndex: 10
   };
