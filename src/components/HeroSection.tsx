@@ -3,8 +3,29 @@ import { useRef, useState, useEffect } from "react";
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+  // Cambiamos a un estado de "modo" para mayor precisión
+  const [viewMode, setViewMode] = useState("desktop");
 
-  // Forzamos el play manualmente por si el autoPlay falla en el deploy
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      if (width > 1024) {
+        setViewMode("desktop");
+      } else if (height > width) {
+        setViewMode("mobilePortrait");
+      } else {
+        // Si el ancho es mayor al alto y estamos en una pantalla "pequeña"
+        setViewMode("mobileLandscape");
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(error => {
@@ -20,6 +41,59 @@ export default function HeroSection() {
     }
   };
 
+  // ==========================================
+  // 1. BLOQUE DESKTOP (Intacto como lo pediste)
+  // ==========================================
+  const desktopStyle: React.CSSProperties = {
+    width: "102vw",
+    height: "100dvh",
+    objectFit: "cover",
+    objectPosition: "center 20%",
+    position: "absolute",
+    top: "66%",
+    left: "50%",
+    transform: "translate(-50%, -50%) scale(1)",
+    pointerEvents: "none",
+    zIndex: 10
+  };
+
+  // ==========================================
+  // 2. BLOQUE MOBILE VERTICAL (El que ya te gusta)
+  // ==========================================
+  const mobilePortraitStyle: React.CSSProperties = {
+    width: "100vh", 
+    height: "100vw",
+    objectFit: "contain",
+    position: "absolute",
+    top: "55%",               // El valor que tienes en tu captura
+    left: "50%",
+    transform: "translate(-50%, -50%) rotate(90deg) scale(1.7)", // El scale de tu captura
+    pointerEvents: "none",
+    zIndex: 10
+  };
+
+  // ==========================================
+  // 3. BLOQUE MOBILE HORIZONTAL (Para corregir el recorte)
+  // Ajusta Scale y Top aquí hasta que lo veas perfecto
+  // ==========================================
+  const mobileLandscapeStyle: React.CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",     // <--- Aquí forzamos el CONTAIN para que no recorte
+    position: "absolute",
+    top: "62%",               // Juega con este valor para centrarlo visualmente
+    left: "50%",
+    transform: "translate(-50%, -50%) scale(.78)", // Juega con el Zoom aquí
+    pointerEvents: "none",
+    zIndex: 10
+  };
+
+  // Selector de estilo
+  const currentStyle = 
+    viewMode === "desktop" ? desktopStyle : 
+    viewMode === "mobilePortrait" ? mobilePortraitStyle : 
+    mobileLandscapeStyle;
+
   return (
     <section style={{ width: "100%", height: "100%", position: "relative", backgroundColor: "#000" }}>
       <video
@@ -28,21 +102,9 @@ export default function HeroSection() {
         loop
         muted
         playsInline
-        /* Añadimos el poster directamente al tag de video */
         poster="/assets/hero-poster.jpg"
         src="/assets/REEL_Optimizado.mp4"
-        style={{
-          width: "102vw",
-          height: "100dvh",
-          objectFit: "cover",
-          objectPosition: "center 20%",
-          position: "absolute",
-          top: "66%",
-          left: "50%",
-          transform: "translate(-50%, -50%) scale(1)",
-          pointerEvents: "none",
-          zIndex: 10
-        }}
+        style={currentStyle}
       />
 
       <button
