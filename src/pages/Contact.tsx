@@ -322,10 +322,10 @@ export default function Contact() {
             <a href="https://www.linkedin.com/in/martilloartdept" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <LinkedinIcon />
             </a>
-            <a href="tel:+5500000000" aria-label={isEn ? "Phone" : "Teléfono"}>
+            <a href="tel:+5215522506682" aria-label={isEn ? "Phone" : "Teléfono"}>
               <PhoneIcon />
             </a>
-            <a href="mailto:martillo@correo.com" aria-label="Email">
+            <a href="mailto:artdeptmartillo@gmail.com" aria-label="Email">
               <EmailIcon />
             </a>
           </div>
@@ -529,10 +529,10 @@ export default function Contact() {
                 <a href="https://www.linkedin.com/in/martilloartdept" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <LinkedinIcon />
                 </a>
-                <a href="tel:+5500000000" aria-label={isEn ? "Phone" : "Teléfono"}>
+                <a href="tel:+5215522506682" aria-label={isEn ? "Phone" : "Teléfono"}>
                   <PhoneIcon />
                 </a>
-                <a href="mailto:martillo@correo.com" aria-label="Email">
+                <a href="mailto:artdeptmartillo@gmail.com" aria-label="Email">
                   <EmailIcon />
                 </a>
               </div>
