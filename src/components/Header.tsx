@@ -240,7 +240,7 @@ export default function Header() {
     linkedin:  "https://www.linkedin.com/in/martilloartdept",
     vimeo:     "https://vimeo.com/user255726939?fl=pp&fe=sh",
     instagram: "https://www.instagram.com/martilloartdept",
-    imdb:      "https://imdb.com",
+    imdb:      "https://www.imdb.com/name/nm0176490/?ref_=ext_shr_wts",
   };
 
   return (

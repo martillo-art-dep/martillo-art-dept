@@ -72,7 +72,7 @@ export default function Footer() {
     { id: "instagram", Icon: IgIcon,       href: "https://www.instagram.com/martilloartdept" },
     { id: "vimeo",     Icon: VimeoIcon,    href: "https://vimeo.com/user255726939?fl=pp&fe=sh" },
     { id: "linkedin",  Icon: LinkedInIcon, href: "https://www.linkedin.com/in/martilloartdept" },
-    { id: "imdb",      Icon: ImdbIcon,     href: "https://imdb.com" },
+    { id: "imdb",      Icon: ImdbIcon,     href: "https://www.imdb.com/name/nm0176490/?ref_=ext_shr_wts" },
   ];
 
   return (
