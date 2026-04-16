@@ -69,9 +69,9 @@ export default function Footer() {
   ];
 
   const socialIcons = [
-    { id: "instagram", Icon: IgIcon,       href: "https://instagram.com" },
-    { id: "vimeo",     Icon: VimeoIcon,    href: "https://vimeo.com" },
-    { id: "linkedin",  Icon: LinkedInIcon, href: "https://linkedin.com" },
+    { id: "instagram", Icon: IgIcon,       href: "https://www.instagram.com/martilloartdept" },
+    { id: "vimeo",     Icon: VimeoIcon,    href: "https://vimeo.com/user255726939?fl=pp&fe=sh" },
+    { id: "linkedin",  Icon: LinkedInIcon, href: "https://www.linkedin.com/in/martilloartdept" },
     { id: "imdb",      Icon: ImdbIcon,     href: "https://imdb.com" },
   ];
 

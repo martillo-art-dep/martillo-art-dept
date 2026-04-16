@@ -316,10 +316,10 @@ export default function Contact() {
             <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <WhatsAppIcon />
             </a>
-            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/martilloartdept" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <InstagramIcon />
             </a>
-            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/martilloartdept" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <LinkedinIcon />
             </a>
             <a href="tel:+5500000000" aria-label={isEn ? "Phone" : "Teléfono"}>
@@ -523,10 +523,10 @@ export default function Contact() {
                 <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                   <WhatsAppIcon />
                 </a>
-                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <a href="https://www.instagram.com/martilloartdept" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <InstagramIcon />
                 </a>
-                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/martilloartdept" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <LinkedinIcon />
                 </a>
                 <a href="tel:+5500000000" aria-label={isEn ? "Phone" : "Teléfono"}>

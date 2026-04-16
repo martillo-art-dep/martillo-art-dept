@@ -236,6 +236,13 @@ export default function Header() {
     { to: "/portfolio?category=videoclips",     labelEs: "Videoclips",    labelEn: "Music Videos" },
   ];
 
+  const socialHrefs: Record<string, string> = {
+    linkedin:  "https://www.linkedin.com/in/martilloartdept",
+    vimeo:     "https://vimeo.com/user255726939?fl=pp&fe=sh",
+    instagram: "https://www.instagram.com/martilloartdept",
+    imdb:      "https://imdb.com",
+  };
+
   return (
     <>
       <style>{navCSS}</style>
@@ -299,7 +306,7 @@ export default function Header() {
             <div className="flex items-center">
               {["linkedin", "vimeo", "instagram", "imdb"].map((id) => (
                 <a
-                  key={id} href={`https://${id}.com`} target="_blank" rel="noopener noreferrer"
+                  key={id} href={socialHrefs[id]} target="_blank" rel="noopener noreferrer"
                   className="social-icon-link"
                   style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "52px", height: "50px", padding: "10px" }}
                 >
@@ -406,7 +413,7 @@ export default function Header() {
           <div style={{ padding: "24px 26px 60px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div style={{ display: "flex" }}>
               {["linkedin", "vimeo", "instagram", "imdb"].map((id) => (
-                <a key={id} href={`https://${id}.com`} target="_blank" rel="noopener noreferrer" style={{ width: "57px", height: "62px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <a key={id} href={socialHrefs[id]} target="_blank" rel="noopener noreferrer" style={{ width: "57px", height: "62px", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <SocialIconSVG id={id} color="#F8F1CD" />
                 </a>
               ))}
