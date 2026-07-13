@@ -2976,8 +2976,6 @@ export const projects: ProjectFull[] = [
           "/assets/projects/nissan-elefante/stills-11.webp",
           "/assets/projects/nissan-elefante/stills-12.webp",
           "/assets/projects/nissan-elefante/stills-13.webp",
-        ],
-      },
     ],
   },
 
