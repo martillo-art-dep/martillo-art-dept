@@ -242,7 +242,7 @@ const aboutCSS = `
 
 // ─── Component ───────────────────────────────────────────────────────
 export default function About() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const isEn = i18n.language.startsWith("en");
 
@@ -323,10 +323,7 @@ export default function About() {
             fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400,
             fontSize: "14px", lineHeight: "18px", color: "#FBFEF9", textAlign: "justify", marginBottom: "40px",
           }}>
-            {isEn
-              ? "A company specializing in production design and art direction for the entertainment industry. Hammer, we are the accurate blow that shapes chaos. In an industry where each production is a new challenge against the clock, experience is not improvised. If we add the years of professional career between the founding partners \"Carry\" and \"Pache\", we are at 62 years of combined trajectory. At Martillo, we conceive of our work as a modern forge craft. We believe that creativity without structure is just noise, and that soulless technology is just an obsolete tool. Martillo Art Dept. is the balance between the pulse of art and the weight of technique."
-              : "Una empresa especializada en el diseño de producción y la dirección de arte para la industria del entretenimiento. Martillo, somos el golpe certero que da forma al caos. En una industria donde cada producción es un nuevo reto contra reloj, la experiencia no se improvisa. Si sumamos los años de carrera profesional entre los socios fundadores \"Carry\" y \"Pache\", estamos en los 62 años de trayectoria combinada. En Martillo, concebimos nuestro trabajo como un oficio de forja moderna. Creemos que la creatividad sin estructura es solo ruido, y que la tecnología sin alma es solo herramienta obsoleta. Martillo Art Dept. es el equilibrio entre el pulso del arte y el peso de la técnica."
-            }
+            {`${t("about.intro")} ${t("about.history_p1")} ${t("about.history_p2")} ${t("about.history_p4")}`}
           </p>
 
           {/* ═══ TEAM — alternating layout ═══ */}
@@ -445,10 +442,7 @@ export default function About() {
             </div>
             <div className="flex items-center" style={{ flex: 1, padding: "10px" }}>
               <p className="about-history-text" style={{ fontFamily: "'Helvetica', 'Arial', sans-serif", fontWeight: 400, fontSize: "24px", lineHeight: "28px", color: "#FBFEF9", maxWidth: "542px" }}>
-                {isEn
-                  ? "A company specializing in production design and art direction for the entertainment industry. Hammer, we are the accurate blow that shapes chaos. In an industry where each production is a new challenge against the clock, experience is not improvised. If we add the years of professional career between the founding partners \"Carry\" and \"Pache\", we are at 62 years of combined trajectory. At Martillo, we conceive of our work as a modern forge craft. We believe that creativity without structure is just noise, and that soulless technology is just an obsolete tool. Martillo Art Dept. is the balance between the pulse of art and the weight of technique."
-                  : "Una empresa especializada en el diseño de producción y la dirección de arte para la industria del entretenimiento. Martillo, somos el golpe certero que da forma al caos. En una industria donde cada producción es un nuevo reto contra reloj, la experiencia no se improvisa. Si sumamos los años de carrera profesional entre los socios fundadores \"Carry\" y \"Pache\", estamos en los 62 años de trayectoria combinada. En Martillo, concebimos nuestro trabajo como un oficio de forja moderna. Creemos que la creatividad sin estructura es solo ruido, y que la tecnología sin alma es solo herramienta obsoleta. Martillo Art Dept. es el equilibrio entre el pulso del arte y el peso de la técnica."
-                }
+                {`${t("about.intro")} ${t("about.history_p1")} ${t("about.history_p2")} ${t("about.history_p4")}`}
               </p>
             </div>
           </div>
