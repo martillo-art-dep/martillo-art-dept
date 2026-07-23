@@ -2482,6 +2482,49 @@ export const projects: ProjectFull[] = [
     ],
   },
 
+  // esto es un comentario
+  // este es un proyecto de ejemplo
+
+  {
+    id: "test-project",
+    title: "PROYECTO DE PRUEBA",
+    year: 2026,
+    category: "prueba",
+    hidden: true,
+    image: "/assets/projects/test-project/thumb.webp",
+    description: "Descripción breve para el proyecto de prueba.",
+    descriptionEn: "Short description for the test project.",
+    heroImage: "/assets/projects/test-project/hero.webp",
+    subtitle: "SUBTÍTULO DE PRUEBA",
+    originalTitle: "Test Project",
+    duration: "1:00 min",
+    genre: "Prueba",
+    credits: [
+      { role: "Dirección", name: "Nombre del Director" },
+      { role: "Producción", name: "Nombre del Productor" }
+    ],
+    posterImage: "/assets/projects/test-project/poster.webp",
+    trailerImage: "/assets/projects/test-project/thumb.webp",
+    trailerUrl: "https://player.vimeo.com/video/000000000",
+    logos: [],
+    nominations: [],
+    synopsis: "Sinopsis de prueba para validar la integración del nuevo proyecto en el sitio web.",
+    synopsisEn: "Test synopsis to validate the integration of the new project on the website.",
+    productionDesignText: "Texto de prueba para la sección de diseño de producción.",
+    productionDesignTextEn: "Test text for the production design section.",
+    galleries: [
+      {
+        title: "STILLS",
+        images: [
+          "/assets/projects/test-project/stills-01.webp",
+          "/assets/projects/test-project/stills-02.webp"
+        ]
+      }
+    ]
+}
+
+  // cierre de proyecto de prueba
+
   {
     id: "casket-girl",
     title: "FUJII KAZE — CASKET GIRL",
