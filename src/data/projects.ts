@@ -2521,7 +2521,7 @@ export const projects: ProjectFull[] = [
         ]
       }
     ]
-}
+},
 
 // cierre de proyecto de prueba //
 
