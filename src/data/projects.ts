@@ -2482,48 +2482,51 @@ export const projects: ProjectFull[] = [
     ],
   },
 
-  // esto es un comentario
-  // este es un proyecto de ejemplo
+// este bloque de codigo es un ejemplo 
 
-  {
-    id: "test-project",
-    title: "PROYECTO DE PRUEBA",
+{
+    id: "neon-nights",
+    title: "NEON NIGHTS",
     year: 2026,
     category: "videoclips",
-    hidden: true,
-    image: "/assets/projects/test-project/thumb.webp",
-    description: "Descripción breve para el proyecto de prueba.",
-    descriptionEn: "Short description for the test project.",
-    heroImage: "/assets/projects/test-project/hero.webp",
-    subtitle: "SUBTÍTULO DE PRUEBA",
-    originalTitle: "Test Project",
-    duration: "1:00 min",
-    genre: "Prueba",
+    image: "/assets/projects/neon-nights/thumb.webp",
+    description: "Videoclip futurista dirigido por Denis Villeneuve para el sencillo \"Neon Nights\" de The Weeknd.",
+    descriptionEn: "Futuristic music video directed by Denis Villeneuve for The Weeknd's single \"Neon Nights\".",
+    heroImage: "/assets/projects/neon-nights/hero.webp",
+    subtitle: "DISEÑO DE PRODUCCIÓN",
+    originalTitle: "The Weeknd — Neon Nights",
+    duration: "5:12 min",
+    genre: "Videoclip",
     credits: [
-      { role: "Dirección", name: "Nombre del Director" },
-      { role: "Producción", name: "Nombre del Productor" }
+      { role: "Dirección", name: "Denis Villeneuve" },
+      { role: "Diseño de producción", name: "Patrice Vermette" },
+      { role: "Dirección de arte", name: "Paul Hotte" },
+      { role: "Intérprete", name: "The Weeknd" },
+      { role: "Producción", name: "XO Records" },
     ],
-    posterImage: "/assets/projects/test-project/poster.webp",
-    trailerImage: "/assets/projects/test-project/thumb.webp",
-    trailerUrl: "https://player.vimeo.com/video/000000000",
+    posterImage: "/assets/projects/neon-nights/poster.webp",
+    trailerImage: "/assets/projects/neon-nights/thumb.webp",
+    trailerUrl: "https://player.vimeo.com/video/987654321",
     logos: [],
     nominations: [],
-    synopsis: "Sinopsis de prueba para validar la integración del nuevo proyecto en el sitio web.",
-    synopsisEn: "Test synopsis to validate the integration of the new project on the website.",
-    productionDesignText: "Texto de prueba para la sección de diseño de producción.",
-    productionDesignTextEn: "Test text for the production design section.",
+    synopsis: "Videoclip dirigido por Denis Villeneuve para el sencillo \"Neon Nights\" de The Weeknd. Una exploración cyberpunk de 5:12 minutos filmada en 2026 que lleva el estilo visual inmersivo del director al mundo de la música electrónica.",
+    synopsisEn: "Music video directed by Denis Villeneuve for The Weeknd's single \"Neon Nights\". A 5:12-minute cyberpunk exploration shot in 2026 that brings the director's immersive visual style to the world of electronic music.",
+    productionDesignText: "Crear una ciudad cyberpunk desde cero requiere una atención al detalle obsesiva. Los tonos neón y la arquitectura brutalista se combinan para reflejar el aislamiento del personaje principal en un mundo saturado de tecnología.",
+    productionDesignTextEn: "Creating a cyberpunk city from scratch requires an obsessive attention to detail. Neon tones and brutalist architecture combine to reflect the main character's isolation in a technology-saturated world.",
     galleries: [
       {
         title: "STILLS",
         images: [
-          "/assets/projects/test-project/stills-01.webp",
-          "/assets/projects/test-project/stills-02.webp"
-        ]
-      }
-    ]
-},
-
-// cierre de proyecto de prueba //
+          "/assets/projects/neon-nights/stills-01.webp",
+          "/assets/projects/neon-nights/stills-02.webp",
+          "/assets/projects/neon-nights/stills-03.webp",
+          "/assets/projects/neon-nights/stills-04.webp",
+          "/assets/projects/neon-nights/stills-05.webp",
+          "/assets/projects/neon-nights/stills-06.webp",
+        ],
+      },
+    ],
+  },
 
 {
     id: "casket-girl",
