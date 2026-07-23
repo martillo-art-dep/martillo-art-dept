@@ -2523,9 +2523,9 @@ export const projects: ProjectFull[] = [
     ]
 }
 
-  // cierre de proyecto de prueba
+// cierre de proyecto de prueba //
 
-  {
+{
     id: "casket-girl",
     title: "FUJII KAZE — CASKET GIRL",
     year: 2025,
