@@ -2489,7 +2489,7 @@ export const projects: ProjectFull[] = [
     id: "test-project",
     title: "PROYECTO DE PRUEBA",
     year: 2026,
-    category: "prueba",
+    category: "videoclips",
     hidden: true,
     image: "/assets/projects/test-project/thumb.webp",
     description: "Descripción breve para el proyecto de prueba.",
