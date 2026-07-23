@@ -2974,8 +2974,12 @@ export const projects: ProjectFull[] = [
           "/assets/projects/nissan-elefante/stills-13.webp",
         ],
       },
-      
+    ],
+  },
 
+];
+
+// ─── Helpers ─────────────────────────────────────────────────────────
 // ─── Helpers ─────────────────────────────────────────────────────────
 
 export function getProjectCards(): ProjectCard[] {
